@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- google 广告 -->
+  <script data-ad-client="ca-pub-7070857500305563" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Vue-查缺补漏 | aixuexi567</title>
+  <meta name="description" content="MVVMMVVM(Model-View-ViewModel)：它将 View 和 Model 分割开，利用 ViewModel 将 Model 中的数据经过一定的处理变成适用于 View 的数据结构并传送到 View 渲染界面，同时 view 层的视图更新也会通知 viewModel，然后再更新 model 中的数据。View 和 ViewModel 之间通过双向绑定建立联系。 选项 el el">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-查缺补漏">
+<meta property="og:url" content="https://aixuexi567.github.io/2019/02/28/Vue-%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F/index.html">
+<meta property="og:site_name" content="爱学兮">
+<meta property="og:description" content="MVVMMVVM(Model-View-ViewModel)：它将 View 和 Model 分割开，利用 ViewModel 将 Model 中的数据经过一定的处理变成适用于 View 的数据结构并传送到 View 渲染界面，同时 view 层的视图更新也会通知 viewModel，然后再更新 model 中的数据。View 和 ViewModel 之间通过双向绑定建立联系。 选项 el el">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-02-28T01:24:34.000Z">
+<meta property="article:modified_time" content="2025-06-13T05:38:58.240Z">
+<meta property="article:author" content="刘振江">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://aixuexi567.github.io/2019/02/28/Vue-%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="爱学兮" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aixuexi567" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">爱学兮</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Front End &amp; Vue &amp; TypeScript</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>😊 欢迎交流与分享经验!</p>  <p>😊 上班摸鱼写散文!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/">成长小记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a><span class="category-list-count">87</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%83%82%E7%AC%94%E5%A4%B4/">烂笔头</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8B%B1%E8%AF%AD%E6%8B%BE%E9%81%97/">英语拾遗</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94%E6%84%9F%E6%82%9F/">随笔感悟</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" rel="tag">CSS权威指南-第四版</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eslint/" rel="tag">eslint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grunt/" rel="tag">grunt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pnpm/" rel="tag">pnpm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vite/" rel="tag">vite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" rel="tag">一碗鸡汤</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" rel="tag">书籍读后感</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" rel="tag">前端性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" rel="tag">反思怪</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" rel="tag">团队协作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" rel="tag">成长小记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" rel="tag">技术总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" rel="tag">残酷物语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" rel="tag">烂笔头</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" rel="tag">编程认知</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A3%9E%E7%9B%98/" rel="tag">飞盘</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" style="font-size: 13.63px;">CSS权威指南-第四版</a> <a href="/tags/axios/" style="font-size: 13px;">axios</a> <a href="/tags/css/" style="font-size: 14px;">css</a> <a href="/tags/eslint/" style="font-size: 13.13px;">eslint</a> <a href="/tags/git/" style="font-size: 13.75px;">git</a> <a href="/tags/grunt/" style="font-size: 13px;">grunt</a> <a href="/tags/http/" style="font-size: 13.38px;">http</a> <a href="/tags/javascript/" style="font-size: 13.88px;">javascript</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/npm/" style="font-size: 13px;">npm</a> <a href="/tags/pnpm/" style="font-size: 13px;">pnpm</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/shell/" style="font-size: 13px;">shell</a> <a href="/tags/vite/" style="font-size: 13px;">vite</a> <a href="/tags/vscode/" style="font-size: 13px;">vscode</a> <a href="/tags/vue/" style="font-size: 13.75px;">vue</a> <a href="/tags/webpack/" style="font-size: 13px;">webpack</a> <a href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" style="font-size: 13px;">一碗鸡汤</a> <a href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" style="font-size: 13.25px;">书籍读后感</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" style="font-size: 13px;">前端性能</a> <a href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" style="font-size: 13.5px;">反思怪</a> <a href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" style="font-size: 13px;">团队协作</a> <a href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" style="font-size: 13px;">成长小记</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" style="font-size: 13px;">技术总结</a> <a href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" style="font-size: 13px;">残酷物语</a> <a href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" style="font-size: 13px;">烂笔头</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" style="font-size: 13.13px;">编程认知</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 13.13px;">网络</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 13.75px;">翻译</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 13.25px;">语法</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 13.63px;">面试</a> <a href="/tags/%E9%A3%9E%E7%9B%98/" style="font-size: 13.25px;">飞盘</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/13/%E6%AF%9B%E9%80%89-%E8%AF%BB%E5%90%8E%E6%84%9F/" class="title">&lt;毛选&gt;读后感</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-13T01:48:36.000Z" itemprop="datePublished">2023-09-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/29/V8%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E4%B8%80%E6%AE%B5js%E4%BB%A3%E7%A0%81/" class="title">V8如何执行一段js代码?</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-29T02:24:35.000Z" itemprop="datePublished">2023-08-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/28/JS-V8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" class="title">JS-V8垃圾回收</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-28T01:46:03.000Z" itemprop="datePublished">2023-08-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/31/%E7%A9%BA%E6%83%B3%E6%80%AA%E7%9A%84%E6%97%A5%E5%B8%B8%E5%8F%8D%E6%80%9D/" class="title">空想怪的日常反思</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-31T02:31:08.000Z" itemprop="datePublished">2023-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/20/%E5%9B%B0/" class="title">困</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-20T03:43:04.000Z" itemprop="datePublished">2023-03-20</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Vue-查缺补漏" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vue-查缺补漏
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/02/28/Vue-%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F/" class="article-date">
+	  <time datetime="2019-02-28T01:24:34.000Z" itemprop="datePublished">2019-02-28</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/vue/" rel="tag">vue</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/02/28/Vue-%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 11(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h4 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h4><p>MVVM(Model-View-ViewModel)：它将 View 和 Model 分割开，利用 ViewModel 将 Model 中的数据经过一定的处理变成适用于 View 的数据结构并传送到 View 渲染界面，同时 view 层的视图更新也会通知 viewModel，然后再更新 model 中的数据。View 和 ViewModel 之间通过双向绑定建立联系。</p>
+<h4 id="选项-el"><a href="#选项-el" class="headerlink" title="选项 el"></a>选项 <code>el</code></h4><ul>
+<li><code>el</code> 用于指定一个页面已经存在的 DOM 元素来挂载 Vue 实例</li>
+<li><code>el</code>可以是 HTMLElement，也可以是 CSS 选择器</li>
+<li>挂载成功后，可通过 vm.$el 来访问该元素</li>
+</ul>
+<h4 id="选项-data"><a href="#选项-data" class="headerlink" title="选项 data"></a>选项 <code>data</code></h4><ul>
+<li>Vue 实例中的 <code>data</code>选项，声明应用内需要<strong>双向绑定的数据</strong>（建议所有用的的数据都预先再<code>data</code>内声明，这样不至于将数据散落在业务逻辑中，难以维护）</li>
+<li>Vue 实例本身也代理了<code>data</code>对象中所有的属性,<strong>同时也代理<code>methods</code>里的方法</strong>,所有可以直接通过 vue 实例来访问属性，调用方法</li>
+<li>除了显示声明<code>data</code>外，也可以指向一个已有的变量，并且它们之间<strong>默认建立了双向绑定</strong></li>
+</ul>
+<h4 id="Vue-生命周期函数"><a href="#Vue-生命周期函数" class="headerlink" title="Vue 生命周期函数"></a>Vue 生命周期函数</h4><ul>
+<li><p><code>beforeCreate</code> -&gt; <code>created</code><br>进行初始化事件、进行数据的观测。在 <code>created</code>时，数据已经和<code>data</code>属性进行绑定，此时还没有<code>el</code>选项，</p>
+</li>
+<li><p><code>created</code> -&gt; <code>beforeMount</code></p>
+<ul>
+<li>首先判断对象是否有<code>el</code>选项<br>有，继续向下编译；没有，则停止编译。可通过手动在**Vue 实例上调用<code>vm.$mount(el)</code>**方法继续向下执行。</li>
+<li>判断 对象是否有 <code>template</code>选项<br>有，则将其作为模板编译成<code>render函数</code>；没有，则将外部 HTML 作物模板编译。<strong>template 选项 优先级高于<code>outer HTML</code></strong></li>
+<li>如果对象还有<code>render</code>函数，以<code>createElement</code>作为函数，则直接用它渲染</li>
+<li><strong>综合排名优先级：</strong><br><code>render函数选项</code> &gt; <code>template选项</code> &gt; <code>outer HTML</code></li>
+</ul>
+</li>
+<li><p><code>beforeMount</code> -&gt; <code>mounted</code><br>给 Vue 实例对象添加<code>$el</code>成员，并替换掉要挂载的 DOM 元素。</p>
+</li>
+<li><p><code>beforeUpdate</code> -&gt; <code>updated</code><br>当 Vue 发现<code>data</code>中数据变化，会触发<strong>对应组件的重新渲染</strong></p>
+</li>
+</ul>
+<h4 id="双括号-Mustache-语法-中的表达式"><a href="#双括号-Mustache-语法-中的表达式" class="headerlink" title="双括号(Mustache 语法)中的表达式"></a><code>双括号</code>(Mustache 语法)中的表达式</h4><p><code>双括号</code>中，只支持单个表达式，不支持语句和流程控制；不能直接使用用户自定义的全局变量，只能使用 Vue 白名单内的全局变量，如<code>Math</code>、<code>Date</code>.</p>
+<h4 id="过滤器-filters-选项"><a href="#过滤器-filters-选项" class="headerlink" title="过滤器 filters 选项"></a>过滤器 filters 选项</h4><p>可自定义过滤器，用于常见文本格式化，在 2 个地方使用，在表达式尾部，由管道（<code>|</code>）符号指示.<br>过滤器函数<strong>总接受表达式的值作第一参数</strong>,也可接受多个参数</p>
+<ul>
+<li><p>双大括号插值中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; message | filterA | filterB(&#x27;arg1&#x27;, arg2)&#125;&#125;</span><br><span class="line">// message 的值作为 filterA函数 第一个参数</span><br><span class="line">// filterA 函数的返回值，作为 filterB函数的 第一参数， 字符串&quot;arg1&quot;,作为第二个参数， 表达式 arg2 的值作为第三个参数</span><br></pre></td></tr></table></figure></li>
+<li><p><code>v-bind</code>表达式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-bind:class</span>=<span class="string">&quot;class | fromatClass&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="表达式-和-语句"><a href="#表达式-和-语句" class="headerlink" title="表达式 和 语句"></a>表达式 和 语句</h2><h4 id="表达式-expression"><a href="#表达式-expression" class="headerlink" title="表达式(expression)"></a>表达式(expression)</h4><ul>
+<li>它是由常量、变量、运算符组合，计算以后返回一个结果值。表达式本身什么事情也不做，只是返回结果值。</li>
+<li>表达式 2 个作用：<ol>
+<li>放在赋值语句的右边</li>
+<li>作为函数的参数</li>
+</ol>
+</li>
+</ul>
+<h4 id="语句-statement"><a href="#语句-statement" class="headerlink" title="语句(statement)"></a>语句(statement)</h4><ul>
+<li>js 整句或命令，以分号结束，语句用来自行使某件事发生</li>
+<li>赋值或函数调用这些有副作用的表达式，可以作为单独的语句。<strong>这种把表达式当作语句的用法称作<code>表达式语句</code></strong></li>
+</ul>
+<h4 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h4><ul>
+<li>默认<code>getter</code>方法来读取一个计算属性，，需要时也可以提供<code>setter</code>方法,当 手动修改计算属性的值，会触发<code>setter</code> 函数，执行一些自定义操作。</li>
+<li>计算属性可以依赖其他计算属性</li>
+<li>计算属性不仅可以依赖当前 Vue 实例的数据，也可以依赖其他实例的数据 (一个组件需要依赖另一个组件的数据)</li>
+<li>计算属性是基于它的依赖缓存的，如果一个计算属性所依赖的数据发生变化时，它才会重新取值。</li>
+</ul>
+<h4 id="v-bind-指令"><a href="#v-bind-指令" class="headerlink" title="v-bind 指令"></a><code>v-bind</code> 指令</h4><p>动态的更新 HTML 元素上的属性，当数据变化，就会重新渲染。</p>
+<h4 id="绑定-class-几种方式"><a href="#绑定-class-几种方式" class="headerlink" title="绑定 class 几种方式"></a>绑定 class 几种方式</h4><ul>
+<li><p>对象语法<br> 对象中可以传入多个属性，来动态切换<code>class</code>. 对象内每项表达式为真时，对应的类名就会加上。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">&quot;&#123;&#x27;active&#x27;: isActive, &#x27;error&#x27;: isError&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment"> 当数据 isActive, isError,为真时，对应类名active,error就会加载 </span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> 当数据isActive, isError变化，对应类名也会更新 </span></span><br><span class="line"><span class="comment"> --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当<code>:class</code>的 表达式过长、逻辑复杂时，可 绑定一个<code>返回对象的计算属性</code>。</p>
+</li>
+<li><p>数组语法<br>给<code>:class</code>绑定一个数组，应用一个 class 列表</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">&quot;[activeCls, errorCls]&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">data: &#123; activeCls: &#x27;active&#x27;, errorCls: &#x27;error&#x27;, &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--  结果 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;active error&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>当直接在自定义组件使用<code>class</code>或<code>:class</code>，样式规则会直接应用到这个组件的根元素上；如果需要给具体的子元素设置类名，应当使用组件的<code>props</code>来传递。</p>
+</li>
+</ul>
+<h4 id="条件渲染指令"><a href="#条件渲染指令" class="headerlink" title="条件渲染指令"></a>条件渲染指令</h4><ul>
+<li><code>v-if</code>，表达式的值为真，<strong>当前组件/元素及所有子节点将被渲染</strong>，为假时被移除。</li>
+<li>如果一次判断多个元素，可在内置<code>&lt;template&gt;</code>元素上使用条件指令，<strong>最终的渲染结果不会包含该元素。</strong></li>
+<li>Vue 在渲染时，出于效率考虑,会尽可能的复用已有的元素而非重新渲染。添加<code>key</code>属性后，就不会复用了。<code>key</code>的必须时唯一的。</li>
+<li><code>v-show</code>不能在<code>&lt;template&gt;</code>上使用。</li>
+<li><code>v-show</code>是改变元素的 CSS 属性<code>display</code>，无论条件真假，都会被编译，用于频繁切换条件。</li>
+</ul>
+<h4 id="列表渲染指令v-for"><a href="#列表渲染指令v-for" class="headerlink" title="列表渲染指令v-for"></a>列表渲染指令<code>v-for</code></h4><ul>
+<li><p>遍历数组时，1 个可选参数，当前项的索引；枚举对象属性时，2 个可选参数，键名、索引</p>
+</li>
+<li><p><code>f-for</code>也可以用在内置<code>&lt;template&gt;</code>上，将多个元素进行渲染</p>
+</li>
+<li></li>
+<li><p>数组变异方法，可改变原数组</p>
+<ul>
+<li>push()</li>
+<li>pop()</li>
+<li>shift(), 从数组头部删除一个元素</li>
+<li>unshift()， 从数据头部添加一个元素</li>
+<li>splice(), [拼接]，可添加/删除元素，参数[index,howmany,item…]<ul>
+<li>index, 必填，添加/删除的位置</li>
+<li>howmany,必填，要删除的元素个数， 0，则不删除元素</li>
+<li>item1,…,itemX, 可选，向数组中添加的新元素</li>
+</ul>
+</li>
+<li>sort()</li>
+<li>reverse()</li>
+</ul>
+</li>
+<li><p>数组非变异方法，不改变原数组.<strong>在使用，可以用新数组替换原数组，含有相同 元素的项不会重新渲染，因此可以 大胆替换，不用担心性能问题</strong></p>
+<ul>
+<li>filter()</li>
+<li>concat()</li>
+<li>slice()</li>
+</ul>
+</li>
+<li><p>Vue 不能监测到的数组变动</p>
+<ul>
+<li>利用索引设置一个项时， <code>vm.items[indexOfItem]= newValue</code>;<br>解决方法：<code>vm.$set(vm.items, indexOfItem, newValue)</code></li>
+<li>修改数组的长度时 <code>vm.items.length = newLength</code>;<br>解决方法: <code>vm.items.splice(newLength)</code></li>
+</ul>
+</li>
+<li><p>Vue 不能监测到对象属性的添加或删除</p>
+<ul>
+<li><p>对于已经创建的实例，Vue 不能动态的添加根级别的响应属性。但可以使用<code>Vue.set(object,key,value)</code>方法向嵌套对象添加响应式属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.$set(vm.<span class="property">userProfile</span>,<span class="string">&#x27;age&#x27;</span>,<span class="number">27</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p>有时需要为已有对象添加多个新属性，比如使用<code>Object.assign()</code>。<strong>这种情况，应该用 2 个对象的属性创建一个新的对象</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vm.<span class="property">userProfile</span> = <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;,vm.<span class="property">userProfile</span>,&#123;</span><br><span class="line">  <span class="attr">age</span>: <span class="number">27</span>,</span><br><span class="line">  <span class="attr">favoriteColor</span>: <span class="string">&#x27;Vue Green&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>显示一个数组的过滤/排序结果，但不改变或重置原始数据。<strong>这种情况下，可以创建返回过滤或排序数组的计算属性</strong>， 在计算属性不适用的情况下(例如，在嵌套<code>v-for循环中</code>)，<strong>可以使用一个<code>method</code>方法</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;n in even(numbers)&quot;</span>&gt;</span>&#123;&#123; n &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>同一节点，<code>v-for</code>的优先级比<code>v-if</code>高</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 只渲染 未完成的todos --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;todo in todos&quot;</span> <span class="attr">v-if</span>=<span class="string">&quot;!todo.isComplete&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h4><blockquote>
+<p>DOM 事件流（event flow）存在三个阶段：事件捕获、处于目标阶段、事件冒泡.触发顺序:<strong>先捕获再冒泡</strong></p>
+<p>事件捕获：当触发 DOM 事件时，浏览器会从 根节点 开始<strong>由外到内</strong>进行事件传播。即点击子元素，若果父元素通过<strong>事件捕获方式</strong>注册了对应的事件的话，会先触发父元素绑定的事件。</p>
+<p>事件冒泡：与事件捕获相反，<strong>由内到外</strong>进行事件传播，直到根节点。</p>
+</blockquote>
+<ul>
+<li><code>v-on</code>，1.可直接写 Js 代码；2.调用的方法名；3.内联 js 语句中调用方法，<code>$event</code>，访问原始 DOM 事件。<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">&quot;warn(&#x27;Form cannot be submitted yet.&#x27;, $event)&quot;</span>&gt;</span></span><br><span class="line">  Submit</span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>使用事件修饰符，此为更好的方式：<strong>方法只有纯粹的数据逻辑，而不是去处理 DOM 事件的细节</strong>。<ul>
+<li><code>.stop</code>, 阻止事件继续传播（例如：阻止子节点事件，冒泡到父节点）</li>
+<li><code>.prevent</code>, 阻止默认事件</li>
+<li><code>.capture</code>，<code>&lt;div v-on:click.capture=&quot;doThis&quot;&gt;...&lt;/div&gt;</code> 添加事件监听器使用事件捕获模式（即，元素自身触发的事件先在此处理，然后才交给内部元素进行处理）</li>
+<li><code>.self</code>, 只有再<code>event.target</code> 是从<strong>当前元素自身触发</strong>，（即事件不是从内部元素冒泡触发的）</li>
+</ul>
+</li>
+</ul>
+<h4 id="表单-与-v-model"><a href="#表单-与-v-model" class="headerlink" title="表单 与 v-model"></a>表单 与 <code>v-model</code></h4><ul>
+<li>使用<code>v-model</code>后，表单控件显示的值只依赖所绑定的数据，不再关系初始化时的 value 属性。对再<code>&lt;textarea&gt;&lt;/textarea&gt;</code>之间插入的值，也不会生效。<strong>它本质上不过是语法糖，负责监听用户的输入事件以更新数据</strong></li>
+<li><code>v-model</code>会忽略所有表单元素的<code>value</code>,<code>checked</code>,<code>selected</code>特性的初始值，而总是将 vue 实例中的数据作为数据来源，<strong>并在<code>data</code>选项中声明初始值</strong>。</li>
+<li><code>v-model</code> 在内部使用不同的属性为不同的输入元素并抛出不同的事件：<ul>
+<li><code>text</code>, <code>textarea</code>使用<code>value</code>属性和<code>input</code>事件</li>
+<li><code>checkbox</code>,<code>radio</code>使用<code>checked</code>属性和<code>change</code>事件</li>
+<li><code>select</code>，将<code>value</code>作为 prop,<code>change</code>事件。</li>
+</ul>
+</li>
+<li>对于单选、复选框、选择框，<code>v-model</code>绑定的值通常是静态的字符串并配合<code>value</code>使用；</li>
+<li>对于只有一个选项的复选框，没有<code>value</code>属性，则绑定布尔值;有多个选项的复选框时，**<code>v-model</code>都有绑定到同一个数组类型**，否则默认为布尔类型</li>
+<li>选项列表，同样也分为单选和多选 2 中方式<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">v-model</span>=<span class="string">&quot;selected&quot;</span> <span class="attr">multiple</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>html<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;js&quot;</span>&gt;</span>javaScript<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span>&gt;</span>css<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>单选，<option>为备选项，如果含有<code>value</code>属性，<code>v-model</code>会优先匹配<code>value</code>的值，如果没有，则直接匹配,<code>&lt;option&gt;的text</code></li>
+<li>多选，添加<code>multiple</code>属性，此时<code>v-model</code>绑定的时一个<strong>数组</strong></li>
+<li><code>&lt;option&gt;</code>备选项如果用<code>v-for</code>动态输出，<code>value</code>和<code>text</code>是用<code>v-bind</code>来动态输出的<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">v-model</span>=<span class="string">&quot;selected&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">v-for</span>=<span class="string">&quot;option in options&quot;</span> <span class="attr">:value</span>=<span class="string">&quot;option.value&quot;</span>&gt;</span></span><br><span class="line">    &#123;&#123;option,text&#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>修饰符<ul>
+<li><code>.lazy</code>,<code>v-model</code>在每次<code>input</code>事件触发后将输入框的值与<code>data</code>选项中的数据进行同步。<code>.lazy</code>转变成使用<code>change</code>事件进行同步数据。<ul>
+<li><code>input</code>事件，在元素值发生变化时触发，即在用户输入时触发。可使用在<code>input</code>,<code>textarea</code>元素</li>
+<li><code>change</code>事件，在输入框失去焦点时才会触发，输入框内容变化时不会触发。使用在<code>input</code>,<code>textarea</code>,<code>select</code>元素</li>
+</ul>
+</li>
+<li><code>.number</code>,将输入转换为 Number 类型</li>
+<li><code>.trim</code>,过滤输入的首尾空格</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://aixuexi567.github.io/2019/02/28/Vue-%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F/" title="Vue-查缺补漏" target="_blank" rel="external">https://aixuexi567.github.io/2019/02/28/Vue-%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aixuexi567" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aixuexi567" target="_blank"><span class="text-dark">爱学兮</span><small class="ml-1x">Front End &amp; Vue &amp; TypeScript</small></a></h3>
+        <div>前端狗，偶尔思考，间歇式码字</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/03/01/Vue-%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F-2-%E7%BB%84%E4%BB%B6/" title="Vue-查缺补漏(2)-组件"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/02/27/Vue%E4%B8%AD%E7%9A%8426%E4%B8%AA%E5%B0%8F%E6%8A%80%E5%B7%A7/" title="Vue中的26个小技巧"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="wechat" data-mobile-sites=""></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '3c9348a5e84eb5050ec8',
+    clientSecret: 'b92d8dd66f66bbe04d870af0e612ff74a00546da',
+    repo: 'aixuexi567.github.io',
+    owner: 'aixuexi567',
+    admin: ['aixuexi567'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+  <!-- Google Adsense -->
+<script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7070857500305563"
+  crossorigin="anonymous"
+></script>
+
+</body>
+</html>

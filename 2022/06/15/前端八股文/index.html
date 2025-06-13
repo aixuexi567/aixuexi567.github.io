@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- google 广告 -->
+  <script data-ad-client="ca-pub-7070857500305563" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>前端八股文 | aixuexi567</title>
+  <meta name="description" content="https 协议的工作原理传送门 # 解读 HTTP1&#x2F;HTTP2&#x2F;HTTP3  客户端使用 https 访问服务器，则要求 web 服务器建立 ssl 链接 web 服务器接收客户端的请求后，会将网站的证书（包含公钥），传输给客户端 客户端和 web 服务器端开始协商 SSL 链接的安全（加密）等级 客户端浏览器通过双方协商一致的安全等级，建立会话秘钥，然后通过网站的公钥来加密会话秘钥，传送给网">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端八股文">
+<meta property="og:url" content="https://aixuexi567.github.io/2022/06/15/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87/index.html">
+<meta property="og:site_name" content="爱学兮">
+<meta property="og:description" content="https 协议的工作原理传送门 # 解读 HTTP1&#x2F;HTTP2&#x2F;HTTP3  客户端使用 https 访问服务器，则要求 web 服务器建立 ssl 链接 web 服务器接收客户端的请求后，会将网站的证书（包含公钥），传输给客户端 客户端和 web 服务器端开始协商 SSL 链接的安全（加密）等级 客户端浏览器通过双方协商一致的安全等级，建立会话秘钥，然后通过网站的公钥来加密会话秘钥，传送给网">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://aixuexi567.github.io/image/image-20220623091006866.png">
+<meta property="og:image" content="https://aixuexi567.github.io/image/image-20220623091035378.png">
+<meta property="og:image" content="https://aixuexi567.github.io/image/image-20220623093036557.png">
+<meta property="article:published_time" content="2022-06-15T01:53:58.000Z">
+<meta property="article:modified_time" content="2025-06-13T05:38:58.253Z">
+<meta property="article:author" content="刘振江">
+<meta property="article:tag" content="技术总结">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://aixuexi567.github.io/image/image-20220623091006866.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://aixuexi567.github.io/2022/06/15/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="爱学兮" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aixuexi567" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">爱学兮</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Front End &amp; Vue &amp; TypeScript</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>😊 欢迎交流与分享经验!</p>  <p>😊 上班摸鱼写散文!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/">成长小记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a><span class="category-list-count">87</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%83%82%E7%AC%94%E5%A4%B4/">烂笔头</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8B%B1%E8%AF%AD%E6%8B%BE%E9%81%97/">英语拾遗</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94%E6%84%9F%E6%82%9F/">随笔感悟</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" rel="tag">CSS权威指南-第四版</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eslint/" rel="tag">eslint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grunt/" rel="tag">grunt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pnpm/" rel="tag">pnpm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vite/" rel="tag">vite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" rel="tag">一碗鸡汤</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" rel="tag">书籍读后感</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" rel="tag">前端性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" rel="tag">反思怪</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" rel="tag">团队协作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" rel="tag">成长小记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" rel="tag">技术总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" rel="tag">残酷物语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" rel="tag">烂笔头</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" rel="tag">编程认知</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A3%9E%E7%9B%98/" rel="tag">飞盘</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" style="font-size: 13.63px;">CSS权威指南-第四版</a> <a href="/tags/axios/" style="font-size: 13px;">axios</a> <a href="/tags/css/" style="font-size: 14px;">css</a> <a href="/tags/eslint/" style="font-size: 13.13px;">eslint</a> <a href="/tags/git/" style="font-size: 13.75px;">git</a> <a href="/tags/grunt/" style="font-size: 13px;">grunt</a> <a href="/tags/http/" style="font-size: 13.38px;">http</a> <a href="/tags/javascript/" style="font-size: 13.88px;">javascript</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/npm/" style="font-size: 13px;">npm</a> <a href="/tags/pnpm/" style="font-size: 13px;">pnpm</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/shell/" style="font-size: 13px;">shell</a> <a href="/tags/vite/" style="font-size: 13px;">vite</a> <a href="/tags/vscode/" style="font-size: 13px;">vscode</a> <a href="/tags/vue/" style="font-size: 13.75px;">vue</a> <a href="/tags/webpack/" style="font-size: 13px;">webpack</a> <a href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" style="font-size: 13px;">一碗鸡汤</a> <a href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" style="font-size: 13.25px;">书籍读后感</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" style="font-size: 13px;">前端性能</a> <a href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" style="font-size: 13.5px;">反思怪</a> <a href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" style="font-size: 13px;">团队协作</a> <a href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" style="font-size: 13px;">成长小记</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" style="font-size: 13px;">技术总结</a> <a href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" style="font-size: 13px;">残酷物语</a> <a href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" style="font-size: 13px;">烂笔头</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" style="font-size: 13.13px;">编程认知</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 13.13px;">网络</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 13.75px;">翻译</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 13.25px;">语法</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 13.63px;">面试</a> <a href="/tags/%E9%A3%9E%E7%9B%98/" style="font-size: 13.25px;">飞盘</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/13/%E6%AF%9B%E9%80%89-%E8%AF%BB%E5%90%8E%E6%84%9F/" class="title">&lt;毛选&gt;读后感</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-13T01:48:36.000Z" itemprop="datePublished">2023-09-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/29/V8%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E4%B8%80%E6%AE%B5js%E4%BB%A3%E7%A0%81/" class="title">V8如何执行一段js代码?</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-29T02:24:35.000Z" itemprop="datePublished">2023-08-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/28/JS-V8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" class="title">JS-V8垃圾回收</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-28T01:46:03.000Z" itemprop="datePublished">2023-08-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/31/%E7%A9%BA%E6%83%B3%E6%80%AA%E7%9A%84%E6%97%A5%E5%B8%B8%E5%8F%8D%E6%80%9D/" class="title">空想怪的日常反思</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-31T02:31:08.000Z" itemprop="datePublished">2023-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/20/%E5%9B%B0/" class="title">困</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-20T03:43:04.000Z" itemprop="datePublished">2023-03-20</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-前端八股文" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端八股文
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/06/15/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87/" class="article-date">
+	  <time datetime="2022-06-15T01:53:58.000Z" itemprop="datePublished">2022-06-15</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" rel="tag">技术总结</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/06/15/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 5.4k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 19(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="https-协议的工作原理"><a href="#https-协议的工作原理" class="headerlink" title="https 协议的工作原理"></a>https 协议的工作原理</h3><p>传送门 <a target="_blank" rel="noopener" href="https://juejin.cn/post/6995109407545622542"># 解读 HTTP1/HTTP2/HTTP3</a></p>
+<ul>
+<li>客户端使用 https 访问服务器，则要求 web 服务器<strong>建立 ssl 链接</strong></li>
+<li>web 服务器接收客户端的请求后，<strong>会将网站的证书（包含公钥），传输给客户端</strong></li>
+<li>客户端和 web 服务器端开始<strong>协商 SSL 链接的安全（加密）等级</strong></li>
+<li>客户端浏览器通过双方协商一致的安全等级，<strong>建立会话秘钥，然后通过网站的公钥来加密会话秘钥，传送给网站</strong></li>
+<li>web 服务器 通过自己的私钥<strong>解密出 会话秘钥</strong></li>
+<li>web 服务器 通过 <strong>会话秘钥 加密</strong> 与客户端之间通信</li>
+</ul>
+<h3 id="TCP-三次握手"><a href="#TCP-三次握手" class="headerlink" title="TCP 三次握手"></a>TCP 三次握手</h3><ul>
+<li>第一次，建立连接时，客户端**发送 SYN 包(syn=j)**到服务器，并进入<code>SYN_SENT</code>状态，等待服务器确认；SYN(Synchronize Sequence Numbers,同步序列号)</li>
+<li>第二次，<strong>服务器收到 SYN 包并确认客户的 SYN (ack=j+1),同时也发送一个自己的 SYN 包(syn=k), 即 SYN+ACK 包</strong>，此时服务器进入<code>SYN_RECV</code>状态</li>
+<li>第三次，**客户端收到服务器的 SYN+ACK 包，向服务器返送确认包 ACK(ack=k+1)**，此包发送完毕后，客户端和服务器进入<code>ESTABLISTHED</code>状态，完成三次握手</li>
+</ul>
+<h3 id="TCP-四次挥手"><a href="#TCP-四次挥手" class="headerlink" title="TCP 四次挥手"></a>TCP 四次挥手</h3><ul>
+<li>客户端进程<strong>发出连接释放报文</strong>，并停止发送数据。释放数据报文首部，FIN=1，其 seq=u(等于前面已经出过来的数据的最后一个字节序号+1)，此时，客户端进入<code>FIN_WAIT_1(终止等待1)</code>状态。</li>
+<li>服务端<strong>收到连接释放报文，发出确认报文</strong>，ACK=1，ack=u+1,并带上自己的序列号 seq=v，此时，服务器进入<code>CLOSE_WAIT</code>状态。TCP 服务器通知高层的应用进程，客户端向服务器的方向已释放，这时处于<strong>半关闭状态</strong>，即 <strong>客户端已经没有数据要发送，但服务器若发送数据，客户端仍然要接受</strong>。</li>
+<li>客户端收到服务器的确认报文后，此时，客户端进入<code>FIN_WAIT_2</code>状态，等待服务器发送连接释放报文，在这之前<strong>还需要接受服务器发送的最后的数据</strong></li>
+<li><strong>服务器将最后的数据发送完毕后，就向客户端发送连接释放报文</strong>，FIN=1，ack=u+1,由于在半关闭状态，服务器很可能又发送了一些数据，假定此时的 seq=w, 此时，服务器进入<code>LAST_ACK</code>状态，<strong>等待客户的确认</strong>。</li>
+<li>客户端<strong>收到服务器的连接释放报文后，必须发出确认</strong>，ACK=1，ack=w+1,自己的 seq=u+1,此时，客户端就进入<code>TIME_WAIT</code>状态。此时 TCP 连接还没有释放，必须等待一段时间后，当客户端撤销相应 TCB 后，进入<code>CLOSED</code>状态。</li>
+<li>服务器只要收到客户端发出的确认，立即进入<code>CLOSED</code>状态，撤销 TCB 后，就结束了 TCP 连接。</li>
+</ul>
+<h3 id="TCP-IP-如何保证数据包传输的有序可靠？"><a href="#TCP-IP-如何保证数据包传输的有序可靠？" class="headerlink" title="TCP/IP 如何保证数据包传输的有序可靠？"></a>TCP/IP 如何保证数据包传输的有序可靠？</h3><p><strong>对字节流分段并进行编号</strong>，然后通过 <strong>ACK 确认回复</strong> 和<strong>超时重发</strong> 机制来保证</p>
+<ul>
+<li>为了保证数据包的可靠传递，<strong>发送方把已经发送的数据包保留在缓冲区</strong></li>
+<li>并为每个<strong>已发送的数据包启动一个超时定时器</strong></li>
+<li>如果在定时器超时之前<strong>收到对方的应答信息</strong>，则<strong>取消定时器</strong>，<strong>释放数据包占用的缓冲区</strong></li>
+<li>否则，重传该数据包，直到<strong>收到应答</strong> 或 <strong>重传次数超过最大次数</strong>为止</li>
+<li>接收方收到数据包后，进行 CRC 校验，正常则将数据交给上层协议，然后给发送方 <strong>发送一个累计应答包</strong>，表明该数据已收到。<strong>如果接收方正好也有数据要发给发送方，应答包也可在数据包中捎带过去。</strong></li>
+</ul>
+<h3 id="TCP-和-UDP-的区别"><a href="#TCP-和-UDP-的区别" class="headerlink" title="TCP 和 UDP 的区别"></a>TCP 和 UDP 的区别</h3><ul>
+<li>TCP 是面向连接的，UDP 是无连接的</li>
+<li>TCP 仅支持单播传输，UDP 提供了单播、广播、多播的功能</li>
+<li>TCP 的三次握手保证了连接的可靠性，UDP 是无连接的，不可靠的，对接收的数据不发送确认信号，发送端也不知道数据是否正确接收</li>
+<li>UDP 的<strong>头部开销</strong>比 TCP 的更小，数据传<strong>输速率更高，实时性更好</strong></li>
+</ul>
+<h4 id="cookie、sessionStorage、localStorage"><a href="#cookie、sessionStorage、localStorage" class="headerlink" title="cookie、sessionStorage、localStorage"></a>cookie、sessionStorage、localStorage</h4><ul>
+<li><p>cookie 数据大小不能超过 4K，sessionStorage、localStorage 的存储大，5M+</p>
+</li>
+<li><p>cookie 设置的过期时间之前一直有效； localStorage 永久存储，浏览器关闭后数据不丢失，除非主动删除；sessionStorage 数据在当前浏览器关闭窗口后自动删除</p>
+</li>
+<li><p>cookie 数据会自动传递到服务器；sessionStorage、localStorage 数据保存在本地</p>
+</li>
+</ul>
+<h3 id="粘包问题分析、对策"><a href="#粘包问题分析、对策" class="headerlink" title="粘包问题分析、对策"></a>粘包问题分析、对策</h3><p>TCP 是面向流的协议，粘包问题主要是因为接收方不知道消息之间的界限，不知道一次提取多少字节的数据造成的。而 UDP 是面向消息的协议，每个 UDP 都是一条消息，应用程序必须以消息为单位提取数据，不能一次提取任意字节的数据。<br>TCP 为了提高传输效率，发送方往往要收集到足够多的数据后才发送一个 TCP 段。TCP 会使用优化方法，将多次间隔较小且数据量小的数据，合并成一个大的数据块发送出去，这样接收方就难于分辨。</p>
+<ul>
+<li>发送方需要等待缓冲区满才发送，造成粘包</li>
+<li>接收方不及时接收缓冲区的包，造成多个包接收<br>粘包有两中情况：<strong>粘在一起的包都是完整的数据包</strong>，<strong>粘在一起的包有不完整的包</strong><br>比较周全的对策：<strong>接收方创建一预处理线程，对接收到的数据包进行预处理，将粘连的包分开</strong></li>
+</ul>
+<h3 id="从输入-URL-到页面加载的全过程"><a href="#从输入-URL-到页面加载的全过程" class="headerlink" title="从输入 URL 到页面加载的全过程"></a>从输入 URL 到页面加载的全过程</h3><p>传送门 <a target="_blank" rel="noopener" href="https://juejin.cn/post/7005468491067162655"># DNS 域名解析过程</a>, <a target="_blank" rel="noopener" href="https://juejin.cn/post/6992597760935460901"># 浏览器的工作原理</a></p>
+<ol>
+<li>浏览器输入 url</li>
+<li>查找缓存：浏览器先查看浏览器缓存-&gt;系统缓存-&gt;路由缓存中是否有该地址页面，如果有则显示该页面内容，没有，进行域名解析，也是先查看缓存<ol>
+<li>浏览器缓存：浏览器会记录 DNS 一段时间</li>
+<li>操作系统缓存：如果浏览器缓存中不包含这个记录，则会获取操作系统的记录（其保存最近的 DNS 查询缓存）</li>
+<li>路由器缓存：如果上述两步均不能成功获取 DNS 记录，则继续搜索路由器缓存</li>
+<li>ISP 缓存： 若上述都失败，继续向 ISP 搜索</li>
+</ol>
+</li>
+<li>DNS 域名解析：浏览器向 DNS 服务器发送请求，解析该 URL 中域名对应的 IP 地址。<strong>使用 UDP 协议</strong></li>
+<li>建立 TCP 连接： 解析出 IP 地址，和服务器建立 TCP 连接（3 次握手）</li>
+<li>发起 HTTP 请求： 浏览器发送 http 请求</li>
+<li>服务器响应： 服务器对浏览器请求做出响应，并把对应 html 文件发送给浏览器</li>
+<li>关闭 TCP 连接：4 次挥手</li>
+<li>浏览器渲染：浏览器解析 html 内容并渲染<ol>
+<li>构建 DOM 树: 词法分析然后解析成 dom 树</li>
+<li>构建 CSS 规则树</li>
+<li>构建 render 树： web 浏览器将 DOM 和 CSSOM 结合，并构建出渲染树</li>
+<li>布局（Layout）：计算每个节点在屏幕中的位置</li>
+<li>绘制（Painting)：变量 render 树，并使用 UI 后端层绘制每个节点</li>
+</ol>
+</li>
+<li>JS 引擎解析：调用 js 引擎执行 js 代码（js 解释阶段、预处理阶段、执行阶段生成执行上下文，VO，作用域链，回收机制）<ol>
+<li>创建 window 对象： window 对象（全局执行环境），当页面产生时就被创建，所有的全局变量和函数都属于 window 的属性和方法，而 DOM 树 会映射到 window 的 document 对象上。关闭网页时，全局执行对环境被销毁</li>
+<li>加载文件： js 引擎分析语法、词法是否合法，合法进入预编译</li>
+<li>预编译：在预编译过程中，浏览器会寻找全局变量声明，把它作为 window 的属性加入到 window 对象，并给变量赋值为“undefined”；寻找全局函数声明，把它作为 window 的方法加入到 window 对象，并将函数体赋值给它。</li>
+<li>解释执行： 执行到变量就赋值，如果变量没有被定义（即没有别预编译就直接赋值），在 es5 非严格模式下此变量会成为 window 的一个属性。函数执行，就将函数的环境推入一个环境的栈中，执行完成后再弹出，控制权交互给之前的环境。</li>
+</ol>
+</li>
+</ol>
+<h3 id="浏览器重排、重绘"><a href="#浏览器重排、重绘" class="headerlink" title="浏览器重排、重绘"></a>浏览器重排、重绘</h3><h5 id="重排、重绘区别？"><a href="#重排、重绘区别？" class="headerlink" title="重排、重绘区别？"></a>重排、重绘区别？</h5><ul>
+<li>重排/回流(Reflow)， 当 DOM 的变化影响到了元素的的几何信息，浏览器需要重新计算元素的集合属性，在将其摆放在页面正确的位置，这一过程即使重排。<strong>重新生成布局，重新排列元素</strong>。</li>
+<li>重绘(Repaint), 元素的外观属性发生变化，但没有改变布局，即重新将元素外观绘制出来的过程。</li>
+</ul>
+<h5 id="如何触发重排、重绘？"><a href="#如何触发重排、重绘？" class="headerlink" title="如何触发重排、重绘？"></a>如何触发重排、重绘？</h5><p>任何改变用来构建渲染树的信息都会导致一次重排或重绘</p>
+<ul>
+<li>添加、删除、更新 DOM 节点</li>
+<li><code>display:none</code>，触发重排和重绘</li>
+<li><code>display:hidden</code>, 只触发重绘，因为无几何变化</li>
+<li>移动或给 DOM 节点添加动画</li>
+<li>添加一个样式表、调整样式属性</li>
+<li>用户行为，调整窗口大小、改变字号、滚动</li>
+</ul>
+<h5 id="如何避免重排、重绘？"><a href="#如何避免重排、重绘？" class="headerlink" title="如何避免重排、重绘？"></a>如何避免重排、重绘？</h5><ul>
+<li><strong>集中改变样式</strong>，而非一条条地修改 DOM 样式</li>
+<li>万万不可把 DOM 节点的属性值放置于循环中当作变量</li>
+<li>为动画的元素 设置<code>position</code> 为 <code>fixed</code>或<code>absolute</code>, 这样修改其 CSS 不会重复 reflow</li>
+<li>尽量只修改 <code>position</code>为<code>fixed</code>或<code>absolute</code>的元素，这对其它元素影响不大</li>
+<li>尽量不使用 table 布局，因为一个很小的变动可能造成整个 table 的 reflow</li>
+<li>动画开始 GPU 加速，translate 使用 3D</li>
+<li>提示为<strong>合成层</strong><ul>
+<li>合成层的位图，会交由 GPU 合成，比 CPU 处理的要快</li>
+<li>当需要 repaint 时，只需要 repaint 本身，不会影响到其他层</li>
+<li>对于 transform 和 opacity 效果，不会触发 layout 和 paint</li>
+<li>使用 CSS 的 <code>will-change</code>属性</li>
+</ul>
+</li>
+</ul>
+<h3 id="浏览器缓存机制"><a href="#浏览器缓存机制" class="headerlink" title="浏览器缓存机制"></a>浏览器缓存机制</h3><h5 id="缓存过程分析"><a href="#缓存过程分析" class="headerlink" title="缓存过程分析"></a>缓存过程分析</h5><p>浏览器和服务器通信的方式 为<strong>应答模式</strong>，即浏览器发送 http 请求 - 服务器响响应请求。</p>
+<p>浏览器第一次向服务器发送请求并得到响应结果，会根据响应报文中 http 头中的<strong>缓存标识</strong>，决定<strong>是否缓存响应结果</strong>，是否将响应结果和缓存标识存入浏览器缓存中。</p>
+<ul>
+<li>浏览器每次请求，都会 <strong>先在浏览器缓存中查找该请求的结果和缓存标识</strong></li>
+<li>浏览器每次拿到返回的请求结果都会 <strong>将该结果和缓存标识存入浏览器缓存中</strong></li>
+</ul>
+<h5 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h5><p>向<strong>浏览器缓存</strong>查询请求结果，并根据该结果的缓存规则来决定是否使用，3 中情况</p>
+<ul>
+<li>不存在该缓存结果和缓存标识，强制缓存失效，则直接向服务器发起请求</li>
+<li>存在该缓存结果和 缓存标识，但结果失效，强制缓存失效，则使用<strong>协商缓存（携带该资源的缓存标识、发起 http 请求）</strong></li>
+<li>存在改缓存结果和缓存标识，且结果尚未失效，强制缓存生效，直接返回该缓存结果</li>
+</ul>
+<p><strong>控制强制缓存的字段 Expires(http1.0) 和 Cache-Control (http 1.1)， 其中 Cache-Control 优先级较高</strong></p>
+<ul>
+<li>Expires , 缓存的到期时间，小于此时间，直接使用缓存结果， (<strong>客户端、服务端时间不一致</strong>)</li>
+<li>Cache-Control,主要取值<ul>
+<li>public， 所有内容都将被缓存(客户端、<strong>代理服务器</strong>都可缓存)</li>
+<li>private, <strong>默认值</strong> 所有内容 只有客户端缓存</li>
+<li>no-cache, 客户端缓存内容，是否使用缓存，需要经过协商缓存来验证决定</li>
+<li>no-store,所有内容都不被缓存</li>
+<li>max-age=xxx, 缓存内容将在 xxx<strong>秒</strong>后失效</li>
+</ul>
+</li>
+</ul>
+<p><strong>强制缓存存放的位置</strong></p>
+<ul>
+<li>from memory cache (内存缓存)， <strong>快速读取、时效性</strong>。 将编译解析后的文件，直接存入该<strong>进程的内存</strong>中，占据该进程一定的内存资源，一旦进程关闭，则改进程的内存会清空。</li>
+<li>from disk cache (硬盘缓存)， 将缓存写入硬盘文件，读取缓存时需要对进行 I/O 操作，然后重新解析该内容，速度比内存缓存慢。</li>
+</ul>
+<h5 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h5><p><strong>在强制缓存失效后</strong>，浏览器<strong>携带缓存标识</strong>向服务器发起请求，由<strong>服务器根据缓存标识决定</strong>是否使用缓存的过程， 2 中情况</p>
+<ul>
+<li><p>协商缓存生效，返回 304</p>
+<p><img src="/image/image-20220623091006866.png" alt="image-20220623091006866"></p>
+</li>
+<li><p>协商缓存失效，返回 200 和请求结果</p>
+<p><img src="/image/image-20220623091035378.png" alt="image-20220623091035378"></p>
+</li>
+</ul>
+<p><strong>控制协商缓存字段 <code>Last-Modified / If-Modified-Since</code> 和 <code>Etag / If-None-Match</code>, 其中 <code>Etag / If-None-Match</code> 优先级较高</strong></p>
+<ul>
+<li>Last-Modified / If-Modified-Since<ul>
+<li>Last-Modified, 服务器响应请求时，返回该资源文件在服务器最后被修改的时间</li>
+<li>If-Modified-Since, 客户端再次发起请求时，携带上次请求返回的 Last-Modified 值，通过此字段告诉服务器该资源上次请求返回的最后修改时间。服务器收到该请求，会根据 If-Modified-Since 字段值与该资源在服务器的最后修改时间做对比，若服务器的资源最后修改时间大于 If-Modified-Since 字段值，则重新返回资源，状态码 200; 否则返回 304，<strong>代表资源无更新，继续使用缓存文件</strong></li>
+</ul>
+</li>
+<li>Etag / If-None-Match<ul>
+<li>Etag， 服务器响应请求是，返回当前资源文件的唯一标识( <strong>由服务器生产</strong>)</li>
+<li>If-None-Match,客户端再次发起请求时，携带上一次请求返回的唯一标识 Etag 值，通过此字段值告诉服务器该资源上次请求返回的唯一标识值。服务器收到该请求后，会与该资源在服务器的 Etag 值做对比，一致则返回 304 Not Modified，代表资源无更新，可继续使用缓存文件；不一致则重新返回资源文件，状态码 200</li>
+</ul>
+</li>
+</ul>
+<p><strong>总结</strong></p>
+<ul>
+<li>浏览器缓存分为强制缓存和协商缓存，强制缓存优先于协商缓存</li>
+<li>若强制缓存生效（Expires 和 Cache-Control,Cache-Control 优先级高），直接使用缓存</li>
+<li>若强制缓存不生效，则进行协商缓存（Last-Modified/If-Modified-Since, Etag/If-None-Match, Etag/If-None-Match 优先级高）， <strong>协商缓存由服务器决定</strong>是否使用缓存</li>
+<li>若协商缓存失效，代表请求的缓存失效，重新换取请求资源，返回 200，在存入浏览器缓存；</li>
+<li>若协商缓存生效，返回 304， 可继续使用缓存</li>
+</ul>
+<p><img src="/image/image-20220623093036557.png" alt="image-20220623093036557"></p>
+<h3 id="BFC-块级格式上下文"><a href="#BFC-块级格式上下文" class="headerlink" title="BFC(块级格式上下文)"></a>BFC(块级格式上下文)</h3><p>BFC 是 Block Formatting Context 的缩写，即块级格式化上下文。BFC 是 CSS 布局的一个概念，是一个<strong>独立的渲染区域</strong>，规定了内部 box 如何布局，并且这个区域的子元素不会影响到外面的元素。布局规则：</p>
+<ul>
+<li>BFC 是一个独立容器，容器里面的子元素不会影响到外面的元素</li>
+<li>内部 Box 会在垂直方向，一个接一个地放置</li>
+<li>Box 垂直方向的距离由 margin 决定，<strong>同一个 BFC 的两个相邻 Box 的 margin 会重叠</strong></li>
+<li>每个元素的 margin box，与<strong>包含块</strong>border box 的左边相接触</li>
+<li><strong>BFC 的区域不会与 float box 重叠</strong></li>
+<li><strong>计算 BFC 的高度时，浮动元素也参与计算高度</strong></li>
+<li>元素的<strong>类型和 display 属性</strong> 决定了此 box 的类型，<strong>不同 box 类型有不同的 formatting context</strong></li>
+</ul>
+<h5 id="如何创建-BFC？"><a href="#如何创建-BFC？" class="headerlink" title="如何创建 BFC？"></a>如何创建 BFC？</h5><ul>
+<li>根元素，</li>
+<li>float 的值不为 none</li>
+<li>position 为 absolute 或 fixed</li>
+<li>display 的值 为 inline-bloc， table-cell， table-caption</li>
+<li>overflow 的值 不为 visible</li>
+</ul>
+<h3 id="元素水平垂直居中"><a href="#元素水平垂直居中" class="headerlink" title="元素水平垂直居中?"></a>元素水平垂直居中?</h3><h5 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h5><ul>
+<li>行内元素，<code>text-align:center</code></li>
+<li>确定宽度的块级元素<ul>
+<li>width 和 margin 实现， <code>margin: 0 auto</code></li>
+<li>绝对定位和 margin-left：(父 width - 子 width) / 2 ,父元素 position: relative</li>
+</ul>
+</li>
+<li>宽度未知的块级元素<ul>
+<li><code>display:table</code> + margin 左右 auto</li>
+<li><code>display:Inline-block</code> + <code>text-aligin:center</code></li>
+<li>绝对定位+ transform， translateX 移动本身元素的 50%</li>
+<li>flex 布局 使用 <code>justify-content:center</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="垂直居中"><a href="#垂直居中" class="headerlink" title="垂直居中"></a>垂直居中</h5><ul>
+<li>line-height， 适合纯文字类</li>
+<li>父容器 相对定位，子级设置 绝对定位，通过 margin 实现或者 通过 位移 transform</li>
+<li>flex，</li>
+<li>table 布局，父级 display：table, 子级 <code>vertical-align</code></li>
+</ul>
+<h3 id="页面布局"><a href="#页面布局" class="headerlink" title="页面布局"></a>页面布局</h3><h5 id="FLex-布局"><a href="#FLex-布局" class="headerlink" title="FLex 布局"></a>FLex 布局</h5><p>容器的属性</p>
+<ul>
+<li>flex-direction,主轴方向</li>
+<li>flex-wrap, 换行规则</li>
+<li>flex-flow, flex-direction 和 flex-wrap 的复合属性， <code>flex-flow: row-reverse wrap;</code></li>
+<li>justify-content, 水平主轴方向的对齐方式</li>
+<li>align-item, 竖直侧轴方向 的对齐方式</li>
+<li>align-content, 容器有多行项目时，垂直方向的对齐方式</li>
+</ul>
+<p>元素/项目的属性</p>
+<ul>
+<li>order, 项目的排列顺序，越小越靠前</li>
+<li>flex-grow, 放大比例</li>
+<li>flex-shrink,缩小比例，为 0， 则不缩小</li>
+<li>flex-basis, 设置伸缩基准值(初始长度)</li>
+<li>flex, flex-grow ,flex-shrink, flex-basis 的复合属性， 默认值 0 1 auto</li>
+<li>align-items, 默认 auto,继承父元素</li>
+</ul>
+<h5 id="Rem-布局"><a href="#Rem-布局" class="headerlink" title="Rem 布局"></a>Rem 布局</h5><p>Rem 是相对于 根元素(html) 的 font-size 大小来计算，其本质是具基于<strong>宽度</strong>的<strong>等比缩放</strong>。 缺点：</p>
+<ul>
+<li>改动多，所有盒子都需要我们去给一个准确的值，才能保证不同机型的适配</li>
+<li>在响应布局中，必须通过 js 来动态的控制根元素 font-size 大小。<strong>css 与 js 有一定的耦合性</strong>，且必须将改变 font-size 的代码放在 css 样式之前</li>
+</ul>
+<h5 id="百分比布局"><a href="#百分比布局" class="headerlink" title="百分比布局"></a>百分比布局</h5><p>子元素的百分比<strong>并非完全相对于直接父元素的 height、width。</strong></p>
+<p>padding、border、margin 等属性不论是水平 ，还是垂直方向都<strong>相对于直接父元素 width</strong></p>
+<p>border-width, translate、background-size <strong>则相对于自身</strong></p>
+<h3 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h3><ul>
+<li><p>添加标签，设置 clear:both 属性</p>
+</li>
+<li><p>父级添加 overflow 属性，或设置高度</p>
+</li>
+<li><p>建立 伪元素 选择器 清除浮动</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;parent&quot;&gt;</span><br><span class="line">	&lt;div style=&quot;clear:both&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.parent::after &#123;</span><br><span class="line">	content: &quot;&quot;;</span><br><span class="line">	display: block;</span><br><span class="line">	height: 0;</span><br><span class="line">	visibility:hidden;</span><br><span class="line">	clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="JS-垃圾回收机制"><a href="#JS-垃圾回收机制" class="headerlink" title="JS 垃圾回收机制"></a>JS 垃圾回收机制</h3><p>如果存在大量不被释放的内存(堆、栈、上下文)，页面性能会变的很慢。当某些代码操作不能别合理释放，就会造成内存泄露</p>
+<p><strong>浏览器垃圾回收机制</strong>：浏览器的 js 具有自动垃圾回收机制，垃圾收集器会定期的找出那些不在继续使用的变量，然后释放其内存。</p>
+<ul>
+<li><p>标记清除（mark-and-sweep）：当变量进入上下文，会被加上存在于上下文的标记。当变量离开上下文时，会被加上离开上下文的标记。 垃圾回收程序运行的时候，会标记内存中存储的所有变量，然后将所有上下文中的变量，以及被上下文中的变量引用的变量的<strong>标记去掉</strong>，之后<strong>再有标记的变量就是待删除的（任何在上下文中的变量都访问不到它们了）</strong>，随后垃圾回收程序做一次内存清理，销毁带标记的所有值并回收它们的内存。</p>
+</li>
+<li><p>引用计数：记录每个变量被引用的次数，当一个值的引用数减为 0 时，就会被回收</p>
+</li>
+</ul>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>在 js 中变量的作用域属于函数作用域，在函数执行完毕后，作用域就会被清理，内存也随之被回收。但是由于闭包函数是建立在函数内部的子函数，<strong>由于其可访问上级作用域，即使上级函数执行完，作用域也不会随之销毁</strong>，这时的子函数（即闭包），便拥有了访问上级作用域中变量的权限。</p>
+<h5 id="闭包形成的条件"><a href="#闭包形成的条件" class="headerlink" title="闭包形成的条件"></a>闭包形成的条件</h5><ul>
+<li>函数的嵌套</li>
+<li>内部函数引用外部函数的局部变量，延长外部函数的变量生命周期</li>
+</ul>
+<h5 id="闭包的用途"><a href="#闭包的用途" class="headerlink" title="闭包的用途"></a>闭包的用途</h5><ul>
+<li>模仿块级作用域</li>
+<li>保护外部函数的变量（阻止其被回收）</li>
+<li>封装私有变量</li>
+<li>创建模块</li>
+</ul>
+<h3 id="JS-中-this-的五种情况"><a href="#JS-中-this-的五种情况" class="headerlink" title="JS 中 this 的五种情况"></a>JS 中 this 的五种情况</h3><ul>
+<li>作为普通函数执行时，this 执行 window</li>
+<li>当函数作为对象的方法被调用时，this 指向该对象</li>
+<li>当使用 new 来实例化一个构造函数时，this 指向实例</li>
+<li>箭头函数中 this 是在定义时绑定的，指向它的<strong>父级作用域</strong></li>
+<li>基于 Function.prototype 上的 apply、call、bind 调用，这三个方法都可以显示的指定调用函数的 this 指向</li>
+</ul>
+<h3 id="原型-amp-amp-原型链"><a href="#原型-amp-amp-原型链" class="headerlink" title="原型&amp;&amp; 原型链"></a>原型&amp;&amp; 原型链</h3><ul>
+<li>每个构造函数都有原型<code>prototype</code></li>
+<li>每个实例都有隐式原型<code>__proto__</code></li>
+<li>实例的<code>__proto__</code>指向构造函数的<code>prototype</code></li>
+</ul>
+<h3 id="new运算符的实现机制"><a href="#new运算符的实现机制" class="headerlink" title="new运算符的实现机制"></a>new运算符的实现机制</h3><ol>
+<li>创建一个新的空对象</li>
+<li><strong>设置原型</strong>，将对象的原型设置为函数的prototype对象</li>
+<li><strong>让函数的this指向该对象</strong>， 执行构造函数代码(为这个新对象添加属性)</li>
+<li>如果无返回值或返回一个非对象值，则返回该对象，否则会将返回值作为新对象返回</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">new Animal(&#x27;cat&#x27;) = &#123;</span><br><span class="line">	var obj = &#123;&#125;</span><br><span class="line">	obj.__proto__ = Amimal.prototype</span><br><span class="line">	var result = Animal.call(obj,&#x27;cat&#x27;)</span><br><span class="line">	return typeof result == &#x27;object&#x27; ? result : obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://aixuexi567.github.io/2022/06/15/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87/" title="前端八股文" target="_blank" rel="external">https://aixuexi567.github.io/2022/06/15/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aixuexi567" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aixuexi567" target="_blank"><span class="text-dark">爱学兮</span><small class="ml-1x">Front End &amp; Vue &amp; TypeScript</small></a></h3>
+        <div>前端狗，偶尔思考，间歇式码字</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/06/16/%E5%A4%A7%E5%89%8D%E7%AB%AF-NoSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E9%9B%86%E6%88%90/" title="大前端-NoSQL数据库的设计与集成"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/06/14/%E4%BA%BA%E9%99%85%E4%BA%A4%E5%BE%80%E4%B9%8B%E5%9B%B0/" title="人际交往之困"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="wechat" data-mobile-sites=""></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '3c9348a5e84eb5050ec8',
+    clientSecret: 'b92d8dd66f66bbe04d870af0e612ff74a00546da',
+    repo: 'aixuexi567.github.io',
+    owner: 'aixuexi567',
+    admin: ['aixuexi567'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+  <!-- Google Adsense -->
+<script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7070857500305563"
+  crossorigin="anonymous"
+></script>
+
+</body>
+</html>

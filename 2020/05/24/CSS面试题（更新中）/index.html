@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- google 广告 -->
+  <script data-ad-client="ca-pub-7070857500305563" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>CSS面试题（更新中） | aixuexi567</title>
+  <meta name="description" content="选择器，优先级优先级：!important &gt; 内联样式 style &gt; ID 选择器 &gt; 伪类选择器 &#x3D; 属性选择器 &#x3D; class 选择器 &gt; 伪元素 &#x3D; 元素(类型)选择器 &#x3D; 关系选择器 &gt; 通配符选择器 5 中类型：基本选择器、组合选择器、属性选择器、伪类选择器、伪元素选择器 1 基本选择器    选择器 示例 示例说明    .class （类选择器） .">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS面试题（更新中）">
+<meta property="og:url" content="https://aixuexi567.github.io/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/index.html">
+<meta property="og:site_name" content="爱学兮">
+<meta property="og:description" content="选择器，优先级优先级：!important &gt; 内联样式 style &gt; ID 选择器 &gt; 伪类选择器 &#x3D; 属性选择器 &#x3D; class 选择器 &gt; 伪元素 &#x3D; 元素(类型)选择器 &#x3D; 关系选择器 &gt; 通配符选择器 5 中类型：基本选择器、组合选择器、属性选择器、伪类选择器、伪元素选择器 1 基本选择器    选择器 示例 示例说明    .class （类选择器） .">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://aixuexi567.github.io/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/%5Cimage%5CCSS3-Flexbox-Model.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/%5Cimage%5Cchrome_7j53vPxJ7f.png">
+<meta property="og:image" content="https://aixuexi567.github.io/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/%5Cimage%5Cflex-wrap.png">
+<meta property="og:image" content="https://aixuexi567.github.io/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/%5Cimage%5Cjustify-content.svg">
+<meta property="og:image" content="https://aixuexi567.github.io/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/%5Cimage%5Calign-items.svg">
+<meta property="og:image" content="https://aixuexi567.github.io/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/%5Cimage%5Calign-content.svg">
+<meta property="og:image" content="https://aixuexi567.github.io/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/%5Cimage%5Corder.svg">
+<meta property="og:image" content="https://aixuexi567.github.io/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/%5Cimage%5Cflex-grow.svg">
+<meta property="og:image" content="https://aixuexi567.github.io/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/%5Cimage%5Cflex-shrink.png">
+<meta property="og:image" content="https://aixuexi567.github.io/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/%5Cimage%5Calign-self.svg">
+<meta property="article:published_time" content="2020-05-24T01:12:19.000Z">
+<meta property="article:modified_time" content="2025-06-13T05:38:58.251Z">
+<meta property="article:author" content="刘振江">
+<meta property="article:tag" content="css">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://aixuexi567.github.io/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/%5Cimage%5CCSS3-Flexbox-Model.jpg">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://aixuexi567.github.io/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="爱学兮" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aixuexi567" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">爱学兮</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Front End &amp; Vue &amp; TypeScript</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>😊 欢迎交流与分享经验!</p>  <p>😊 上班摸鱼写散文!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/">成长小记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a><span class="category-list-count">87</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%83%82%E7%AC%94%E5%A4%B4/">烂笔头</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8B%B1%E8%AF%AD%E6%8B%BE%E9%81%97/">英语拾遗</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94%E6%84%9F%E6%82%9F/">随笔感悟</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" rel="tag">CSS权威指南-第四版</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eslint/" rel="tag">eslint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grunt/" rel="tag">grunt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pnpm/" rel="tag">pnpm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vite/" rel="tag">vite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" rel="tag">一碗鸡汤</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" rel="tag">书籍读后感</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" rel="tag">前端性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" rel="tag">反思怪</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" rel="tag">团队协作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" rel="tag">成长小记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" rel="tag">技术总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" rel="tag">残酷物语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" rel="tag">烂笔头</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" rel="tag">编程认知</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A3%9E%E7%9B%98/" rel="tag">飞盘</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" style="font-size: 13.63px;">CSS权威指南-第四版</a> <a href="/tags/axios/" style="font-size: 13px;">axios</a> <a href="/tags/css/" style="font-size: 14px;">css</a> <a href="/tags/eslint/" style="font-size: 13.13px;">eslint</a> <a href="/tags/git/" style="font-size: 13.75px;">git</a> <a href="/tags/grunt/" style="font-size: 13px;">grunt</a> <a href="/tags/http/" style="font-size: 13.38px;">http</a> <a href="/tags/javascript/" style="font-size: 13.88px;">javascript</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/npm/" style="font-size: 13px;">npm</a> <a href="/tags/pnpm/" style="font-size: 13px;">pnpm</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/shell/" style="font-size: 13px;">shell</a> <a href="/tags/vite/" style="font-size: 13px;">vite</a> <a href="/tags/vscode/" style="font-size: 13px;">vscode</a> <a href="/tags/vue/" style="font-size: 13.75px;">vue</a> <a href="/tags/webpack/" style="font-size: 13px;">webpack</a> <a href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" style="font-size: 13px;">一碗鸡汤</a> <a href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" style="font-size: 13.25px;">书籍读后感</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" style="font-size: 13px;">前端性能</a> <a href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" style="font-size: 13.5px;">反思怪</a> <a href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" style="font-size: 13px;">团队协作</a> <a href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" style="font-size: 13px;">成长小记</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" style="font-size: 13px;">技术总结</a> <a href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" style="font-size: 13px;">残酷物语</a> <a href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" style="font-size: 13px;">烂笔头</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" style="font-size: 13.13px;">编程认知</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 13.13px;">网络</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 13.75px;">翻译</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 13.25px;">语法</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 13.63px;">面试</a> <a href="/tags/%E9%A3%9E%E7%9B%98/" style="font-size: 13.25px;">飞盘</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/13/%E6%AF%9B%E9%80%89-%E8%AF%BB%E5%90%8E%E6%84%9F/" class="title">&lt;毛选&gt;读后感</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-13T01:48:36.000Z" itemprop="datePublished">2023-09-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/29/V8%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E4%B8%80%E6%AE%B5js%E4%BB%A3%E7%A0%81/" class="title">V8如何执行一段js代码?</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-29T02:24:35.000Z" itemprop="datePublished">2023-08-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/28/JS-V8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" class="title">JS-V8垃圾回收</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-28T01:46:03.000Z" itemprop="datePublished">2023-08-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/31/%E7%A9%BA%E6%83%B3%E6%80%AA%E7%9A%84%E6%97%A5%E5%B8%B8%E5%8F%8D%E6%80%9D/" class="title">空想怪的日常反思</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-31T02:31:08.000Z" itemprop="datePublished">2023-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/20/%E5%9B%B0/" class="title">困</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-20T03:43:04.000Z" itemprop="datePublished">2023-03-20</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-CSS面试题（更新中）" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSS面试题（更新中）
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/" class="article-date">
+	  <time datetime="2020-05-24T01:12:19.000Z" itemprop="datePublished">2020-05-24</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/css/" rel="tag">css</a>, <a class="article-tag-link-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3.2k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 12(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="选择器，优先级"><a href="#选择器，优先级" class="headerlink" title="选择器，优先级"></a>选择器，优先级</h3><p><strong>优先级：<code>!important</code> &gt; <code>内联样式 style</code> &gt; <code>ID 选择器</code> &gt; <code>伪类选择器 = 属性选择器 = class 选择器</code> &gt; <code>伪元素 = 元素(类型)选择器 = 关系选择器</code> &gt; <code>通配符选择器</code></strong></p>
+<p>5 中类型：基本选择器、组合选择器、属性选择器、伪类选择器、伪元素选择器</p>
+<p>1 基本选择器</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>示例</th>
+<th>示例说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.class （类选择器）</td>
+<td>.button</td>
+<td>匹配 class 中包含 button 类的元素</td>
+</tr>
+<tr>
+<td>#id （Id 选择器）</td>
+<td>#app</td>
+<td>匹配 id 为 app 的元素</td>
+</tr>
+<tr>
+<td>element （元素选择器）</td>
+<td>p</td>
+<td>选择所有 p 元素</td>
+</tr>
+<tr>
+<td>* （通配符选择器）</td>
+<td>*</td>
+<td>匹配任何元素</td>
+</tr>
+</tbody></table>
+<p>2 组合选择器</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>示例</th>
+<th>示例说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a,b (多元素选择器)</td>
+<td>ul,ol</td>
+<td>匹配 ul 元素或 ol 元素</td>
+</tr>
+<tr>
+<td>a b （后代选择器）</td>
+<td>div p</td>
+<td>匹配 div 元素所有后代元素中的 p 元素</td>
+</tr>
+<tr>
+<td>a&gt;b (子元素选择器)</td>
+<td>div&gt;p</td>
+<td>匹配 div 元素所有的直接子元素中的 p 元素</td>
+</tr>
+<tr>
+<td>a+b （直接相邻兄弟元素）</td>
+<td>div+p</td>
+<td>匹配 div 元素之后的相邻同级的 p 元素</td>
+</tr>
+<tr>
+<td>a~b (普通兄弟元素)</td>
+<td>div~p</td>
+<td>匹配 div 元素之后的同级的 p 元素，无论是否相邻</td>
+</tr>
+</tbody></table>
+<p>3 属性选择器</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>示例</th>
+<th>示例说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[attribute] 简单的属性选择器</td>
+<td>[href][title]</td>
+<td>选择同时带有 href 和 title 属性的元素</td>
+</tr>
+<tr>
+<td>[attribute=value] 根据具体属性值选择</td>
+<td><code>[href=&quot;www.betterjiang.com&quot;][title=&quot;刘振江博客&quot;]</code></td>
+<td>选择 href 属性值为 <a target="_blank" rel="noopener" href="http://www.betterjiang.com,并且/">www.betterjiang.com,并且</a> title 属性值为刘振江博客的所有元素</td>
+</tr>
+<tr>
+<td>[attribute~=value] 包含</td>
+<td>p[class~=”warning”]</td>
+<td>选择 class 属性值中包含 warning 的 p 元素</td>
+</tr>
+<tr>
+<td>[attribute^=value] 开头</td>
+<td>img[src^=”person”]</td>
+<td>选择 src 属性值以“person”开头的 img 元素</td>
+</tr>
+<tr>
+<td>[attribute$=value] 结尾</td>
+<td>img[src$=”.png”]</td>
+<td>选择 src 属性值以”.png”结尾的 img 元素</td>
+</tr>
+<tr>
+<td>[attribute*=value] 包含</td>
+<td>img[src*=”dog”]</td>
+<td>选择 src 属性值中包含子串”dog”的 img 元素</td>
+</tr>
+<tr>
+<td>[attribute &#124; =value] 等于 或以 value- 开头</td>
+<td>img[src &#124; =”dog”]</td>
+<td>选择 src 属性值等于”dog”或以”dog-“开头的 img 元素</td>
+</tr>
+</tbody></table>
+<p>4 伪类选择器</p>
+<ul>
+<li>状态伪类</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>示例</th>
+<th>示例说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:link</td>
+<td>a:link</td>
+<td>选择未访问的链接</td>
+</tr>
+<tr>
+<td>:visited</td>
+<td>a:visited</td>
+<td>选择访问过的链接</td>
+</tr>
+<tr>
+<td>:hover</td>
+<td>a:hover</td>
+<td>鼠标悬浮于 a 元素的状态</td>
+</tr>
+<tr>
+<td>:active</td>
+<td>a:active</td>
+<td>选择被激活的链接</td>
+</tr>
+<tr>
+<td>:focus</td>
+<td>input:focus</td>
+<td>选择当前拥有输入焦点的 input 元素</td>
+</tr>
+<tr>
+<td>:not(selector)</td>
+<td>:not(p)</td>
+<td>选择不是 p 元素的元素</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>结构化伪类</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>示例</th>
+<th>示例说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:first - child</td>
+<td>p:first-child</td>
+<td>选择 p 元素的第一个子元素</td>
+</tr>
+<tr>
+<td>:first-of-type</td>
+<td>p:first-of-type</td>
+<td>选择每个父元素是 p 元素的第一个 p 子元素</td>
+</tr>
+<tr>
+<td>:last-child</td>
+<td>p:last-child</td>
+<td>选择所有 p 元素的最后一个子元素</td>
+</tr>
+<tr>
+<td>:last-of-type</td>
+<td>p:last-of-type</td>
+<td>选择每个 p 元素是其母元素的最后一个 p 元素</td>
+</tr>
+<tr>
+<td>:not(selector)</td>
+<td>:not(p)</td>
+<td>选择所有 p 以外的元素</td>
+</tr>
+<tr>
+<td>:nth-child(n)</td>
+<td>p:nth-child(2)</td>
+<td>选择所有 p 元素的第二个子元素</td>
+</tr>
+<tr>
+<td>:nth-last-child(n)</td>
+<td>p:nth-last-child(2)</td>
+<td>选择所有 p 元素倒数的第二个子元素</td>
+</tr>
+<tr>
+<td>:nth-last-of-type(n)</td>
+<td>p:nth-last-of-type(2)</td>
+<td>选择所有 p 元素倒数的第二个为 p 的子元素</td>
+</tr>
+<tr>
+<td>:nth-of-type(n)</td>
+<td>p:nth-of-type(2)</td>
+<td>选择所有 p 元素第二个为 p 的子元素</td>
+</tr>
+<tr>
+<td>:only-of-type</td>
+<td>p:only-of-type</td>
+<td>选择所有仅有一个子元素为 p 的元素</td>
+</tr>
+<tr>
+<td>:only-child</td>
+<td>p:only-child</td>
+<td>选择所有仅有一个子元素的 p 元素</td>
+</tr>
+<tr>
+<td>:target</td>
+<td>#news:target</td>
+<td>选择当前活动#news 元素(点击 URL 包含锚的名字)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>表单相关</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>示例</th>
+<th>示例说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:disabled</td>
+<td>input:disabled</td>
+<td>选择所有禁用的表单元素</td>
+</tr>
+<tr>
+<td>:enabled</td>
+<td>input:enabled</td>
+<td>选择没有设置 disabled 属性的表单元素</td>
+</tr>
+<tr>
+<td>:in-range</td>
+<td>input:in-range</td>
+<td>选择在指定区域内的元素</td>
+</tr>
+<tr>
+<td>:out-of-range</td>
+<td>input:out-of-range</td>
+<td>选择不在指定区域内的元素</td>
+</tr>
+<tr>
+<td>:valid</td>
+<td>input:valid</td>
+<td>选择条件验证正确的表单元素</td>
+</tr>
+<tr>
+<td>:invalid</td>
+<td>input:invalid</td>
+<td>选择条件验证错误的表单元素</td>
+</tr>
+<tr>
+<td>:required</td>
+<td>input:required</td>
+<td>选择设置 required 属性的表单元素</td>
+</tr>
+<tr>
+<td>:optional</td>
+<td>input:optional</td>
+<td>选择没有 required 属性，即设置 optional 属性的表单元素</td>
+</tr>
+<tr>
+<td>:read-only</td>
+<td>input:read-only</td>
+<td>选择设置 readonly 只读属性的元素</td>
+</tr>
+<tr>
+<td>:read-write</td>
+<td>input:read-write</td>
+<td>选择处于编辑状态的元素；input，textarea 和设置 contenteditable 的 HTML 元素获取焦点时即处于编辑状态。</td>
+</tr>
+<tr>
+<td>:checked</td>
+<td>input:checked</td>
+<td>匹配被选中的 input 元素，input 元素包括 radio 和 checkbox</td>
+</tr>
+<tr>
+<td>:empty</td>
+<td>p:empty</td>
+<td>匹配所有没有子元素的 p 元素</td>
+</tr>
+</tbody></table>
+<p>5 伪元素选择器</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>示例</th>
+<th>示例说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>::first-letter （首字母，仅用于块级元素）</td>
+<td>p::first-letter</td>
+<td>匹配 p 元素的首字母</td>
+</tr>
+<tr>
+<td>::first-line （第一行，仅用于块级元素）</td>
+<td>p::first-line</td>
+<td>匹配 p 元素的第一行文本</td>
+</tr>
+<tr>
+<td>::before (在元素之前插入生成内容，并设置其样式)</td>
+<td>h2::before { content:”@”, color: black }</td>
+<td>在每个 h2 元素前插入一个黑色的@</td>
+</tr>
+<tr>
+<td>::after （在元素之后插入生成内容，并设置其样式）</td>
+<td>body::after {content:’The End’}</td>
+<td>在 body 元素最后插入”The End“</td>
+</tr>
+</tbody></table>
+<h3 id="弹性盒子（Flexbox）-布局"><a href="#弹性盒子（Flexbox）-布局" class="headerlink" title="弹性盒子（Flexbox） 布局"></a>弹性盒子（Flexbox） 布局</h3><p>Flexbox 布局是 CSS3 中新增的布局模块，它改进了在容器中元素的对齐、方向、顺序，即使元素的尺寸是动态的，甚至是未知的。flex 容器的只要特征就是<strong>可以修改其内子容器的高、宽度，以在不同屏幕大小使用最佳方式填充可利用的空间</strong>。</p>
+<p><strong>flex 布局由父容器（flex container）和它内包含的项目（flex items）组成。</strong></p>
+<p><img src="%5Cimage%5CCSS3-Flexbox-Model.jpg" alt="CSS3-Flexbox-Model"></p>
+<h4 id="flex-container（父容器）-属性-6-个"><a href="#flex-container（父容器）-属性-6-个" class="headerlink" title="flex container（父容器） 属性 (6 个)"></a>flex container（父容器） 属性 (6 个)</h4><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+<th>属性值</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flex-direction</td>
+<td>定义 主轴（main axis）方向</td>
+<td>row &#124; row-reverse &#124; column &#124; column-reverse</td>
+<td><img src="%5Cimage%5Cchrome_7j53vPxJ7f.png" alt="chrome_7j53vPxJ7f"></td>
+</tr>
+<tr>
+<td>flex-wrap</td>
+<td>项目在一条轴线上排不下，如何换行？</td>
+<td>nowrap &#124; wrap &#124; wrap-reverse(第一行在下方)</td>
+<td><img src="%5Cimage%5Cflex-wrap.png" alt="flex-wrap"></td>
+</tr>
+<tr>
+<td>flex-flow</td>
+<td>flex-direction 和 flex-wrap 简写形式</td>
+<td>&lt;flex-direction&gt; &#124;&#124; &lt;flex-wrap&gt;</td>
+<td></td>
+</tr>
+<tr>
+<td>justify-content</td>
+<td>项目在主轴上的对齐方式</td>
+<td>flex-start &#124; flex-end &#124; center &#124; space-between &#124; space-around &#124; space-evenly</td>
+<td><img src="%5Cimage%5Cjustify-content.svg" alt="justify-content"></td>
+</tr>
+<tr>
+<td>align-items</td>
+<td>项目在交叉轴（cross axis）上如何对齐</td>
+<td>flex-start &#124; flex-end &#124; center &#124; baseline &#124; stretch</td>
+<td><img src="%5Cimage%5Calign-items.svg" alt="align-items"></td>
+</tr>
+<tr>
+<td>align-content</td>
+<td><strong>多根轴线</strong>的对齐方式，如果项目只有一根轴线，该属性无效</td>
+<td>flex-start &#124; flex-end &#124; center &#124; space-between &#124; space-around</td>
+<td><img src="%5Cimage%5Calign-content.svg" alt="align-content"></td>
+</tr>
+</tbody></table>
+<h4 id="项目（flex-items）的属性-（6-个）"><a href="#项目（flex-items）的属性-（6-个）" class="headerlink" title="项目（flex items）的属性 （6 个）"></a>项目（flex items）的属性 （6 个）</h4><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+<th>属性值</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>order</td>
+<td>定义项目的排列顺序，默认为 0，数值越小，越靠前</td>
+<td>&lt;integer&gt;</td>
+<td><img src="%5Cimage%5Corder.svg" alt="order"></td>
+</tr>
+<tr>
+<td>flex-grow</td>
+<td>项目的放大比例，如果有剩余空间。默认为 0</td>
+<td>&lt;integer&gt;</td>
+<td><img src="%5Cimage%5Cflex-grow.svg" alt="flex-grow"></td>
+</tr>
+<tr>
+<td>flex-shrink</td>
+<td>项目的缩小比例，如果空间不足。默认为 1</td>
+<td></td>
+<td><img src="%5Cimage%5Cflex-shrink.png" alt="flex-shrink"></td>
+</tr>
+<tr>
+<td>flex-basis</td>
+<td>在分配多余空间之前，项目占据主轴的空间大小。默认为 auto</td>
+<td>&lt;length&gt; &#124; auto</td>
+<td></td>
+</tr>
+<tr>
+<td>flex</td>
+<td>flex-grow, flex-shrink, flex-basis 的简写 默认值为 0 1 auto</td>
+<td>[&lt;flex-grow&gt; &lt;flex-shrink&gt; &#124;&#124; &lt;flex-basis&gt;] &#124; none &#124; auto</td>
+<td></td>
+</tr>
+<tr>
+<td>align-self</td>
+<td>设置单独项目的对齐方式，可与其它项目不同。覆盖 align-items 属性</td>
+<td>auto &#124; flex-start &#124; flex-end &#124; center &#124;baseline &#124; stretch</td>
+<td><img src="%5Cimage%5Calign-self.svg" alt="align-self"></td>
+</tr>
+</tbody></table>
+<h3 id="浮动、定位"><a href="#浮动、定位" class="headerlink" title="浮动、定位"></a>浮动、定位</h3><h4 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h4><ul>
+<li>所有元素都可以浮动，且浮动元素会脱离文档流，但浮动元素依然位于父元素之内。<strong>浮动元素周围的外边距不会合并</strong></li>
+<li><strong>浮动元素会生成一个块级框，不论这个元素本身是什么</strong>。 <strong>浮动元素的包含块就是其最近的块级祖先元素</strong>。</li>
+<li>浮动元素左/右外边界不能超过其包含块的左/右内边界，浮动元素不可彼此重叠</li>
+<li>当行内框与浮动元素重叠时，其边框、背景、内容都会在浮动元素 <strong>之上</strong></li>
+<li>当块级框与浮动元素重叠时，其边框、背景在浮动元素<strong>之下</strong>显示，而<strong>内容在浮动元素之上显示</strong></li>
+<li><code>clear</code>属性会清楚浮动，<code>h3&#123;clear:left&#125;</code>，<strong>确保 h3 的左边没有浮动元素</strong>。其工作原理: **会增加元素的上外边距，使之最后落在浮动元素的下面，这实际上 会 忽略清除元素原先设置的上外边距。 **，所有要确保一个清除元素的顶端和一个浮动元素的底端之间有一定的空间，可以为浮动元素本身设置一个下外边距。</li>
+</ul>
+<h4 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h4><p>为什么要清除浮动？因为 子元素浮动引起父元素的内部高度为 0<strong>（高度塌陷）</strong>。清除浮动方法：</p>
+<table>
+<thead>
+<tr>
+<th>清除浮动方法</th>
+<th>优势</th>
+<th>劣势</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>设置父元素高度</td>
+<td>极其简单</td>
+<td>必须要知道父元素高度</td>
+</tr>
+<tr>
+<td>在父元素中，追加一个空元素，设置 <code>clear:both;</code></td>
+<td>简单</td>
+<td>添加无意义的空标签，破坏文档结构</td>
+</tr>
+<tr>
+<td>设置父元素也浮动（因为 浮动元素会延伸，从而包含其所有的后代浮动元素）</td>
+<td>简单，代码量少，没有结构和语义化问题</td>
+<td>对后续元素有影响</td>
+</tr>
+<tr>
+<td>为父元素设置 overflow 属性 hidden,或 auto （因为会触发<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context">BFC</a>，从而实现清除）</td>
+<td>简单，代码简洁</td>
+<td>可能会无法显示要溢出的元素</td>
+</tr>
+<tr>
+<td>【最优解】 使用伪类，生成空内容的方式 <code>.clearfinx:&#123;content: &#39;&#39;; dislay: block; clear:both;&#125;</code></td>
+<td>不破坏文档结构，无副作用</td>
+<td>代码量多</td>
+</tr>
+</tbody></table>
+<h4 id="元素的定位-（position）"><a href="#元素的定位-（position）" class="headerlink" title="元素的定位 （position）"></a>元素的定位 （position）</h4><ul>
+<li><p><strong>static （默认值）</strong>：元素在文档常规流中当前的布局位置，此时 <code>top</code>,<code>right</code>,<code>z-index</code>等属性无效。</p>
+</li>
+<li><p><strong>relative（相对定位）</strong>：相对于自身在文档流中所处的位置进行定位，<strong>参照物为自身，且仍处于文档流中，原先占有的空间仍保留</strong>，<strong>常作为绝对定位的参照物</strong></p>
+</li>
+<li><p><strong>absolute（绝对定位）</strong>： <strong>元素脱离文档流，不会为元素留空间，后面的元素会其原来的位置布局</strong>。其参照物是<strong>第一个属性不是 static 的祖先元素</strong>。<strong>绝对定位之后会产生块级框，通过<code>top</code>,<code>left</code>等属性进行定位</strong></p>
+</li>
+<li><p><strong>fixed（固定定位）</strong>： <strong>元素脱离文档流，定位参照物为屏幕视口，元素的位置在屏幕滚动时 不会改变。</strong></p>
+</li>
+<li><p><strong>sticky （粘性定位）</strong>： 元素根据正常文档流进行定位，然后相对它的<strong>最近滚动祖先</strong>进行偏移。一个 sticky 元素会”固定“在离它最近的一个拥有”滚动机制“的祖先上（及祖先的 overflow 是 hidden,scroll,auto,overlay）。**简单说，祖先元素在滚动时，某个元素在 距其祖先元素的距离 达到 sticky 定位的要求时， 就会固定，不在滚动了 **</p>
+<iframe class="live-sample-frame sample-code-frame" frameborder="0" id="frame_Sticky_positioning" src="https://mdn.mozillademos.org/zh-CN/docs/Web/CSS/position$samples/Sticky_positioning?revision=1595767"></iframe></li>
+</ul>
+<h3 id="BFC-块格式化上下文"><a href="#BFC-块格式化上下文" class="headerlink" title="BFC(块格式化上下文)"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context">BFC(块格式化上下文)</a></h3><p>BFC（Block Formatting Context）,它是一个独立的渲染区域，是块级盒子（Block box）的布局过程发生的区域，它规定了内部的 Block Box 如何布局，并且于这个区域外部毫不相干。</p>
+<h4 id="盒子（Box）"><a href="#盒子（Box）" class="headerlink" title="盒子（Box）"></a>盒子（Box）</h4><p>Box 是 CSS 布局的对象和基本单位，即一个页面是由多个盒子组成的。元素的类型和 display 属性，决定了盒子的类型。不同的盒子，会参与不同的 Formatting Context（格式化上下文）</p>
+<ul>
+<li>block-level box (块级盒子): display 属性值为 <code>block</code>,<code>list-item</code>,<code>table</code>的元素，会生成块级盒子，参与 block formatting context;</li>
+<li>inline-level box (行内盒子)： display 属性值为 <code>inline</code>,<code>inline-block</code>,<code>inline-table</code>的元素，会生成行内盒子，参与 inline formatting context;</li>
+</ul>
+<h4 id="格式化上下文-（Formatting-Context）"><a href="#格式化上下文-（Formatting-Context）" class="headerlink" title="格式化上下文 （Formatting Context）"></a>格式化上下文 （Formatting Context）</h4><p>它是页面中的一块渲染区域，并且由一套渲染规则，决定了其内子元素如何定位、以及和其他元素的关系和相互作用。 最常见的 由 BFC（Block Formatting Context） 和 IFC （Inline Formatting Context）</p>
+<h4 id="BFC-布局规则"><a href="#BFC-布局规则" class="headerlink" title="BFC 布局规则"></a>BFC 布局规则</h4><ol>
+<li>内部的 块级盒子 会在垂直方向，一个接一个的排列</li>
+<li>同一 BFC 内的 两个相邻 的 块级盒子 的 margin <strong>会发生重叠，取最大值</strong></li>
+<li>每个盒子（块级或行内）的 左/右 外边届 与 其包含块 的 左/右 内边距 相接触，浮动元素也是如此。</li>
+<li>BFC 区域 不会 与 浮动元素 重叠，即 浮动元素 外边距不 重叠</li>
+<li>BFC 是一个独立容器，容器内的子元素不会影响到外面的元素，反之亦然</li>
+<li><strong>计算 BFC 的高度，浮动元素也参与计算</strong> 通过 设置<code>overflow</code>属性，创建了 BFC，并计算高度，浮动元素参与计算，达到清除浮动的效果。</li>
+</ol>
+<h4 id="创建-BFC"><a href="#创建-BFC" class="headerlink" title="创建 BFC"></a>创建 BFC</h4><ol>
+<li>根元素</li>
+<li>浮动元素 （元素的 <code>float</code>属性值不为 none）</li>
+<li>绝对定位元素 （元素的 <code>position</code> 属性值 为 <code>absolute</code>或<code>fixed</code>）</li>
+<li>行内块元素 (<code>display : inline-block</code>)</li>
+<li><code>overflow</code>值不为<code>visible</code>的块元素</li>
+<li>弹性元素 （<code>display:flex</code>元素 的 直接子元素）</li>
+</ol>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://aixuexi567.github.io/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/" title="CSS面试题（更新中）" target="_blank" rel="external">https://aixuexi567.github.io/2020/05/24/CSS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aixuexi567" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aixuexi567" target="_blank"><span class="text-dark">爱学兮</span><small class="ml-1x">Front End &amp; Vue &amp; TypeScript</small></a></h3>
+        <div>前端狗，偶尔思考，间歇式码字</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/05/26/%E9%9D%A2%E8%AF%95%E5%B0%8F%E8%AE%B0/" title="面试小记"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/05/21/ES6%E5%B8%B8%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/" title="ES6常用知识点梳理"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="wechat" data-mobile-sites=""></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '3c9348a5e84eb5050ec8',
+    clientSecret: 'b92d8dd66f66bbe04d870af0e612ff74a00546da',
+    repo: 'aixuexi567.github.io',
+    owner: 'aixuexi567',
+    admin: ['aixuexi567'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+  <!-- Google Adsense -->
+<script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7070857500305563"
+  crossorigin="anonymous"
+></script>
+
+</body>
+</html>
