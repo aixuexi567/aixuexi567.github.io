@@ -187,8 +187,8 @@ profile:
   avatar: images/avatar.jpg
   gravatar: # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
   author: 爱学兮
-  author_title: Front End & Vue & TypeScript
-  author_description: 前端狗，偶尔思考，间歇式码字
+  author_title: AI & Web Developer & Data Analyst
+  author_description: 前端狗，偶尔思考，间歇码字
   location: Shenzhen, China
   follow: https://github.com/aixuexi567
   # Social Links
