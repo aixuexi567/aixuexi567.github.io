@@ -1,0 +1,26 @@
+{
+    "cSpell.words": [
+        "Shenzhen"
+    ],
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#0c83b4",
+        "activityBar.activeBorder": "#f9a5e1",
+        "activityBar.background": "#0c83b4",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#f9a5e1",
+        "activityBarBadge.foreground": "#15202b",
+        "sash.hoverBorder": "#0c83b4",
+        "statusBar.background": "#096084",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#0c83b4",
+        "statusBarItem.remoteBackground": "#096084",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#096084",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#09608499",
+        "titleBar.inactiveForeground": "#e7e7e799",
+        "commandCenter.border": "#e7e7e799"
+    },
+    "peacock.color": "#096084"
+}

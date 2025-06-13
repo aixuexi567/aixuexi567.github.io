@@ -1,0 +1,233 @@
+# menu
+menu:
+  Home: .
+  Archives: archives # 归档
+  Categories: categories # 分类
+  Tags: tags # 标签
+  Repository: repository # github repositories
+  # Books: books # 豆瓣书单
+  # Links: links # 友链
+  About: about # 关于
+
+# Enable/Disable menu icons
+menu_icons:
+  enable: true # 是否启用导航菜单图标
+  home: icon-home-fill
+  archives: icon-archives-fill
+  categories: icon-folder
+  tags: icon-tags
+  repository: icon-project
+  books: icon-book-fill
+  links: icon-friendship
+  about: icon-cup-fill
+
+# rss
+rss: /atom.xml
+
+# Site
+site:
+  logo:
+    enabled: false
+    width: 40
+    height: 40
+    url:
+  title: better-jiang # 页面title
+  favicon: /favicon.ico
+  board: <p>😊 欢迎交流与分享经验!</p>  <p>😊 上班摸鱼写散文!</p> # 站点公告
+  copyright: false # 底部版权信息
+
+# config
+config:
+  skin: theme-purple # 主题颜色 theme-black theme-blue theme-green theme-purple
+  layout: main-center # 布局方式 main-left main-center main-right
+  toc: true # 是否开启文章章节目录导航
+  menu_highlight: false # 是否开启当前菜单高亮显示
+  thumbnail: false # enable posts thumbnail, options: true, false
+  excerpt_link: Read More
+
+# Pagination
+pagination:
+  number: false
+  prev:
+    alwayShow: true
+  next:
+    alwayShow: true
+
+# Sidebar
+sidebar: right
+widgets:
+  - board
+  - category
+  - tag
+  - tagcloud
+  - archive
+  - recent_posts
+
+# display widgets at the bottom of index pages (pagination == 2)
+index_widgets:
+# - category
+# - tagcloud
+# - archive
+
+# widget behavior
+archive_type: "monthly"
+show_count: true
+
+# Fancybox
+fancybox: true
+
+# Search
+search:
+  insight: true # you need to install `hexo-generator-json-content` before using Insight Search
+  baidu: false # you need to disable other search engines to use Baidu search
+
+# Donate
+donate:
+  enable: true
+  # 微信打赏
+  wechatpay:
+    qrcode: images/donate/wechatpayimg.png
+    title: 微信支付
+  # 支付宝打赏
+  alipay:
+    qrcode: images/donate/alipayimg.png
+    title: 支付宝
+
+# Share
+# weibo,qq,qzone,wechat,tencent,douban,diandian,facebook,twitter,google,linkedin
+share:
+  enable: true # 是否启用分享
+  sites: wechat # weibo,qq,facebook,twitter  # PC端显示的分享图标
+  mobile_sites: # weibo,qq,qzone  # 移动端显示的分享图标
+
+# Github
+github:
+  username: Better-Jiang # github username
+
+# Comment
+# Gitment
+# Introduction: https://imsun.net/posts/gitment-introduction/
+comment:
+  type: gitalk # 启用哪种评论系统
+  disqus: # enter disqus shortname here
+  youyan:
+    uid: 1783844 # enter youyan uid
+  livere:
+    uid: # enter youyan uid
+  gitment:
+    githubID:
+    repo:
+    ClientID:
+    ClientSecret:
+    lazy: false
+  gitalk: # gitalk. https://gitalk.github.io/
+    owner: Better-Jiang #必须. GitHub repository 所有者，可以是个人或者组织。
+    admin: Better-Jiang #必须. GitHub repository 的所有者和合作者 (对这个 repository 有写权限的用户)。
+    repo: Better-Jiang.github.io #必须. GitHub repository.
+    ClientID: 3c9348a5e84eb5050ec8 #必须. GitHub Application Client ID.
+    ClientSecret: b92d8dd66f66bbe04d870af0e612ff74a00546da #必须. GitHub Application Client Secret.
+  valine: # Valine. https://valine.js.org
+    appid: # your leancloud application appid
+    appkey: # your leancloud application appkey
+    notify: false # mail notifier , https://github.com/xCss/Valine/wiki
+    verify: false # Verification code
+    placeholder: Just go go # comment box placeholder
+    avatar: mm # gravatar style
+    meta: nick,mail,link # custom comment header
+    pageSize: 10 # pagination size
+    visitor: false # Article reading statistic https://valine.js.org/visitor.html
+
+# douban 豆瓣书单
+# Api：
+# https://developers.douban.com/wiki/?title=book_v2 图书
+# https://developers.douban.com/wiki/?title=movie_v2 电影
+# books：
+# https://api.douban.com/v2/book/user/:name/collections?start=0&count=100 个人书单列表
+# movies:
+# https://api.douban.com/v2/movie/in_theaters 正在上映的电影
+# https://api.douban.com/v2/movie/coming_soon 即将上映的电影
+# https://api.douban.com/v2/movie/subject/:id 单个电影信息
+# https://api.douban.com/v2/movie/search?q={text} 电影搜索
+douban:
+  user: better-jiang # 豆瓣用户名(域名)
+  start: 0 # 从哪一条记录开始
+  count: 100 # 获取豆瓣书单数据条数
+
+# PV
+pv:
+  busuanzi:
+    enable: true # 不蒜子统计
+  leancloud:
+    enable: false # leancloud统计
+    app_id: # leancloud <AppID>
+    app_key: # leancloud <AppKey>
+
+# wordcount
+postCount:
+  enable: true
+  wordcount: true # 文章字数统计
+  min2read: true # 阅读时长预计
+
+# Plugins
+plugins:
+  google_analytics: # enter the tracking ID for your Google Analytics
+  google_site_verification: # enter Google site verification code
+  baidu_analytics: # enter Baidu Analytics hash key
+  tencent_analytics:
+
+# Miscellaneous
+twitter:
+google_plus:
+fb_admins:
+fb_app_id:
+
+# profile
+profile:
+  enabled: true # Whether to show profile bar
+  avatar: images/avatar.jpg
+  gravatar: # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
+  author: 爱学兮
+  author_title: Front End & Vue & TypeScript
+  author_description: 前端狗，偶尔思考，间歇式码字
+  location: Shenzhen, China
+  follow: https://github.com/Better-Jiang
+  # Social Links
+  social:
+    links:
+      github: https://github.com/Better-Jiang
+      # weibo: http://weibo.com/cofess
+      # twitter: https://twitter.com/iwebued
+      # facebook: /
+      # dribbble: /
+      # behance: https://www.behance.net/cofess
+      # rss: atom.xml
+    link_tooltip: true # enable the social link tooltip, options: true, false
+  # My Skills
+  skills:
+    Javascript: ★★★☆☆
+    CSS: ★★★☆☆
+    Vue: ★★★★☆
+    Node: ★★★☆☆
+    TypeScript: ★★★☆☆
+
+  # My Personal Links
+  links:
+    Github: https://github.com/Better-Jiang
+    # Blog: http://blog.cofess.com
+    # 微博: http://weibo.com/cofess
+    # 花瓣: http://huaban.com/cofess
+    # Behance: https://www.behance.net/cofess
+  # My Personal Labels
+  labels:
+    - Front End
+    - Vue
+    - TypeScript
+  # My Personal Works
+  works:
+    # name:
+    #  link: http://www.example.com
+    #  date: 2016
+  # My Personal Projects
+  projects:
+    # cofess/gulp-startpro: https://github.com/cofess/gulp-startpro
+    # cofess/hexo-theme-pure: https://github.com/cofess/hexo-theme-pure
