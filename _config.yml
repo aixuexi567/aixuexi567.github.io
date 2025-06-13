@@ -84,3 +84,9 @@ deploy:
   type: git
   repo: https://github.com/aixuexi567/aixuexi567.github.io.git
   branch: main  # 使用 main 分支作为默认分支
+
+# hexo-permalink-pinyin 配置
+permalink_pinyin:
+  enable: true
+  separator: '-' # 默认为 '-'
+  remove_tones: true # 是否去除声调
