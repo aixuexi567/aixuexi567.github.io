@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>404 Astronaut</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#6C63FF" offset="0%"></stop>
+            <stop stop-color="#4A4AFF" offset="100%"></stop>
+        </linearGradient>
+        <circle id="path-2" cx="150" cy="150" r="100"></circle>
+        <filter x="-15.5%" y="-15.5%" width="131.0%" height="131.0%" filterUnits="objectBoundingBox" id="filter-3">
+            <feGaussianBlur stdDeviation="10" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="404-Astronaut">
+            <g id="Stars" opacity="0.8">
+                <circle id="Star-1" fill="#6C63FF" cx="50" cy="50" r="2"></circle>
+                <circle id="Star-2" fill="#6C63FF" cx="75" cy="90" r="1"></circle>
+                <circle id="Star-3" fill="#6C63FF" cx="250" cy="60" r="2"></circle>
+                <circle id="Star-4" fill="#6C63FF" cx="220" cy="200" r="1"></circle>
+                <circle id="Star-5" fill="#6C63FF" cx="40" cy="200" r="1.5"></circle>
+                <circle id="Star-6" fill="#6C63FF" cx="180" cy="40" r="1"></circle>
+                <circle id="Star-7" fill="#6C63FF" cx="280" cy="150" r="2"></circle>
+                <circle id="Star-8" fill="#6C63FF" cx="100" cy="250" r="1.5"></circle>
+                <circle id="Star-9" fill="#6C63FF" cx="240" cy="120" r="1"></circle>
+            </g>
+            <g id="Planet">
+                <use fill="#F2F2F2" fill-rule="evenodd" xlink:href="#path-2"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                <circle stroke="#E0E0E0" stroke-width="2" cx="150" cy="150" r="101"></circle>
+                <circle id="Crater-1" fill="#E0E0E0" cx="100" cy="120" r="15"></circle>
+                <circle id="Crater-2" fill="#E0E0E0" cx="180" cy="170" r="20"></circle>
+                <circle id="Crater-3" fill="#E0E0E0" cx="120" cy="200" r="10"></circle>
+            </g>
+            <g id="Astronaut" transform="translate(130.000000, 130.000000)">
+                <g id="Body" transform="translate(0.000000, 15.000000)">
+                    <path d="M40,60 C51.045695,60 60,51.045695 60,40 C60,28.954305 51.045695,20 40,20 C28.954305,20 20,28.954305 20,40 C20,51.045695 28.954305,60 40,60 Z" id="Suit" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="2"></path>
+                    <path d="M40,20 L40,0 C40,0 50,5 50,15 C50,18 46,20 40,20 Z" id="Backpack" fill="#E0E0E0"></path>
+                    <path d="M30,20 L30,0 C30,0 20,5 20,15 C20,18 24,20 30,20 Z" id="Backpack" fill="#E0E0E0" transform="translate(25.000000, 10.000000) scale(-1, 1) translate(-25.000000, -10.000000) "></path>
+                </g>
+                <g id="Head" transform="translate(25.000000, 0.000000)">
+                    <circle id="Helmet" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="2" cx="15" cy="15" r="15"></circle>
+                    <circle id="Visor" fill="url(#linearGradient-1)" cx="15" cy="15" r="10"></circle>
+                </g>
+                <g id="Arms" transform="translate(0.000000, 25.000000)">
+                    <path d="M20,10 C20,15.5228475 15.5228475,20 10,20 C4.4771525,20 0,15.5228475 0,10 C0,4.4771525 4.4771525,0 10,0 C15.5228475,0 20,4.4771525 20,10 Z" id="Left-Hand" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="2"></path>
+                    <path d="M80,10 C80,15.5228475 75.5228475,20 70,20 C64.4771525,20 60,15.5228475 60,10 C60,4.4771525 64.4771525,0 70,0 C75.5228475,0 80,4.4771525 80,10 Z" id="Right-Hand" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="2"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
