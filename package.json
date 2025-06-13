@@ -9,7 +9,7 @@
     "start": "hexo s",
     "new": "hexo new",
     "g": "hexo g",
-    "d": "hexo d",
+    "d": "hexo clean && hexo generate && hexo deploy",
     "c": "hexo clean"
   },
   "dependencies": {
