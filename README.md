@@ -1,6 +1,6 @@
 # 个人博客
 
-[betterjiang.com](<(https://aixuexi567.github.io/)>)
+[爱学兮](https://aixuexi567.github.io/)
 
 - 技术总结
 - 随笔感悟
