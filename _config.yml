@@ -83,4 +83,4 @@ theme: pure
 deploy:
   type: git
   repo: https://github.com/aixuexi567/aixuexi567.github.io.git
-  # branch: writing
+  branch: main  # 使用 main 分支作为默认分支
