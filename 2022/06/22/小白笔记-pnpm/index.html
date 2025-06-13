@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- google 广告 -->
+  <script data-ad-client="ca-pub-7070857500305563" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>小白笔记-pnpm | aixuexi567</title>
+  <meta name="description" content="performant npm，高性能的 npm，由 npm、yarn 衍生而来，解决了 npm&#x2F;yarn 内部潜在的 bug，极大的优化了性能。 特点 速度快，安装高效  节省磁盘空间 当使用 npm 或 yarn 时，如果有 100 个项目使用到某个依赖(dependency)，就会有 100 份改依赖的副本保存在硬盘上。使用 pnpm 时，依赖会被存储在内容可寻址的存储中(the denpen">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小白笔记-pnpm">
+<meta property="og:url" content="https://aixuexi567.github.io/2022/06/22/%E5%B0%8F%E7%99%BD%E7%AC%94%E8%AE%B0-pnpm/index.html">
+<meta property="og:site_name" content="爱学兮">
+<meta property="og:description" content="performant npm，高性能的 npm，由 npm、yarn 衍生而来，解决了 npm&#x2F;yarn 内部潜在的 bug，极大的优化了性能。 特点 速度快，安装高效  节省磁盘空间 当使用 npm 或 yarn 时，如果有 100 个项目使用到某个依赖(dependency)，就会有 100 份改依赖的副本保存在硬盘上。使用 pnpm 时，依赖会被存储在内容可寻址的存储中(the denpen">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://aixuexi567.github.io/image/image-20220622162106602.png">
+<meta property="og:image" content="https://aixuexi567.github.io/image/image-20220622162714637.png">
+<meta property="og:image" content="https://aixuexi567.github.io/image/image-20220622165200478.png">
+<meta property="og:image" content="https://aixuexi567.github.io/image/image-20220622170327166.png">
+<meta property="og:image" content="https://aixuexi567.github.io/image/image-20220622171758946.png">
+<meta property="og:image" content="https://aixuexi567.github.io/image/image-20220622185716656.png">
+<meta property="og:image" content="https://aixuexi567.github.io/image/image-20220622190031040.png">
+<meta property="article:published_time" content="2022-06-22T06:15:55.000Z">
+<meta property="article:modified_time" content="2025-06-13T05:38:58.254Z">
+<meta property="article:author" content="刘振江">
+<meta property="article:tag" content="pnpm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://aixuexi567.github.io/image/image-20220622162106602.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://aixuexi567.github.io/2022/06/22/%E5%B0%8F%E7%99%BD%E7%AC%94%E8%AE%B0-pnpm/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="爱学兮" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aixuexi567" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">爱学兮</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Front End &amp; Vue &amp; TypeScript</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>😊 欢迎交流与分享经验!</p>  <p>😊 上班摸鱼写散文!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/">成长小记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a><span class="category-list-count">87</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%83%82%E7%AC%94%E5%A4%B4/">烂笔头</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8B%B1%E8%AF%AD%E6%8B%BE%E9%81%97/">英语拾遗</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94%E6%84%9F%E6%82%9F/">随笔感悟</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" rel="tag">CSS权威指南-第四版</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eslint/" rel="tag">eslint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grunt/" rel="tag">grunt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pnpm/" rel="tag">pnpm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vite/" rel="tag">vite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" rel="tag">一碗鸡汤</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" rel="tag">书籍读后感</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" rel="tag">前端性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" rel="tag">反思怪</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" rel="tag">团队协作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" rel="tag">成长小记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" rel="tag">技术总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" rel="tag">残酷物语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" rel="tag">烂笔头</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" rel="tag">编程认知</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A3%9E%E7%9B%98/" rel="tag">飞盘</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" style="font-size: 13.63px;">CSS权威指南-第四版</a> <a href="/tags/axios/" style="font-size: 13px;">axios</a> <a href="/tags/css/" style="font-size: 14px;">css</a> <a href="/tags/eslint/" style="font-size: 13.13px;">eslint</a> <a href="/tags/git/" style="font-size: 13.75px;">git</a> <a href="/tags/grunt/" style="font-size: 13px;">grunt</a> <a href="/tags/http/" style="font-size: 13.38px;">http</a> <a href="/tags/javascript/" style="font-size: 13.88px;">javascript</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/npm/" style="font-size: 13px;">npm</a> <a href="/tags/pnpm/" style="font-size: 13px;">pnpm</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/shell/" style="font-size: 13px;">shell</a> <a href="/tags/vite/" style="font-size: 13px;">vite</a> <a href="/tags/vscode/" style="font-size: 13px;">vscode</a> <a href="/tags/vue/" style="font-size: 13.75px;">vue</a> <a href="/tags/webpack/" style="font-size: 13px;">webpack</a> <a href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" style="font-size: 13px;">一碗鸡汤</a> <a href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" style="font-size: 13.25px;">书籍读后感</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" style="font-size: 13px;">前端性能</a> <a href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" style="font-size: 13.5px;">反思怪</a> <a href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" style="font-size: 13px;">团队协作</a> <a href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" style="font-size: 13px;">成长小记</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" style="font-size: 13px;">技术总结</a> <a href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" style="font-size: 13px;">残酷物语</a> <a href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" style="font-size: 13px;">烂笔头</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" style="font-size: 13.13px;">编程认知</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 13.13px;">网络</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 13.75px;">翻译</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 13.25px;">语法</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 13.63px;">面试</a> <a href="/tags/%E9%A3%9E%E7%9B%98/" style="font-size: 13.25px;">飞盘</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/13/%E6%AF%9B%E9%80%89-%E8%AF%BB%E5%90%8E%E6%84%9F/" class="title">&lt;毛选&gt;读后感</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-13T01:48:36.000Z" itemprop="datePublished">2023-09-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/29/V8%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E4%B8%80%E6%AE%B5js%E4%BB%A3%E7%A0%81/" class="title">V8如何执行一段js代码?</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-29T02:24:35.000Z" itemprop="datePublished">2023-08-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/28/JS-V8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" class="title">JS-V8垃圾回收</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-28T01:46:03.000Z" itemprop="datePublished">2023-08-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/31/%E7%A9%BA%E6%83%B3%E6%80%AA%E7%9A%84%E6%97%A5%E5%B8%B8%E5%8F%8D%E6%80%9D/" class="title">空想怪的日常反思</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-31T02:31:08.000Z" itemprop="datePublished">2023-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/20/%E5%9B%B0/" class="title">困</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-20T03:43:04.000Z" itemprop="datePublished">2023-03-20</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-小白笔记-pnpm" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      小白笔记-pnpm
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/06/22/%E5%B0%8F%E7%99%BD%E7%AC%94%E8%AE%B0-pnpm/" class="article-date">
+	  <time datetime="2022-06-22T06:15:55.000Z" itemprop="datePublished">2022-06-22</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E7%83%82%E7%AC%94%E5%A4%B4/">烂笔头</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/pnpm/" rel="tag">pnpm</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/06/22/%E5%B0%8F%E7%99%BD%E7%AC%94%E8%AE%B0-pnpm/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.5k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 9(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>performant npm，高性能的 npm，由 npm、yarn 衍生而来，解决了 npm/yarn 内部潜在的 bug，极大的优化了性能。</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li><p>速度快，安装高效</p>
+</li>
+<li><p>节省磁盘空间</p>
+<p>当使用 npm 或 yarn 时，如果有 100 个项目使用到某个依赖(dependency)，就会有 100 份改依赖的副本保存在硬盘上。使用 pnpm 时，依赖会被存储在内容可寻址的存储中(the denpendency wil be sotred in a content-addressable store),所有</p>
+<ul>
+<li>用到某个依赖的不同版本，只会将<strong>不同版本有差异的文件</strong>添加到仓库</li>
+<li>所有的文件都会存储在硬盘的某一个位置。当软件包被安装时，包里的文件会<strong>硬链接</strong>到该位置，不会再占用额外的磁盘空间。可<strong>允许跨项目的共享同一版本的依赖</strong>。</li>
+</ul>
+</li>
+<li><p>优化了依赖的 node_modules 结构，创建<strong>非扁平化</strong>的 node_modules 文件夹</p>
+<ul>
+<li>使用 npm 或 yarn 安装依赖项时，所有的包都<strong>被提升到模块目录的根目录</strong>，因此，项目可以访问到未被添加进当前项目的依赖</li>
+<li>默认情况下，pnpm 使用<strong>软链</strong>的方式将项目的直接依赖<strong>添加进模块文件夹的根目录</strong></li>
+</ul>
+</li>
+<li><p>内置了对 Monorepo 的支持，无需在引入 lerna</p>
+</li>
+</ul>
+<h3 id="npm、yarn-面临的问题"><a href="#npm、yarn-面临的问题" class="headerlink" title="npm、yarn 面临的问题"></a>npm、yarn 面临的问题</h3><h4 id="Npm-安装包的过程"><a href="#Npm-安装包的过程" class="headerlink" title="Npm 安装包的过程"></a>Npm 安装包的过程</h4><ul>
+<li>先检查 <code>.npmrc</code>文件，包含以下 npm 配置信息，如 registry,全局缓存目录等</li>
+<li>读取 package.json 文件中的依赖信息，根据<strong>semver</strong>语义化版本信息生成完整的版本依赖树</li>
+<li>先查询本地缓存目录，如果有缓存就直接使用，如果不存在，再去 npm 仓库下载到的缓存目录，此过程，会校验包的哈希，以保证安全性</li>
+</ul>
+<p>上述过程中依赖树可能存在大量重复的模块，因为它按依赖树的结构进行安装，比如 A，B 模块都依赖了 C 模块，那么 C 模块会在 A、B 模块的 node_modules 目录内重复安装，造成大量的重复和冗余。</p>
+<p><img src="/image/image-20220622162106602.png" alt="image-20220622162106602"></p>
+<p>npm3 进行了优化，加入了<code>dedupe模块扁平化</code>，尽可能的将所有依赖都发到<strong>最顶层</strong>node_modules 目录下，如果有重复的模块，且版本相互兼容，就会只保留一个，丢弃其它的。如果版本不兼容，那么<strong>只有一个被提升到顶层</strong>，其它的会放在其父依赖的 node_modules 目录下，而哪一个被提升到顶层可能不固定，所有在 npm5+版本中新增了<code>package-lock.json</code>用于<strong>锁定依赖结构</strong>，确保每一次安装出来的目录结构和依赖版本相同。</p>
+<p><img src="/image/image-20220622162714637.png" alt="image-20220622162714637"></p>
+<h4 id="phantom-dependencies-幽灵依赖"><a href="#phantom-dependencies-幽灵依赖" class="headerlink" title="phantom dependencies (幽灵依赖)"></a>phantom dependencies (幽灵依赖)</h4><p>由于扁平化的处理方式， 用户可以引用 package.json 中没有声明的依赖。 比如项目 1 使用 依赖 A，其中 A 有一个 A1 包，由于扁平化 A1 包会别提升到项目 node_modules 下，此时在项目 1 中可直接使用 A1 包，将来 A 升级或不在使用 A1 包，那么项目 1 就会出现异常或报错</p>
+<h4 id="npm-dopplelgangers-npm-包分身"><a href="#npm-dopplelgangers-npm-包分身" class="headerlink" title="npm dopplelgangers (npm 包分身)"></a>npm dopplelgangers (npm 包分身)</h4><p>npm 扁平化的处理机制，可能导致心魔中应用多个版本的包，从而导致</p>
+<ul>
+<li>需要安装多个版本包</li>
+<li>打包出来的文件可能包含多个包</li>
+<li>如果该包需要用到单例，会出现异常</li>
+</ul>
+<h3 id="pnpm-原理"><a href="#pnpm-原理" class="headerlink" title="pnpm 原理"></a>pnpm 原理</h3><p>pnpm 安装依赖后 node_modules 目录大概如下：</p>
+<p><img src="/image/image-20220622165200478.png" alt="image-20220622165200478"></p>
+<p>其中 node_modules 包含 <code>.bin</code>,<code>.pnpm</code>目录以及其它的 npm 包，这些 npm 包与 package.json 中声明的保持一致，因此只有 package.json 中声明过的依赖才能在项目中使用，从而避免了幽灵依赖的问题。</p>
+<p>不同于 npm,这些 npm 包都是 <strong>symbolic link 符号链接，指向了.pnpm 目录下的包</strong></p>
+<p><strong>.pnpm 下的包名规则是</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;organization-name&gt; + &lt;package-name&gt;@&lt;version&gt;/node_modules/&lt;name&gt;</span><br><span class="line">组织名+包名@版本号/node_modules/名称(项目名)</span><br><span class="line">typescript@4.7.4/node_modules/typescript</span><br></pre></td></tr></table></figure>
+
+<p><img src="/image/image-20220622170327166.png" alt="image-20220622170327166"></p>
+<p>因为.pnpm 里面的包路径中加入了<strong>版本号信息</strong>，因此可以在<strong>同一目录下相对扁平化的存储所有的包</strong>，</p>
+<p>由于每个包又有自己的依赖，为了迎合 node.js 的包查找规则，因此上面的包命名规则中有添加了一层 node_modules 目录，本包的依赖也会在这个目录 内创建 Symbolic link 符号链接，链接到.pnmp 顶层上的包，通过此法，使得每一个包都能正常的使用自己的依赖，但不会污染到顶层的 node_modules,从而避免幽灵依赖的问题</p>
+<p><img src="/image/image-20220622171758946.png" alt="image-20220622171758946"></p>
+<blockquote>
+<p>注： node_modules 目录下还存在一部分没有在 package.json 中声明的依赖，比如<code>@jest/type</code>,<code>@vitejs</code>，这是因为一部分包需要在顶层才能使用，比如 eslint、typescript 声明，prettier 插件等，pnpm 会默认将包名含 types，eslint、prettier 等关键词的包提升到顶层。可通过<code>.npmrc</code>中设置<code>public-hoist-pattern[]=</code>来关闭这些提升</p>
+</blockquote>
+<h4 id="Hard-Link-和-Store"><a href="#Hard-Link-和-Store" class="headerlink" title="Hard Link 和 Store"></a>Hard Link 和 Store</h4><p>在 linux 文件系统中，保存在磁盘分区中文件都会分配一个编号，称为索引编号(inode index)，文件名和 inode 通常是一一对应的，且允许<strong>多个文件名指向同一个 inode</strong>, <strong>删除任何一个文件名并不会对 inode 或其它文件有影响</strong>。只有当最后一个硬链接删除后才回收 inode 编号并标记对应的 block 为可用，等待其它数据存储后抹去其内容。如此，同一个文件可以有多个文件路径和文件名，但在磁盘中仅仅只有一份内容，避免了重复占用。</p>
+<p>项目的 node_modules 目录下的所有文件都是通过硬链接的方式链接到全局 pnpm store 内的文件，以.pnpm 目录下的 vue 为例， 查看 README.md 文件的 inode 编号：64817529</p>
+<p><img src="/image/image-20220622185716656.png" alt="image-20220622185716656"></p>
+<p>进入 pnpm 全局 stroe 路径，查找 inode 编号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Users/liuzhenjiang948/.pnpm-store  // 全局目录</span><br><span class="line">find . -inum 64817529   // 查找对应 inode</span><br></pre></td></tr></table></figure>
+
+<p><img src="/image/image-20220622190031040.png" alt="image-20220622190031040"></p>
+<p>所有 npm 包里面的<strong>所有文件都会在全局进行存储</strong>,存储是根据文件的哈希信息进行散列，这样可以扁平化的存储，而不用按原始的 npm 包目录结构进行存储，节省大量磁盘空间。</p>
+<h3 id="pnpm-install-安装包的大致过程"><a href="#pnpm-install-安装包的大致过程" class="headerlink" title="pnpm install 安装包的大致过程"></a>pnpm install 安装包的大致过程</h3><ul>
+<li>判断是否有 <code>pnpm-lock.yaml</code>文件，<ul>
+<li>如果没有，则根据<code>package.json</code>中声明的版本计算依赖树以及各版本 npm 包的 integrity 值</li>
+<li>如果有 且版本跟 package.json 中声明的匹配，就根据<code>pnpm-lock.yaml</code>中各个依赖包的 integrity 信息，并计算对应的 -index.json 文件的完整哈希和路径</li>
+<li>如果 stroe 里面有对应的包的-index.json 文件，即有该包的缓存</li>
+<li>如果没有的话需联网下载对应的 tar 包，并生成对应的-index.json 文件，并且将包内的文件计算 integrityz 值和哈希</li>
+<li>对整个依赖树进行完以上操作后再项目内的 node_modules 目录创建个依赖的符号链接和文件的硬链接完成安装</li>
+</ul>
+</li>
+</ul>
+<h3 id="CLI-命令"><a href="#CLI-命令" class="headerlink" title="CLI 命令"></a>CLI 命令</h3><ul>
+<li><p>pnpm add <pkg>, <code>-D 安装到 devDependencies</code>, <code>-O 安装到 optionalDependencies</code></p>
+</li>
+<li><p>pnpm install （i）, 安装项目所有依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Packages are copied from the content-addressable store to the virtual store.</span><br><span class="line">  Content-addressable store is at: /Users/liuzhenjiang948/Library/pnpm/store/v3</span><br><span class="line">  Virtual store is at:             node_modules/.pnpm</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>默认值/类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–offline</td>
+<td>false</td>
+<td>为 true，仅使用在<code>store</code>中已有的包，本地找不到，安装失败</td>
+</tr>
+<tr>
+<td>–ignore-scripts</td>
+<td>false</td>
+<td>不执行任何项目中<code>package.json</code>和它依赖项中定义的任何脚本</td>
+</tr>
+<tr>
+<td>–ockfile-only</td>
+<td>fasle</td>
+<td>只更新<code>pnpm-lock.yaml</code>和<code>package.json</code>，不写入<code>node_modules</code>目录</td>
+</tr>
+<tr>
+<td>–fix-lockfile</td>
+<td></td>
+<td>自动修复损坏的 lock 文件入口</td>
+</tr>
+<tr>
+<td>—reporter=<name></td>
+<td>default, silent, append-only, ndjson</td>
+<td>silent: 除致命 errors，不输出记录信息<br />ndjson: 最详细记录信息</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>pnpm update (up), 更新软件包的最新版本</p>
+<table>
+<thead>
+<tr>
+<th>命令，配置项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pnpm up</td>
+<td>按 <code>package.json</code>指定的范围更新所有的依赖项</td>
+</tr>
+<tr>
+<td>pnpm up –latest</td>
+<td>更新所有依赖项，忽略<code>package.json</code>指定的范围</td>
+</tr>
+<tr>
+<td>pnpm up –recursive</td>
+<td>递归更新子目录中的依赖包</td>
+</tr>
+<tr>
+<td>pnpm up –global</td>
+<td>更新全局安装的依赖包</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>pnpm remove (rm,un,uninstall), 删除指定的包</p>
+</li>
+<li><p>pnpm link (ln)， 使当前本地包 可在<strong>系统范围内 或 其他位置 访问</strong></p>
+<p>在项目开发时，需要将一些公用的代码抽离发布成 npm 包，作为项目的依赖去安装使用。但在开发调试中需要频繁的打包发布，再安装依赖，很不方便。为解决此问题，可以使用 link 命令将模块链接到项目中。</p>
+<ul>
+<li>假设 项目名 project-jiang，和一个公用组件模块 common，现在需要在项目中使用 common,且 common 是作为项目的 npm 包依赖。</li>
+<li>在 common 目录下使用 <code>pnpm link</code> ,将 common 模块创建成本地依赖包</li>
+<li>在 project-jiang 项目中，使用 <code>pnpm link common</code> 和本地 common 模块建立链接。此时该项目中的 node_modules 里就会添加一个 common 模块的软连接</li>
+</ul>
+</li>
+<li><p>pnpm unlink， 取消链接一个系统访问的 package</p>
+</li>
+<li><p>pnpm import, 从另一个软件包管理器的 lock 文件生产 <code>pnpm-lock.yaml</code>， 支持的源文件 <code>package-lock.json</code>,<code>yarn.lock</code>,<code>npm-shrinkwrap.json</code></p>
+</li>
+</ul>
+<h4 id="查看依赖"><a href="#查看依赖" class="headerlink" title="查看依赖"></a>查看依赖</h4><ul>
+<li>pnpm audit, 检查已安装包的已知安全问题，如果发现问题，尝试使用<code>pnpm update</code>，<code>pnpm audit --fix</code></li>
+<li>pnpm list, 以树形结构输出所有的已安装<code>package</code>的版本及其依赖</li>
+<li>pnpm outdated， 检查过期的 packages</li>
+</ul>
+<h4 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h4><ul>
+<li><p>pnpm run ， 运行一个在 package 文件定义的脚本</p>
+</li>
+<li><p>pnpm test, 运行在<code> package</code> 的<code> scripts</code> 对象中<code>test</code> 属性指定的任意的命令</p>
+</li>
+<li><p>pnpm exec, 在项目访问内执行 shell</p>
+</li>
+<li><p><strong>pnpm dlx</strong>, 从源中获取包而不将其安装为依赖，热加载，并运行它公开的任何默认命令的二级制文件</p>
+<p>例如 <code>pnpm dlx create-react-app my-app</code>, 使用 <code>create-react-app</code>来初始化一个 react 应用</p>
+</li>
+<li><p>pnpm create， 从<code>create-*</code>或<code>@foo/create-*</code>启动套件创建项目， 例如<code>pnpm create react-app my-app</code></p>
+</li>
+</ul>
+<h4 id="管理-Node-环境"><a href="#管理-Node-环境" class="headerlink" title="管理 Node 环境"></a>管理 Node 环境</h4><p><strong>pnpm env <cmd></strong></p>
+<ul>
+<li><p>安装并使用指定版本 node.js</p>
+<p><code>pnpm env use --global lts</code>, <code>pnpm env use --global 16</code>, <code>pnpm env use --global latest</code></p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://aixuexi567.github.io/2022/06/22/%E5%B0%8F%E7%99%BD%E7%AC%94%E8%AE%B0-pnpm/" title="小白笔记-pnpm" target="_blank" rel="external">https://aixuexi567.github.io/2022/06/22/%E5%B0%8F%E7%99%BD%E7%AC%94%E8%AE%B0-pnpm/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aixuexi567" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aixuexi567" target="_blank"><span class="text-dark">爱学兮</span><small class="ml-1x">Front End &amp; Vue &amp; TypeScript</small></a></h3>
+        <div>前端狗，偶尔思考，间歇式码字</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/07/14/%E5%B0%8F%E7%99%BD%E7%AC%94%E8%AE%B0-shell/" title="小白笔记-shell"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/06/21/%E5%B0%8F%E7%99%BD%E7%AC%94%E8%AE%B0-redis/" title="小白笔记-redis"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="wechat" data-mobile-sites=""></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '3c9348a5e84eb5050ec8',
+    clientSecret: 'b92d8dd66f66bbe04d870af0e612ff74a00546da',
+    repo: 'aixuexi567.github.io',
+    owner: 'aixuexi567',
+    admin: ['aixuexi567'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+  <!-- Google Adsense -->
+<script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7070857500305563"
+  crossorigin="anonymous"
+></script>
+
+</body>
+</html>

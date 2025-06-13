@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- google 广告 -->
+  <script data-ad-client="ca-pub-7070857500305563" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Vue-查缺补漏(2)-组件 | aixuexi567</title>
+  <meta name="description" content="DOM 模板解析 注意事项Vue 组件的模板在某些情况下会受到 HTML 的限制。ul,ol,table,select这些元素,只有某些特定的元素才能出现在它们内部。li,tr,option这些元素只能出现在特定的元素内部。 12345678&lt;!-- &lt;talbe&gt;元素 内只规定只允许出现&lt;tr&gt;,&lt;td&gt;,&lt;th&gt;等表格元素，所有在此内的直接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-查缺补漏(2)-组件">
+<meta property="og:url" content="https://aixuexi567.github.io/2019/03/01/Vue-%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F-2-%E7%BB%84%E4%BB%B6/index.html">
+<meta property="og:site_name" content="爱学兮">
+<meta property="og:description" content="DOM 模板解析 注意事项Vue 组件的模板在某些情况下会受到 HTML 的限制。ul,ol,table,select这些元素,只有某些特定的元素才能出现在它们内部。li,tr,option这些元素只能出现在特定的元素内部。 12345678&lt;!-- &lt;talbe&gt;元素 内只规定只允许出现&lt;tr&gt;,&lt;td&gt;,&lt;th&gt;等表格元素，所有在此内的直接">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-03-01T03:58:53.000Z">
+<meta property="article:modified_time" content="2025-06-13T05:38:58.240Z">
+<meta property="article:author" content="刘振江">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://aixuexi567.github.io/2019/03/01/Vue-%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F-2-%E7%BB%84%E4%BB%B6/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="爱学兮" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aixuexi567" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">爱学兮</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Front End &amp; Vue &amp; TypeScript</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>😊 欢迎交流与分享经验!</p>  <p>😊 上班摸鱼写散文!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/">成长小记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a><span class="category-list-count">87</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%83%82%E7%AC%94%E5%A4%B4/">烂笔头</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8B%B1%E8%AF%AD%E6%8B%BE%E9%81%97/">英语拾遗</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94%E6%84%9F%E6%82%9F/">随笔感悟</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" rel="tag">CSS权威指南-第四版</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eslint/" rel="tag">eslint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grunt/" rel="tag">grunt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pnpm/" rel="tag">pnpm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vite/" rel="tag">vite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" rel="tag">一碗鸡汤</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" rel="tag">书籍读后感</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" rel="tag">前端性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" rel="tag">反思怪</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" rel="tag">团队协作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" rel="tag">成长小记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" rel="tag">技术总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" rel="tag">残酷物语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" rel="tag">烂笔头</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" rel="tag">编程认知</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A3%9E%E7%9B%98/" rel="tag">飞盘</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" style="font-size: 13.63px;">CSS权威指南-第四版</a> <a href="/tags/axios/" style="font-size: 13px;">axios</a> <a href="/tags/css/" style="font-size: 14px;">css</a> <a href="/tags/eslint/" style="font-size: 13.13px;">eslint</a> <a href="/tags/git/" style="font-size: 13.75px;">git</a> <a href="/tags/grunt/" style="font-size: 13px;">grunt</a> <a href="/tags/http/" style="font-size: 13.38px;">http</a> <a href="/tags/javascript/" style="font-size: 13.88px;">javascript</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/npm/" style="font-size: 13px;">npm</a> <a href="/tags/pnpm/" style="font-size: 13px;">pnpm</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/shell/" style="font-size: 13px;">shell</a> <a href="/tags/vite/" style="font-size: 13px;">vite</a> <a href="/tags/vscode/" style="font-size: 13px;">vscode</a> <a href="/tags/vue/" style="font-size: 13.75px;">vue</a> <a href="/tags/webpack/" style="font-size: 13px;">webpack</a> <a href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" style="font-size: 13px;">一碗鸡汤</a> <a href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" style="font-size: 13.25px;">书籍读后感</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" style="font-size: 13px;">前端性能</a> <a href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" style="font-size: 13.5px;">反思怪</a> <a href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" style="font-size: 13px;">团队协作</a> <a href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" style="font-size: 13px;">成长小记</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" style="font-size: 13px;">技术总结</a> <a href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" style="font-size: 13px;">残酷物语</a> <a href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" style="font-size: 13px;">烂笔头</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" style="font-size: 13.13px;">编程认知</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 13.13px;">网络</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 13.75px;">翻译</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 13.25px;">语法</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 13.63px;">面试</a> <a href="/tags/%E9%A3%9E%E7%9B%98/" style="font-size: 13.25px;">飞盘</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/13/%E6%AF%9B%E9%80%89-%E8%AF%BB%E5%90%8E%E6%84%9F/" class="title">&lt;毛选&gt;读后感</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-13T01:48:36.000Z" itemprop="datePublished">2023-09-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/29/V8%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E4%B8%80%E6%AE%B5js%E4%BB%A3%E7%A0%81/" class="title">V8如何执行一段js代码?</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-29T02:24:35.000Z" itemprop="datePublished">2023-08-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/28/JS-V8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" class="title">JS-V8垃圾回收</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-28T01:46:03.000Z" itemprop="datePublished">2023-08-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/31/%E7%A9%BA%E6%83%B3%E6%80%AA%E7%9A%84%E6%97%A5%E5%B8%B8%E5%8F%8D%E6%80%9D/" class="title">空想怪的日常反思</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-31T02:31:08.000Z" itemprop="datePublished">2023-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/20/%E5%9B%B0/" class="title">困</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-20T03:43:04.000Z" itemprop="datePublished">2023-03-20</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Vue-查缺补漏-2-组件" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vue-查缺补漏(2)-组件
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/03/01/Vue-%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F-2-%E7%BB%84%E4%BB%B6/" class="article-date">
+	  <time datetime="2019-03-01T03:58:53.000Z" itemprop="datePublished">2019-03-01</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/vue/" rel="tag">vue</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/01/Vue-%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F-2-%E7%BB%84%E4%BB%B6/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.7k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 7(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h4 id="DOM-模板解析-注意事项"><a href="#DOM-模板解析-注意事项" class="headerlink" title="DOM 模板解析 注意事项"></a>DOM 模板解析 注意事项</h4><p>Vue 组件的模板在某些情况下会受到 HTML 的限制。<code>ul</code>,<code>ol</code>,<code>table</code>,<code>select</code>这些元素,只有某些特定的元素才能出现在它们内部。<code>li</code>,<code>tr</code>,<code>option</code>这些元素只能出现在特定的元素内部。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- &lt;talbe&gt;元素 内只规定只允许出现&lt;tr&gt;,&lt;td&gt;,&lt;th&gt;等表格元素，所有在此内的直接使用组件时会被作为无效是内容提升到外部--&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">my-component</span>&gt;</span><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- 这种情况下，需要使用 is 属性来挂载组件 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">tr</span> <span class="attr">is</span>=<span class="string">&quot;my-component&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>如果从以下来源使用的模板的话，不存在该限制</strong></p>
+<ul>
+<li>字符串模板（template:’…’）</li>
+<li>单文件组件（.vue）</li>
+<li><code>&lt;script type=&quot;text/x-template&quot;&gt;</code></li>
+</ul>
+<h4 id="使用props-传递数据"><a href="#使用props-传递数据" class="headerlink" title="使用props 传递数据"></a>使用<code>props</code> 传递数据</h4><ul>
+<li><p>选项 <code>props</code>的值 2 种，字符串数组、对象;这些传递的是一个静态的值</p>
+<ul>
+<li>字符串数组,一种简便方式<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">props</span>: [<span class="string">&#x27;message&#x27;</span>, <span class="string">&#x27;message2&#x27;</span>];</span><br></pre></td></tr></table></figure></li>
+<li>对象,可定制<code>prop</code>的验证方法；<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">props</span>: &#123;</span><br><span class="line">  <span class="attr">message</span>: <span class="title class_">Number</span>,</span><br><span class="line">  <span class="comment">//多个可能的类型</span></span><br><span class="line">  <span class="attr">message2</span>:[<span class="title class_">String</span>,<span class="title class_">Number</span>],</span><br><span class="line">  <span class="attr">message3</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: [<span class="title class_">String</span>, <span class="title class_">Number</span>],</span><br><span class="line">    <span class="attr">required</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="number">100</span>,</span><br><span class="line">    <span class="comment">// 验证函数</span></span><br><span class="line">    <span class="attr">validator</span>: <span class="keyword">function</span>(<span class="params">value</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">parseInt</span>(value) &gt; <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">message4</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">Object</span>,</span><br><span class="line">    <span class="comment">// 对象 和 数组默认值 必须从一个工厂函数获取</span></span><br><span class="line">    <span class="attr">default</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;<span class="attr">name</span>: <span class="string">&#x27;22&#x27;</span>&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>使用<code>v-bind</code>，动态给<code>Prop</code>赋值，<strong>任何类型的值</strong>都可以传给一个<code>Prop</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 传入一个数字 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- `42`即便是静态的，当使用`v-bind`告诉 Vue，这是一个js表达式（返回number类型），而不是一个字符串 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">my-component</span> <span class="attr">v-bind:message</span>=<span class="string">&quot;42&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 传入一个布尔值 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 包含 该 Prop ，在没有值的情况下，表示：`true` --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">my-component</span> <span class="attr">message</span>&gt;</span><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- `false`是静态的，但`v-bind`告诉了 Vue,t它是一个js表达式(返回Booelean  false),而不是一个字符串 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">my-component</span> <span class="attr">v-bind:message</span>=<span class="string">&quot;false&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 同理，传入一个对象，数字 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">my-component</span> <span class="attr">v-bind:message</span>=<span class="string">&quot;&#123;</span></span></span><br><span class="line"><span class="string"><span class="tag">  name: &#x27;jaing&#x27;,</span></span></span><br><span class="line"><span class="string"><span class="tag">  age: 27</span></span></span><br><span class="line"><span class="string"><span class="tag">&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">my-component</span> <span class="attr">v-bind:message</span>=<span class="string">&quot;[&#x27;133&#x27;,3334,&#x27;nihao&#x27;]&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p><code>Prop</code>验证，是在<strong>组件实例创建之前</strong>进行验证，所有实例的属性在<code>default</code>,<code>validator</code>函数中是不可用的</p>
+</li>
+</ul>
+<h4 id="数据流流向"><a href="#数据流流向" class="headerlink" title="数据流流向"></a>数据流流向</h4><p><code>props</code>传递的数据是单向的，父组件数据变化会传递给子组件，反过来不行。</p>
+<ul>
+<li>2 种 改变 <code>Prop</code>情况<ul>
+<li>父组件传递初始值进来，子组件在<code>data</code>内再声明一个数据，引用父组件的<code>prop</code>，这样就可以在自己的作用域下随意使用和修改<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组件中声明了count,它在组件初始化时会获取来自父组件的initCount，之后就与父组件无关了，只用维护count，避免直接操作initCount</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&#x27;my-component&#x27;</span>,&#123;</span><br><span class="line">  <span class="attr">props</span>: [<span class="string">&#x27;initCount&#x27;</span>],</span><br><span class="line">  <span class="attr">template</span>: <span class="string">`&lt;div&gt;&#123;&#123; count &#125;&#125;&lt;/div&gt;`</span>,</span><br><span class="line">  <span class="attr">data</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">count</span>: <span class="variable language_">this</span>.<span class="property">initCount</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>子组件的数据依赖父组件的<code>props</code>传入的数据,这种情况用计算属性<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&#x27;my-component&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">props</span>: [<span class="string">&#x27;width&#x27;</span>],</span><br><span class="line">  <span class="attr">template</span>: <span class="string">&#x27;&lt;div :style=&quot;style&quot;&gt;组件内容&lt;/div&gt;&#x27;</span>,</span><br><span class="line">  <span class="attr">computed</span>: &#123;</span><br><span class="line">    <span class="attr">style</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">width</span>: <span class="variable language_">this</span>.<span class="property">width</span> + <span class="string">&#x27;px&#x27;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h4><ul>
+<li><p>事件名称<br>因为<code>v-on</code>事件监听器在 DOM 模板中会被自动转换为全小写（HTML 大小写不敏感）,<code>v-on:myEvent</code>会被转换成<code>v-on:myevent</code>，所以导致<code>myEvent</code>不被监听到。<br>因此，<strong>最好使用 kebab-case 的事件名</strong></p>
+</li>
+<li><p>自定义组件的 <code>v-model</code><br>具有双向绑定的<code>v-model</code>（本质上：语法糖）组件,需要满足以下条件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 绑定value值，接受value `prop` --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 触发input事件时，$event的值，赋给 text  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">my-input</span></span></span><br><span class="line"><span class="tag">  <span class="attr">v-bind:value</span>=<span class="string">&quot;text&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">v-on:input</span>=<span class="string">&quot;text=$event&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">my-input</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 自定义组件，就可以使用v-model 指令 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">my-input</span> <span class="attr">v-model</span>=<span class="string">&quot;something&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">my-input</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>接受一个 <code>value</code>的<code>prop</code></li>
+<li>在<code>value</code>改变时，触发<code>input</code>事件</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;my-component v-model=<span class="string">&quot;total&quot;</span>&gt;&lt;/my-component&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册组件</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&#x27;my-component&#x27;</span>,&#123;</span><br><span class="line">  <span class="attr">props</span>: [<span class="string">&#x27;value&#x27;</span>],</span><br><span class="line">  <span class="attr">template</span>:<span class="string">&#x27;&lt;input :value=&quot;value&quot; @input=&quot;updateValue&quot;&gt;&#x27;</span>,</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">    <span class="comment">// 默认参数：DOM事件</span></span><br><span class="line">    <span class="attr">updateValue</span>: <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.$emit(<span class="string">&#x27;input&#x27;</span>, event.<span class="property">target</span>.<span class="property">value</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>原生事件绑定到组件<br>在一个组件的根元素直接监听一个原生事件，使用<code>v-on</code>的<code>.native</code>修饰符</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">base-input</span> <span class="attr">v-on:click.native</span>=<span class="string">&quot;onClick&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">base-input</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="构建完全透明的包裹器（扩展组件）"><a href="#构建完全透明的包裹器（扩展组件）" class="headerlink" title="构建完全透明的包裹器（扩展组件）"></a>构建完全透明的包裹器（扩展组件）</h4><ul>
+<li><code>vm.$listeners</code>,它是一个对象，包含了<strong>父作用域</strong>中的<code>v-on</code>（不包含<code>.native 修饰符的</code>）事件监听器。它可以通过<code>v-on=&quot;$listeners&quot;</code>出入到 内部的子组件，从而在 父组件上跟 子组件 相同的监听器都可以工作</li>
+<li><code>vm.$props</code>,当前组件接受的 props 对象</li>
+<li><code>vm.$attrs</code>, 它是一个对象，包含了 <strong>父作用域（父组件）</strong>中的不作为<code>prop</code>，且可获取的特性绑定（<code>class</code>,<code>style</code>除外）。当一个组件没有声明任何<code>prop</code>时，这里会包含所有父作用域的绑定。并且可以通过<code>v-bind=&quot;$attrs&quot;</code>传入内部的子组件。</li>
+<li>选项<code>inhertAttrs</code>,默认情况，父作用域的不被作为<code>props</code>的特性绑定，将会”回退”且作为普通 HTML 特性应用在子元素的<strong>根元素上</strong>。设置 <code>false</code>,取消。在通过<code>vm.$attrs</code>让其特性生效，且通过 v-bind 显性的绑定到非根元素。</li>
+<li><code>extend</code>选项，引用一个”子类”, 父组件的<code>data</code>,覆盖其<code>data</code>.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这边 `base-table`组件时一个完全透明的包裹器，它完全像一个普通 ivewz 中的  `table`组件</span></span><br><span class="line"><span class="comment">// 所有跟ivew `table`组件相同的特性和监听器`base-table`都可以使用</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Table</span> &#125; <span class="keyword">from</span> <span class="string">&quot;iview&quot;</span>;</span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&#x27;base-table&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">inheritAttrs</span>: fasle,</span><br><span class="line">  <span class="attr">extends</span>: <span class="title class_">Table</span>,   <span class="comment">// 扩展Table组件，合并</span></span><br><span class="line">  <span class="attr">template</span>: <span class="string">`&lt;div&gt;</span></span><br><span class="line"><span class="string">              &lt;Table v-on=&quot;$listeners&quot; v-bind=&quot;$props&quot;&gt;&lt;/Table&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="父链，子链-ref子组件索引"><a href="#父链，子链-ref子组件索引" class="headerlink" title="父链，子链 ref子组件索引"></a>父链，子链 <code>ref</code>子组件索引</h4><p>在组件中，可以使用<code>vm.$parent</code>，直接访问 该组件的父组件或父实例。父组件也可以 通过<code>vm.$children</code>访问 它所有的子组件.<br>当子组件太多时，通过<code>vm.$children</code>来遍历出我们需要的一个子组件实例是比较困难的，尤其是组件动态渲染时，它们的序列不固定。<br>使用特殊的属性<code>ref</code>来为子组件指定一个索引名称，在通过<code>vm.$refs（一个对象，持有注册过ref特性的所有DOM元素和组件实例）</code>找到该组件。<br><strong><code>$refs</code>只在组件渲染完后才被注册，并非响应式的，应该避免在模板中或计算 属性中使用<code>$refs</code></strong>.</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://aixuexi567.github.io/2019/03/01/Vue-%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F-2-%E7%BB%84%E4%BB%B6/" title="Vue-查缺补漏(2)-组件" target="_blank" rel="external">https://aixuexi567.github.io/2019/03/01/Vue-%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F-2-%E7%BB%84%E4%BB%B6/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aixuexi567" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aixuexi567" target="_blank"><span class="text-dark">爱学兮</span><small class="ml-1x">Front End &amp; Vue &amp; TypeScript</small></a></h3>
+        <div>前端狗，偶尔思考，间歇式码字</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/03/02/Vue-%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F-3-%E6%8F%92%E6%A7%BD-slot/" title="Vue-查缺补漏(3)-插槽(slot)"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/02/28/Vue-%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F/" title="Vue-查缺补漏"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="wechat" data-mobile-sites=""></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '3c9348a5e84eb5050ec8',
+    clientSecret: 'b92d8dd66f66bbe04d870af0e612ff74a00546da',
+    repo: 'aixuexi567.github.io',
+    owner: 'aixuexi567',
+    admin: ['aixuexi567'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+  <!-- Google Adsense -->
+<script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7070857500305563"
+  crossorigin="anonymous"
+></script>
+
+</body>
+</html>

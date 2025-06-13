@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- google 广告 -->
+  <script data-ad-client="ca-pub-7070857500305563" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>JS知识点梳理(1)-基本概念 | aixuexi567</title>
+  <meta name="description" content="语法区分大小写ECMAScript 中的一切（变量、函数名、操作符）都区分大小写 标识符标识符，指变量、函数、属性名，或函数的参数。它是按照以下规则组合起来的一个或多个字符：  第一个字符必须是一个字母、下划线(_)或者一个美元符号($) 其他字符可以是字母、下划线、美元符号、数字。  按照惯例，ECMAScript 标识符采用驼峰大小写格式，这是为了与 ECMAScript 内置的函数和对象命名">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS知识点梳理(1)-基本概念">
+<meta property="og:url" content="https://aixuexi567.github.io/2020/03/23/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86-1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/index.html">
+<meta property="og:site_name" content="爱学兮">
+<meta property="og:description" content="语法区分大小写ECMAScript 中的一切（变量、函数名、操作符）都区分大小写 标识符标识符，指变量、函数、属性名，或函数的参数。它是按照以下规则组合起来的一个或多个字符：  第一个字符必须是一个字母、下划线(_)或者一个美元符号($) 其他字符可以是字母、下划线、美元符号、数字。  按照惯例，ECMAScript 标识符采用驼峰大小写格式，这是为了与 ECMAScript 内置的函数和对象命名">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-22T20:04:00.000Z">
+<meta property="article:modified_time" content="2025-06-13T05:38:58.247Z">
+<meta property="article:author" content="刘振江">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://aixuexi567.github.io/2020/03/23/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86-1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="爱学兮" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aixuexi567" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">爱学兮</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Front End &amp; Vue &amp; TypeScript</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>😊 欢迎交流与分享经验!</p>  <p>😊 上班摸鱼写散文!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/">成长小记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a><span class="category-list-count">87</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%83%82%E7%AC%94%E5%A4%B4/">烂笔头</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8B%B1%E8%AF%AD%E6%8B%BE%E9%81%97/">英语拾遗</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94%E6%84%9F%E6%82%9F/">随笔感悟</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" rel="tag">CSS权威指南-第四版</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eslint/" rel="tag">eslint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grunt/" rel="tag">grunt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pnpm/" rel="tag">pnpm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vite/" rel="tag">vite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" rel="tag">一碗鸡汤</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" rel="tag">书籍读后感</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" rel="tag">前端性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" rel="tag">反思怪</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" rel="tag">团队协作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" rel="tag">成长小记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" rel="tag">技术总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" rel="tag">残酷物语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" rel="tag">烂笔头</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" rel="tag">编程认知</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A3%9E%E7%9B%98/" rel="tag">飞盘</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" style="font-size: 13.63px;">CSS权威指南-第四版</a> <a href="/tags/axios/" style="font-size: 13px;">axios</a> <a href="/tags/css/" style="font-size: 14px;">css</a> <a href="/tags/eslint/" style="font-size: 13.13px;">eslint</a> <a href="/tags/git/" style="font-size: 13.75px;">git</a> <a href="/tags/grunt/" style="font-size: 13px;">grunt</a> <a href="/tags/http/" style="font-size: 13.38px;">http</a> <a href="/tags/javascript/" style="font-size: 13.88px;">javascript</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/npm/" style="font-size: 13px;">npm</a> <a href="/tags/pnpm/" style="font-size: 13px;">pnpm</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/shell/" style="font-size: 13px;">shell</a> <a href="/tags/vite/" style="font-size: 13px;">vite</a> <a href="/tags/vscode/" style="font-size: 13px;">vscode</a> <a href="/tags/vue/" style="font-size: 13.75px;">vue</a> <a href="/tags/webpack/" style="font-size: 13px;">webpack</a> <a href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" style="font-size: 13px;">一碗鸡汤</a> <a href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" style="font-size: 13.25px;">书籍读后感</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" style="font-size: 13px;">前端性能</a> <a href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" style="font-size: 13.5px;">反思怪</a> <a href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" style="font-size: 13px;">团队协作</a> <a href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" style="font-size: 13px;">成长小记</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" style="font-size: 13px;">技术总结</a> <a href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" style="font-size: 13px;">残酷物语</a> <a href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" style="font-size: 13px;">烂笔头</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" style="font-size: 13.13px;">编程认知</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 13.13px;">网络</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 13.75px;">翻译</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 13.25px;">语法</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 13.63px;">面试</a> <a href="/tags/%E9%A3%9E%E7%9B%98/" style="font-size: 13.25px;">飞盘</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/13/%E6%AF%9B%E9%80%89-%E8%AF%BB%E5%90%8E%E6%84%9F/" class="title">&lt;毛选&gt;读后感</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-13T01:48:36.000Z" itemprop="datePublished">2023-09-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/29/V8%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E4%B8%80%E6%AE%B5js%E4%BB%A3%E7%A0%81/" class="title">V8如何执行一段js代码?</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-29T02:24:35.000Z" itemprop="datePublished">2023-08-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/28/JS-V8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" class="title">JS-V8垃圾回收</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-28T01:46:03.000Z" itemprop="datePublished">2023-08-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/31/%E7%A9%BA%E6%83%B3%E6%80%AA%E7%9A%84%E6%97%A5%E5%B8%B8%E5%8F%8D%E6%80%9D/" class="title">空想怪的日常反思</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-31T02:31:08.000Z" itemprop="datePublished">2023-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/20/%E5%9B%B0/" class="title">困</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-20T03:43:04.000Z" itemprop="datePublished">2023-03-20</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-JS知识点梳理-1-基本概念" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS知识点梳理(1)-基本概念
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/03/23/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86-1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="article-date">
+	  <time datetime="2020-03-22T20:04:00.000Z" itemprop="datePublished">2020-03-23</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/javascript/" rel="tag">javascript</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/03/23/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86-1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3.4k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 13(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="区分大小写"><a href="#区分大小写" class="headerlink" title="区分大小写"></a>区分大小写</h3><p>ECMAScript 中的一切（<code>变量、函数名、操作符</code>）都区分大小写</p>
+<h3 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h3><p><code>标识符</code>，指变量、函数、属性名，或函数的参数。它是按照以下规则组合起来的一个或多个字符：</p>
+<ul>
+<li>第一个字符必须是一个字母、下划线(<code>_</code>)或者一个美元符号(<code>$</code>)</li>
+<li>其他字符可以是字母、下划线、美元符号、数字。</li>
+</ul>
+<p>按照惯例，ECMAScript 标识符采用<strong>驼峰大小写格式，这是为了与 ECMAScript 内置的函数和对象命名格式保持一致</strong></p>
+<h3 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Strict_mode">严格模式</a></h3><p>严格模式<code>(strict mode)</code>是为 JS 定义了一种不同的解析和执行模式，且对正常的 JS 语义做了些更改，消除 JS 语法中一些不合理，不严谨之处，减少一些怪异行为。</p>
+<ul>
+<li><ol>
+<li>严格模式通过<strong>抛出错误</strong>来消除一些原有<strong>静默错误</strong></li>
+</ol>
+</li>
+<li><ol start="2">
+<li>严格模式修复了一些导致 JS 引擎难以执行优化的缺陷，提高了运行效率</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>严格模式禁用了在 ECMAScript 的未来版本中可能会定义的一些语法</li>
+</ol>
+</li>
+</ul>
+<h4 id="如何开启严格模式"><a href="#如何开启严格模式" class="headerlink" title="如何开启严格模式"></a>如何开启严格模式</h4><ul>
+<li>将<code>&quot;use strict&quot;;</code>语句放在 JS 文件的开头，为整个 JS 文件开启严格模式</li>
+<li>将<code>&quot;use strict&quot;;</code>语句放在函数体所有语句之前，为函数开启严格模式</li>
+</ul>
+<h4 id="严格模式中的变化"><a href="#严格模式中的变化" class="headerlink" title="严格模式中的变化"></a>严格模式中的变化</h4><h5 id="将过失错误转成异常"><a href="#将过失错误转成异常" class="headerlink" title="将过失错误转成异常"></a>将过失错误转成异常</h5><p>JS 起初被设计为能使新人开发更易于上手，所以有时候会给本来错误操作赋予新的不报错的语义（non-error semantics）。</p>
+<ul>
+<li><p>严格模式下,无法意外创建全局对象,抛出<code>ReferenceError</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line">a = <span class="number">12</span>; <span class="comment">// ReferenceError: a is not defined</span></span><br></pre></td></tr></table></figure></li>
+<li><p>严格模式下,引起<code>静默失败（silently fail,即不报错也无任何效果）</code>的赋值操作抛出异常。引起静默失败的赋值操作：</p>
+<ul>
+<li><p>给不可写的属性赋值</p>
+</li>
+<li><p>给只读属性赋值</p>
+</li>
+<li><p>给不可扩展对象的新属性赋值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="comment">// 给不可写的属性赋值</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, <span class="string">&quot;x&quot;</span>, &#123; <span class="attr">value</span>: <span class="number">20</span>, <span class="attr">writable</span>: <span class="literal">false</span> &#125;);</span><br><span class="line">obj.<span class="property">x</span> = <span class="number">12</span>;  <span class="comment">// TypeError: Cannot assign to read only property &#x27;x&#x27; of object &#x27;#&lt;Object&gt;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 给只读属性赋值</span></span><br><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line"><span class="keyword">get</span> <span class="title function_">x</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">12</span>;</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">//   set x(value) &#123;&#125;</span></span><br><span class="line">&#125;;</span><br><span class="line">obj1.<span class="property">x</span> = <span class="number">32</span>; <span class="comment">// TypeError: Cannot set property x of #&lt;Object&gt; which has only a getter</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 给不可扩张对象的新属性赋值</span></span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;&#125;;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">preventExtensions</span>(obj2);</span><br><span class="line">obj2.<span class="property">x</span> = <span class="number">22</span>; <span class="comment">// TypeError: Cannot add property x, object is not extensible</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>严格模式下，试图删除不可删除的属性时会抛出异常</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="keyword">delete</span> <span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>; <span class="comment">// TypeError: Cannot delete property &#x27;prototype&#x27; of function Object() &#123; [native code] &#125;</span></span><br><span class="line"><span class="keyword">delete</span> c; <span class="comment">// SyntaxError: Delete of an unqualified identifier in strict mode.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>严格模式下，函数中重命名参数被认为时语法错误</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sum</span>(<span class="params">a,a,b</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> a + a + b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// SyntaxError: Duplicate parameter name not allowed in this context</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>严格模式下，以<code>0</code>开头的八进制语法被认为语法错误,可以使用<code>0o</code>前缀来表示八进制数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">012</span>; <span class="comment">// SyntaxError: Octal literals are not allowed in strict mode.</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="number">0o12</span>; <span class="comment">// 10</span></span><br></pre></td></tr></table></figure></li>
+<li><p>严格模式下，禁止给基本数据类型值设置属性，抛出 TypeError</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="literal">false</span>.<span class="property">age</span> = <span class="number">12</span>; <span class="comment">// TypeError: Cannot create property &#x27;age&#x27; on boolean &#x27;false&#x27;</span></span><br><span class="line">(<span class="number">15</span>).<span class="property">age</span> = <span class="number">12</span>; <span class="comment">// TypeError: Cannot create property &#x27;age&#x27; on number &#x27;15&#x27;</span></span><br><span class="line"><span class="string">&quot;jiang&quot;</span>.<span class="property">age</span> = <span class="number">12</span>; <span class="comment">// TypeError: Cannot create property &#x27;age&#x27; on string &#x27;jiang&#x27;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="简化变量的使用"><a href="#简化变量的使用" class="headerlink" title="简化变量的使用"></a>简化变量的使用</h5><p>严格模式简化了代码中变量名字映射到变量定义的方式。JS 有些情况使得代码中名字到变量定义的基本映射只有在运行时才产生，严格模式移除了大多数这种情况的发生，所以编译器可以更好的优化严格模式的代码。</p>
+<ul>
+<li><p>严格模式下，禁用<code>with</code>.使用<code>with</code>所引起的问题是：块内的名称可以映射到<code>with</code>传进的对象属性，也可以映射到包含该块的作用域内变量，甚至全局变量。这一切都在运行时决定的，在代码运行之前无法得知。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> obj =&#123;</span><br><span class="line">    <span class="attr">x</span>: <span class="number">12</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> x = <span class="number">17</span>;</span><br><span class="line"><span class="title function_">with</span>(<span class="params">obj</span>) &#123;  <span class="comment">// //  SyntaxError: Strict mode code may not include a with statement</span></span><br><span class="line">    cosole.<span class="title function_">log</span>(x);</span><br><span class="line">&#125;</span><br><span class="line"> <span class="comment">// 如果没有开启严格模式，with中的x会执行全局的那个x,还是obj.x？</span></span><br><span class="line"> <span class="comment">// 如果不运行代码，则无法得知，因此，这样的代码让引擎无法进行优化，速度也就会变慢</span></span><br></pre></td></tr></table></figure></li>
+<li><p>严格模式下，<code>eval</code>不在为上层范围引入新变量。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="title function_">doSomething</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="built_in">eval</span>(<span class="string">&#x27;var x = 20&#x27;</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(x);  <span class="comment">// ReferenceError: x is not defined</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="让arguments变的简单"><a href="#让arguments变的简单" class="headerlink" title="让arguments变的简单"></a>让<code>arguments</code>变的简单</h5><ul>
+<li>严格模式下，参数的值不会随<code>arguments</code>对象的改变而变化。<code>arguments</code>对象会保存函数被调用时的原始参数，<code>arguments[i]的值不会随着与之相应的参数的值的改变而变化</code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">f</span>(<span class="params">a</span>) &#123;</span><br><span class="line">    <span class="string">&quot;use strict&quot;</span>;</span><br><span class="line">    a = <span class="number">42</span>;</span><br><span class="line">    <span class="keyword">return</span> [a, <span class="variable language_">arguments</span>[<span class="number">0</span>]];</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">f</span>(<span class="number">17</span>)); <span class="comment">// [42, 17]</span></span><br></pre></td></tr></table></figure></li>
+<li>严格模式下，不再支持<code>arguments.callee</code>.正常模式下，<code>arguments.callee</code>指向当前正在执行的函数。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="title function_">abc</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="string">&quot;use  strict&quot;</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="variable language_">arguments</span>.<span class="property">callee</span>;  <span class="comment">// TypeError: &#x27;caller&#x27;, &#x27;callee&#x27;, and &#x27;arguments&#x27; properties may not be accessed on strict mode functions or the arguments objects for calls to them</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="更”安全的”JavaScript"><a href="#更”安全的”JavaScript" class="headerlink" title="更”安全的”JavaScript"></a>更”安全的”JavaScript</h5><ul>
+<li><p>对于一个严格模式下的函数，指定的<code>this</code>不再被强制转换为一个对象，<code>this</code>值始终是指定的值,无论指定的是什么值.在非严格模式 下，使用<code>call</code>,<code>apply</code>,<code>bind</code>方法时，用<code>undefined</code>或者<code>null</code>指定<code>this</code>,其<code>this</code>值将自动转换为全局对象<code>window</code>或者<code>global</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  没有开启严格</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">func</span>(<span class="params"></span>) &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="variable language_">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">func2</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="string">&quot;use strict&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 未开启严格模式</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(func.<span class="title function_">call</span>()); <span class="comment">// global &#123;...&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(func.<span class="title function_">call</span>(<span class="number">2</span>)); <span class="comment">// Number &#123;[[PrimitiveValue]]: 2&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(func.<span class="title function_">call</span>(<span class="literal">undefined</span>)); <span class="comment">// global &#123;...&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(func.<span class="title function_">apply</span>(<span class="literal">null</span>)); <span class="comment">// global &#123;...&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(func.<span class="title function_">bind</span>(<span class="literal">true</span>)()); <span class="comment">// Boolean &#123;[[PrimitiveValue]]: true&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 开启严格模式</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(func2.<span class="title function_">call</span>());  <span class="comment">// undefined</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(func2.<span class="title function_">call</span>(<span class="number">2</span>)); <span class="comment">// 2</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(func2.<span class="title function_">call</span>(<span class="literal">undefined</span>)); <span class="comment">//  undefined</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(func2.<span class="title function_">apply</span>(<span class="literal">null</span>));  <span class="comment">// null</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(func2.<span class="title function_">bind</span>(<span class="literal">true</span>)()); <span class="comment">// true</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h3><p>ECMAScript 中的语句是以一个分号结尾;如果省略分号，则由解析器确定语句的结尾，但建议在任何时候都不要省略分号。它可以避免很多错误，如不完整的输入，更放心的通过删除多余空格来压缩代码。另外，加上分号也会在某些情况下提高代码性能，省去了解析器推测应该在哪添加分号的时间。</p>
+<h2 id="关键字和保留字"><a href="#关键字和保留字" class="headerlink" title="关键字和保留字"></a>关键字和保留字</h2><p><code>关键字</code>用于表示控制语句的开始、结束，或者用于执行特定操作等。<code>保留字</code>表示将来有可能被用作关键字。二者都不能用作标识符。</p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ul>
+<li>ECMAScript 的变量是松散类型的，即可以用来保存任何类型的数据。</li>
+<li>每个变量仅仅是一个用于保存值的占位符而已。</li>
+<li>省略<code>var</code>,<code>let</code>,<code>const</code>操作符，定义的变量，会成为全局变量。</li>
+</ul>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>5 种基本数据类型： <code>Undefined</code>,<code>Null</code>,<code>Boolean</code>,<code>Number</code>,<code>String</code><br>1 种复杂数据类型： <code>Object</code> ,包含<code>Data</code>、<code>function</code>、<code>Array</code>等。<br>ES6 新增数据类型： <code>Symbol</code>,表示独一无二的值,可以用作对象的属性名，保证不会与其他属性名产生冲突。</p>
+<h3 id="typeof操作符"><a href="#typeof操作符" class="headerlink" title="typeof操作符"></a><code>typeof</code>操作符</h3><p><code>typeof</code>操作符的操作数可以是变量，也可以是数值字面量，是一种用来检测给定变量的数据类型的手段,可能返回以下字符串：</p>
+<ul>
+<li>“undefined” —- 未定义</li>
+<li>“boolean” —- 布尔值</li>
+<li>“string” —- 字符串</li>
+<li>“number” —- 数值</li>
+<li>“object” —- 对象或<code>null</code>（因为<code>null</code>被认为是一个<strong>空的对象引用</strong>，所以返回”object”）</li>
+<li>“function” —- 函数</li>
+</ul>
+<h3 id="Undefined-类型"><a href="#Undefined-类型" class="headerlink" title="Undefined 类型"></a>Undefined 类型</h3><ul>
+<li>Undefined 类型只有一个值，即<code>undefined</code>，表示未经初始化的变量的值。</li>
+<li>另外需要注意，包含<code>undefined</code>值的变量和尚未声明的变量是不一样的，即使使用<code>typeof</code>操作符检测都会返回<code>undefined</code>。但传递给函数尚未声明的变量会报错。</li>
+</ul>
+<h3 id="Null-类型"><a href="#Null-类型" class="headerlink" title="Null 类型"></a>Null 类型</h3><ul>
+<li>Null 类型也只有一个特殊的值<code>null</code>.</li>
+<li><code>null</code>值表示一个空对象指针，这也是<code>typeof null</code>返回”object”的原因</li>
+<li>只要意在保存对象的变量还没有真正的保存对接，就应该明确的将该变量初始化为<code>null</code></li>
+<li><code>null</code>和<code>undefined</code>之间的相等操作符(<code>==</code>)返回<code>true</code></li>
+</ul>
+<h3 id="Boolean-类型"><a href="#Boolean-类型" class="headerlink" title="Boolean 类型"></a>Boolean 类型</h3><ul>
+<li><p>对于任何数据类型的值 调用<code>Boolean()</code>函数，总会返回一个 Boolean 值。具体转化规则</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>转化为 true 的值</th>
+<th>转化为 false 的值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Boolean</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>String</td>
+<td>任何非空字符串</td>
+<td>“”(空字符串)</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>任何非零数值</td>
+<td>0 和 NaN</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>任何对象</td>
+<td>null</td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td>无</td>
+<td>undefined</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h3 id="Number-类型"><a href="#Number-类型" class="headerlink" title="Number 类型"></a>Number 类型</h3><h3 id="各进制表示"><a href="#各进制表示" class="headerlink" title="各进制表示"></a>各进制表示</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> decimalNum = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> octalNum = <span class="number">0o12</span>;</span><br><span class="line"><span class="keyword">var</span> hexNum = <span class="number">0xA</span>;</span><br><span class="line"><span class="keyword">var</span> binaryNum = <span class="number">0b1010</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数值范围"><a href="#数值范围" class="headerlink" title="数值范围"></a>数值范围</h3><ul>
+<li>ECMAScript 表示的数值范围，<code>Number.MIN_VALUE</code>,<code>Number.MAX_VALUE</code>之间.超出范围的值被自动转化为<code>-Infinity</code>和<code>Infinity</code></li>
+<li><code>isFinite()</code>函数，判断参数是否位于最小和最大的数值之间。</li>
+</ul>
+<h3 id="数值转换"><a href="#数值转换" class="headerlink" title="数值转换"></a>数值转换</h3><p>3 个函数可以将非数值转换为数值：<code>Number()</code>,<code>parseInt()</code>,<code>parseFloat()</code></p>
+<ul>
+<li><code>Number()</code>函数可应用与任何数据类型，具体转换规则：<ul>
+<li>Boolean 值，true，flase 分别转换为 1，0</li>
+<li>数字值，返回值不变</li>
+<li>null 值，返回 0</li>
+<li>字符串，则按以下规则：<ul>
+<li>如果字符串只包含数字，则将其转换为十进制数值，忽略前导的零</li>
+<li>如果字符串包含有效的浮点格式，则转换为对应的浮点数值</li>
+<li>如果字符串包含有效的十六进制格式，”0xf”,转换为相同大小的十进制数值</li>
+<li>如果字符串是空的，转换为 0</li>
+<li>如果字符串中包含除上述格式之外的字符，则转换为 NaN</li>
+</ul>
+</li>
+<li>对象，调用对象的 <code>valueOf()</code>,然后按照以上规则转换返回的值，如果结果为 NaN,则调用对象的<code>toString()</code>方法，然后按照以上规则转换返回的字符串值。</li>
+</ul>
+</li>
+<li><code>parseInt()</code>函数，仅用于将字符串转换为数值。<ul>
+<li>忽略字符串前面的空格，直到找到第一个非空格字符。如果第一个字符不是数字字符或负号，则返回 NaN。</li>
+<li>如果第一个字符是数字字符，会继续解析第二个字符，直到解析完所有后续字符或遇到一个非数字字符</li>
+<li>为了消除 ECMAScript 3 和 5 之间，解析八进制字面量的字符串时存在的分歧，可以为<code>paeseInt()</code>提供第二个参数：转换时使用的基数（多少进制）：例如：<code>parseInt(&quot;0fAF&quot;,16)</code></li>
+</ul>
+</li>
+<li><code>parseFloat()</code>函数只解析十进制值，因此没有第二参数指定基数。</li>
+</ul>
+<h3 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a>NaN</h3><ul>
+<li>NaN，即非数值（Not a Number),表示一个本来要返回数值的操作数，但未返回数值的情况。</li>
+<li>任何涉及<code>NaN</code>的操作都会返回<code>NaN</code></li>
+<li><code>NaN</code>与任何值都不相等，包含<code>NaN</code>本身</li>
+<li><code>isNaN()</code>函数，确定参数是否”不是数值”</li>
+</ul>
+<h3 id="String-类型"><a href="#String-类型" class="headerlink" title="String 类型"></a>String 类型</h3><ul>
+<li>String 类型用于表示 0 或多个 <code>16位Unicode字符</code>组成的字符序列，即字符串</li>
+<li>String 数据类型也包含一些特殊的字符字面量，也叫<code>转义序列</code>。</li>
+<li><code>\xnn</code>,以十六进制代码 nn 表示一个字符，（n 为 0-F）。<code>\x41</code>表示”A”</li>
+<li><code>\unnnn</code>,以十六进制代码 nnnn 表示一个 Unicode 字符，（n 为 0-F），<code>\u0061</code>表表示”a”</li>
+</ul>
+<h4 id="字符串特点"><a href="#字符串特点" class="headerlink" title="字符串特点"></a>字符串特点</h4><p>ECMAScript 中字符串是不可变的，字符串一旦创建，它们的值就不能改变。要改变莫格变量保存的字符串，首先要先销毁原来的字符串，然后再用另一个包含新字符串填充该变量。</p>
+<h4 id="字符串转换"><a href="#字符串转换" class="headerlink" title="字符串转换"></a>字符串转换</h4><ul>
+<li>数值，布尔值，对象，字符串值都有<code>toString()</code>方法，<code>null</code>和<code>undefined</code>值没有该方法</li>
+<li>如果不知道要转换的值是不是<code>null</code>或<code>undefined</code>情况下，可以使用转型函数<code>String()</code>,按以下规则：<ul>
+<li>如果值有<code>toString()</code>方法，则调用该方法并返回结果</li>
+<li>如果值是 null,则返回”null”</li>
+<li>如果值是 undefined,则返回”undefined”</li>
+</ul>
+</li>
+</ul>
+<h3 id="Object-类型"><a href="#Object-类型" class="headerlink" title="Object 类型"></a>Object 类型</h3><p>Object 类型是所有它的实例的基础，JS 中的所有对象都来自<code>Object</code>。即所有的对象从<code>Object.prototype</code>继承属性和方法。</p>
+<ul>
+<li><code>constructor</code>:保存着用于创建当前对象的函数(构造函数)的引用</li>
+<li><code>hasOwnProperty(propertyName)</code>:返回一个布尔值，表示某个对象实例是否包含指定的属性，而且此属性非原型链继承的。其参数的属性名必须以字符串形式指定。</li>
+<li><code>isPrototypeOf(object)</code>:返回一个布尔值，表示指定的对象是否在当前对象的原型链中</li>
+<li><code>propertyIsEnumerable(propertyName)</code>:返回一个布尔值，表示指定的属性是否可枚举，能否使用<code>for-in</code>语句枚举，但是通过原型链继承的属性除外。</li>
+<li><code>toString()</code>:返回对象的字符串表达</li>
+<li><code>toLocaleString()</code>:根据执行环境的地区，返回对应的字符串表示</li>
+<li><code>valueOf()</code>:返回指定对象的原始值。每个内置的核心对象都会覆盖此方法以返回适当的值。例如<code>Date</code>对象的<code>valueOf()</code>方法，返回自 1970/01/01 开始计的毫秒数</li>
+</ul>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><ul>
+<li>可以向 ECMAScript 函数传递任意数量的参数，在函数体内可以通过<code>arguments</code>对象来访问。</li>
+<li><code>arguments</code>对象是一个类数组对象，它不是 Array 的实例</li>
+<li>由于不存在函数签名的特性，ECMAScript 函数不能重载。</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://aixuexi567.github.io/2020/03/23/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86-1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="JS知识点梳理(1)-基本概念" target="_blank" rel="external">https://aixuexi567.github.io/2020/03/23/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86-1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aixuexi567" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aixuexi567" target="_blank"><span class="text-dark">爱学兮</span><small class="ml-1x">Front End &amp; Vue &amp; TypeScript</small></a></h3>
+        <div>前端狗，偶尔思考，间歇式码字</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/03/30/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86-2-%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86/" title="JS知识点梳理(2)-变量、作用域、垃圾收集"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/03/22/%E7%96%AB%E6%83%85%E4%B8%AD%EF%BC%8C%E5%86%85%E7%9C%8B%E8%87%AA%E5%B7%B1/" title="疫情中，内看自己"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="wechat" data-mobile-sites=""></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '3c9348a5e84eb5050ec8',
+    clientSecret: 'b92d8dd66f66bbe04d870af0e612ff74a00546da',
+    repo: 'aixuexi567.github.io',
+    owner: 'aixuexi567',
+    admin: ['aixuexi567'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+  <!-- Google Adsense -->
+<script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7070857500305563"
+  crossorigin="anonymous"
+></script>
+
+</body>
+</html>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- google 广告 -->
+  <script data-ad-client="ca-pub-7070857500305563" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>JS知识点梳理(10)-Ajax | aixuexi567</title>
+  <meta name="description" content="Ajax(Asynchronous JavaScript and XML)技术核心是 XMLHttpRequest 对象，能够以异步的方式从服务器获取信息，从而可以不必刷新页面也能获取新数据。即使用 XHR 对象取得新数据，再通过 DOM 操作将新数据插入到页面中。 XHR 的用法 创建 XHR 对象1var xhr &#x3D; new XMLHttpRequest(); open(),初始化请求open">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS知识点梳理(10)-Ajax">
+<meta property="og:url" content="https://aixuexi567.github.io/2020/04/09/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86-10-Ajax/index.html">
+<meta property="og:site_name" content="爱学兮">
+<meta property="og:description" content="Ajax(Asynchronous JavaScript and XML)技术核心是 XMLHttpRequest 对象，能够以异步的方式从服务器获取信息，从而可以不必刷新页面也能获取新数据。即使用 XHR 对象取得新数据，再通过 DOM 操作将新数据插入到页面中。 XHR 的用法 创建 XHR 对象1var xhr &#x3D; new XMLHttpRequest(); open(),初始化请求open">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-09T07:36:41.000Z">
+<meta property="article:modified_time" content="2025-06-13T05:38:58.249Z">
+<meta property="article:author" content="刘振江">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="http">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://aixuexi567.github.io/2020/04/09/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86-10-Ajax/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="爱学兮" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aixuexi567" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">爱学兮</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Front End &amp; Vue &amp; TypeScript</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>😊 欢迎交流与分享经验!</p>  <p>😊 上班摸鱼写散文!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/">成长小记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a><span class="category-list-count">87</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%83%82%E7%AC%94%E5%A4%B4/">烂笔头</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8B%B1%E8%AF%AD%E6%8B%BE%E9%81%97/">英语拾遗</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94%E6%84%9F%E6%82%9F/">随笔感悟</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" rel="tag">CSS权威指南-第四版</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eslint/" rel="tag">eslint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grunt/" rel="tag">grunt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pnpm/" rel="tag">pnpm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vite/" rel="tag">vite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" rel="tag">一碗鸡汤</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" rel="tag">书籍读后感</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" rel="tag">前端性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" rel="tag">反思怪</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" rel="tag">团队协作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" rel="tag">成长小记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" rel="tag">技术总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" rel="tag">残酷物语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" rel="tag">烂笔头</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" rel="tag">编程认知</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A3%9E%E7%9B%98/" rel="tag">飞盘</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" style="font-size: 13.63px;">CSS权威指南-第四版</a> <a href="/tags/axios/" style="font-size: 13px;">axios</a> <a href="/tags/css/" style="font-size: 14px;">css</a> <a href="/tags/eslint/" style="font-size: 13.13px;">eslint</a> <a href="/tags/git/" style="font-size: 13.75px;">git</a> <a href="/tags/grunt/" style="font-size: 13px;">grunt</a> <a href="/tags/http/" style="font-size: 13.38px;">http</a> <a href="/tags/javascript/" style="font-size: 13.88px;">javascript</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/npm/" style="font-size: 13px;">npm</a> <a href="/tags/pnpm/" style="font-size: 13px;">pnpm</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/shell/" style="font-size: 13px;">shell</a> <a href="/tags/vite/" style="font-size: 13px;">vite</a> <a href="/tags/vscode/" style="font-size: 13px;">vscode</a> <a href="/tags/vue/" style="font-size: 13.75px;">vue</a> <a href="/tags/webpack/" style="font-size: 13px;">webpack</a> <a href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" style="font-size: 13px;">一碗鸡汤</a> <a href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" style="font-size: 13.25px;">书籍读后感</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" style="font-size: 13px;">前端性能</a> <a href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" style="font-size: 13.5px;">反思怪</a> <a href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" style="font-size: 13px;">团队协作</a> <a href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" style="font-size: 13px;">成长小记</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" style="font-size: 13px;">技术总结</a> <a href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" style="font-size: 13px;">残酷物语</a> <a href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" style="font-size: 13px;">烂笔头</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" style="font-size: 13.13px;">编程认知</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 13.13px;">网络</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 13.75px;">翻译</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 13.25px;">语法</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 13.63px;">面试</a> <a href="/tags/%E9%A3%9E%E7%9B%98/" style="font-size: 13.25px;">飞盘</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/13/%E6%AF%9B%E9%80%89-%E8%AF%BB%E5%90%8E%E6%84%9F/" class="title">&lt;毛选&gt;读后感</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-13T01:48:36.000Z" itemprop="datePublished">2023-09-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/29/V8%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E4%B8%80%E6%AE%B5js%E4%BB%A3%E7%A0%81/" class="title">V8如何执行一段js代码?</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-29T02:24:35.000Z" itemprop="datePublished">2023-08-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/28/JS-V8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" class="title">JS-V8垃圾回收</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-28T01:46:03.000Z" itemprop="datePublished">2023-08-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/31/%E7%A9%BA%E6%83%B3%E6%80%AA%E7%9A%84%E6%97%A5%E5%B8%B8%E5%8F%8D%E6%80%9D/" class="title">空想怪的日常反思</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-31T02:31:08.000Z" itemprop="datePublished">2023-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/20/%E5%9B%B0/" class="title">困</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-20T03:43:04.000Z" itemprop="datePublished">2023-03-20</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-JS知识点梳理-10-Ajax" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS知识点梳理(10)-Ajax
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/09/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86-10-Ajax/" class="article-date">
+	  <time datetime="2020-04-09T07:36:41.000Z" itemprop="datePublished">2020-04-09</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/http/" rel="tag">http</a>, <a class="article-tag-link-link" href="/tags/javascript/" rel="tag">javascript</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/09/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86-10-Ajax/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.5k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 10(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>Ajax(Asynchronous JavaScript and XML)技术核心是 XMLHttpRequest 对象，能够以异步的方式从服务器获取信息，从而可以不必刷新页面也能获取新数据。即使用 XHR 对象取得新数据，再通过 DOM 操作将新数据插入到页面中。</p>
+<h2 id="XHR-的用法"><a href="#XHR-的用法" class="headerlink" title="XHR 的用法"></a>XHR 的用法</h2><ul>
+<li>创建 XHR 对象<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br></pre></td></tr></table></figure></li>
+<li><code>open()</code>,初始化请求<br><code>open(method,url,async)</code>方法，接受 3 个参数：请求类型，请求的 URL，是否异步（默认为异步请求）</li>
+<li><code>send()</code>,发生请求<br><code>send(data)</code>发送请求，接受一个可选参数，作为请求主体发送的数据，如果不需要则必须传入<code>null</code></li>
+<li><code>abort()</code>,取消异步请求</li>
+<li>处理响应<br>在受到响应后，响应的数据会自动填充 XHR 对象的属性<ul>
+<li>responseText： 作为响应主体被返回的文本</li>
+<li>responseXML： 如果响应的内容类型是”text/xml”,”application/xml”,则改属性保存着包含响应数据的 XML DOM 文档</li>
+<li>status： 响应的 HTTP 状态</li>
+<li>statusText： HTTP 状态说明</li>
+</ul>
+</li>
+</ul>
+<p>在发送异步请求，为了让 JavaScript 继续执行而不必等待响应，可为 XHR 对象添加<code>readystatechange</code>事件，来在请求/响应过程执行相应动作。XHR 对象的<code>readyState</code>属性，可表示请求的当前状态，可取值如下：</p>
+<ul>
+<li>0：UNSENT，为初始化，尚未调用<code>open()</code>方法</li>
+<li>1：OPENED， 启动，已经 调用<code>open()</code>方法，但未调用<code>send()</code>方法</li>
+<li>2： HEADERS_RECEIVED，发送，已经调用<code>send()</code>方法，但尚未接收到响应</li>
+<li>3： LOADING，接收，已经接收到部分响应数据</li>
+<li>4： DONE，完成，已经接收到全部响应数据</li>
+</ul>
+<h2 id="HTTP-头部信息"><a href="#HTTP-头部信息" class="headerlink" title="HTTP 头部信息"></a>HTTP 头部信息</h2><ul>
+<li><code>setRequestHeader(header, value)</code>: 设置 HTTP 请求头部，此方法必须在<code>open()</code>和<code>send()</code>方法之间调用</li>
+<li><code>getResponseHeader(name)</code>:返回指定的响应头信息</li>
+<li><code>getAllResponseHeaders()</code>: 返回所有响应头</li>
+</ul>
+<h2 id="XMLHttpRequest-2"><a href="#XMLHttpRequest-2" class="headerlink" title="XMLHttpRequest 2"></a>XMLHttpRequest 2</h2><h3 id="FormData"><a href="#FormData" class="headerlink" title="FormData"></a>FormData</h3><p>FormData 类型为序列化表单以及创建与表单格式相同的数据提供了便利。</p>
+<ul>
+<li>创建 FormData 的 实例后，可直接将它传入 XHR 的<code>send()</code>方法</li>
+<li>另外，XHR 对象能够识别传入的数据类型是 FormData 的实例，并配置适当的头部信息，不需在手动配置头部信息(<code>shr.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;)</code>)</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 序列化表单</span></span><br><span class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> <span class="title class_">FormData</span>(<span class="variable language_">document</span>.<span class="property">forms</span>[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建表单格式数据</span></span><br><span class="line"><span class="keyword">var</span> data1 = <span class="keyword">new</span> <span class="title class_">FormData</span>();</span><br><span class="line">data.<span class="title function_">append</span>(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;jiang jiang&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="超时定时"><a href="#超时定时" class="headerlink" title="超时定时"></a>超时定时</h3><p>XHR 对象的<code>timeout</code>属性，表示请求在等待响应多少毫秒之后终止。<br>在给 XHR<code>timeout</code>设置一个数值后，如果在规定时间内浏览器还没有接收到响应，就会触发<code>timeout</code>事件.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line">xhr.<span class="property">timeout</span> = <span class="number">1000</span>;</span><br><span class="line">xhr.<span class="property">ontimeout</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="overrideMimeType"><a href="#overrideMimeType" class="headerlink" title="overrideMimeType()"></a><code>overrideMimeType()</code></h3><p>XHR 的<code>overrideMimeType(mimeType)</code>,指定一个 MIME 类型用于替换服务器指定的类型，使服务器响应信息中传输的数据按照该指定 MIME 类型处理。<br><strong>注意：如果服务器没有指定一个<code>Content-Type</code>头，XHR 默认 MIME 类型为<code>&quot;text/xml&quot;</code>。但如果接收的数据不是有效的 XML,就会出现格式不正确的错误。可用通过<code>overrideMimeType()</code>指定各种类型来 避免这种情况</strong></p>
+<h2 id="进度事件"><a href="#进度事件" class="headerlink" title="进度事件"></a>进度事件</h2><p>XHR 对象提供了各种在请求被处理期间发生的事件以供监听，包括定期进度通知，错误通知，完成通知等。具体进度事件如下：</p>
+<ul>
+<li>loadstart： 在接收到响应数据的第一个字节时触发</li>
+<li>progress： 在接收响应数据期间不断触发</li>
+<li>error： 在请求发生错误时触发</li>
+<li>abort： 因调用<code>abort()</code>方法而终止连接时触发</li>
+<li>timeout： 请求超时时触发</li>
+<li>load： 在接收到完成数据时触发</li>
+<li>loadend： 通信终止（成功或失败）时触发，error，abort，timeout，load 任意事件后触发</li>
+</ul>
+<h3 id="progress-事件"><a href="#progress-事件" class="headerlink" title="progress 事件"></a>progress 事件</h3><p>progress 事件在浏览器接收数据期间周期性的触发，其事件处理程序会接收到的 event 对象，具有以下特殊属性</p>
+<ul>
+<li>target: XHR 对象</li>
+<li>lengthComputable： 进度信息是否可用的布尔值，如果为 false，意味着总字节数为止并且 total 的值为 0</li>
+<li>loaded： 已经接收到的字节数</li>
+<li>total： 预计的总字节数</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;controls&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;xhr success&quot;</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;XHR (success)&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;xhr abort&quot;</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;XHR (abort)&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;xhr error&quot;</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;XHR (error)&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">readonly</span> <span class="attr">class</span>=<span class="string">&quot;event-log&quot;</span> <span class="attr">cols</span>=<span class="string">&quot;80&quot;</span> <span class="attr">rows</span>=<span class="string">&quot;20&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">&quot;img&quot;</span> <span class="attr">src</span>=<span class="string">&quot;&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;图片&quot;</span> <span class="attr">width</span>=<span class="string">&quot;400&quot;</span> <span class="attr">height</span>=<span class="string">&quot;500&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> xhrButtonSuccess = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.xhr.success&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> xhrButtonAbort = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.xhr.abort&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> xhrButtonError = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.xhr.error&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> log = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.event-log&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> img = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.img&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">handleEvent</span>(<span class="params">event</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;event&gt;&gt;&gt;&quot;</span>, event);</span></span><br><span class="line"><span class="language-javascript">      log.<span class="property">textContent</span> =</span></span><br><span class="line"><span class="language-javascript">        log.<span class="property">textContent</span> +</span></span><br><span class="line"><span class="language-javascript">        <span class="string">`<span class="subst">$&#123;event.type&#125;</span>: lengthComputable: <span class="subst">$&#123;event.lengthComputable&#125;</span>, <span class="subst">$&#123;event.loaded&#125;</span> / <span class="subst">$&#123;event.total&#125;</span> bytes transferred\n`</span>;</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">if</span> (event.<span class="property">type</span> === <span class="string">&quot;load&quot;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">let</span> xhr = event.<span class="property">target</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(xhr.<span class="title function_">getAllResponseHeaders</span>());</span></span><br><span class="line"><span class="language-javascript">        img.<span class="property">src</span> = xhr.<span class="property">responseURL</span>;</span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">addListeners</span>(<span class="params">xhr</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      xhr.<span class="title function_">addEventListener</span>(<span class="string">&quot;loadstart&quot;</span>, handleEvent);</span></span><br><span class="line"><span class="language-javascript">      xhr.<span class="title function_">addEventListener</span>(<span class="string">&quot;progress&quot;</span>, handleEvent);</span></span><br><span class="line"><span class="language-javascript">      xhr.<span class="title function_">addEventListener</span>(<span class="string">&quot;load&quot;</span>, handleEvent);</span></span><br><span class="line"><span class="language-javascript">      xhr.<span class="title function_">addEventListener</span>(<span class="string">&quot;loaded&quot;</span>, handleEvent);</span></span><br><span class="line"><span class="language-javascript">      xhr.<span class="title function_">addEventListener</span>(<span class="string">&quot;error&quot;</span>, handleEvent);</span></span><br><span class="line"><span class="language-javascript">      xhr.<span class="title function_">addEventListener</span>(<span class="string">&quot;abort&quot;</span>, handleEvent);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">runXHR</span>(<span class="params">url</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      log.<span class="property">textContent</span> = <span class="string">&quot;&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">const</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span></span><br><span class="line"><span class="language-javascript">      <span class="title function_">addListeners</span>(xhr);</span></span><br><span class="line"><span class="language-javascript">      xhr.<span class="title function_">open</span>(<span class="string">&quot;get&quot;</span>, url);</span></span><br><span class="line"><span class="language-javascript">      xhr.<span class="title function_">send</span>();</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">return</span> xhr;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    xhrButtonSuccess.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="title function_">runXHR</span>(</span></span><br><span class="line"><span class="language-javascript">        <span class="string">&quot;http://5b0988e595225.cdn.sohucs.com/images/20181012/f34af81a69b145ee83f35a462d8650bb.jpeg&quot;</span></span></span><br><span class="line"><span class="language-javascript">      );</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript">    xhrButtonAbort.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="title function_">runXHR</span>(</span></span><br><span class="line"><span class="language-javascript">        <span class="string">&quot;http://5b0988e595225.cdn.sohucs.com/images/20181012/f34af81a69b145ee83f35a462d8650bb.jpeg&quot;</span></span></span><br><span class="line"><span class="language-javascript">      ).<span class="title function_">abort</span>();</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript">    xhrButtonError.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="title function_">runXHR</span>(<span class="string">&quot;https://somewhere.com/dont-exist&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="跨域资源共享"><a href="#跨域资源共享" class="headerlink" title="跨域资源共享"></a>跨域资源共享</h2><p>默认情况下,XHR 对象 只能访问与它包含的页面位于同一域中资源。跨域是指一个域下的文档或脚本试图去请求另一个域下的资源。</p>
+<h3 id="广义的跨域"><a href="#广义的跨域" class="headerlink" title="广义的跨域"></a>广义的跨域</h3><ul>
+<li>资源跳转： a 链接，重定向，表单提交</li>
+<li>资源嵌入： <code>&lt;link&gt;</code>,<code>&lt;script&gt;</code>,<code>&lt;img&gt;</code>标签，css 样式中<code>url()</code>,<code>@font-face()</code>等文件外链</li>
+<li>脚本请求： ajax 请求</li>
+</ul>
+<h3 id="狭义的跨域"><a href="#狭义的跨域" class="headerlink" title="狭义的跨域"></a>狭义的跨域</h3><p>通常所说的跨域是狭义的，是由浏览器同源策略所限制的一类请求场景。<strong>同源策略</strong>是浏览器最核心的安全功能，所谓同源是指<strong>协议+域名+端口</strong>三者相同。即使两个不同的域名指向同一 IP 地址，也非同源。</p>
+<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>CORS（Cross-Origin Resource Sharing，跨域资源共享），定义了在必须访问跨域资源时，浏览器与服务器应该如何沟通。其基本思想，就是使用自定义的 HTTP 头部让浏览器与服务器沟通，从而决定请求或响应是成功，还是失败。具体做法如下：</p>
+<ul>
+<li>浏览器在发生请求时，会给 HTTP 头部附加一个额外的<code>Origin</code>头部，其中包含请求页面的源信息（协议+域名+端口），以便服务器根据该头部信息来决定是否响应<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Origin: https://developer.mozilla.org</span><br></pre></td></tr></table></figure></li>
+<li>服务器如果认为该请求可以接受，就会在<code>Access-Control-Allow-Origin</code>头部中回发相同的源信息,如果是公共资源，可以回发<code>*</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: *</span><br></pre></td></tr></table></figure></li>
+<li>如果是带凭证的请求，例如 带 cookie 请求时，需要将 XHR 对象<code>withCredentials</code>属性设置为 true,如果服务器接收带凭证的请求，会使用 HTTP 头部来响应<code>Access-Control-Allow-Credentials: true</code>.如果服务器的响应不含该头部，则浏览器不会把响应交给 JavaScript，于是 status 的值为 0，调用 onerror()事件处理程序</li>
+</ul>
+<h3 id="跨域解决方案"><a href="#跨域解决方案" class="headerlink" title="跨域解决方案"></a>跨域解决方案</h3><h4 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h4><p>原理：通过动态创建<code>script</code>，在请求时传参（一个回调函数）给后端，后端在返回时执行这个在前端定义的回调函数，回调函数传入的参数就要返回的数据<br>前端 代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;jsonp&quot;</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;JSONP&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">class</span>=<span class="string">&quot;responseData&quot;</span> <span class="attr">cols</span>=<span class="string">&quot;30&quot;</span> <span class="attr">rows</span>=<span class="string">&quot;10&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> responseData = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.responseData&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> jsonpButton = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.jsonp&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">handleCallback</span>(<span class="params">res</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      responseData.<span class="property">textContent</span> = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(res);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">runJSONP</span>(<span class="params">url, callback</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">var</span> script = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;script&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">      script.<span class="property">type</span> = <span class="string">&quot;text/javascript&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">      script.<span class="property">src</span> = <span class="string">`<span class="subst">$&#123;url&#125;</span>?callback=<span class="subst">$&#123;callback&#125;</span>`</span>;</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">document</span>.<span class="property">head</span>.<span class="title function_">appendChild</span>(script);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    jsonpButton.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="title function_">runJSONP</span>(<span class="string">&quot;http://127.0.0.1:8080/&quot;</span>, <span class="string">&quot;handleCallback&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>后端 node.代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> querystring = <span class="built_in">require</span>(<span class="string">&quot;querystring&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> server = http.<span class="title function_">createServer</span>();</span><br><span class="line"></span><br><span class="line">server.<span class="title function_">on</span>(<span class="string">&quot;request&quot;</span>, <span class="keyword">function</span> (<span class="params">req, res</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> params = querystring.<span class="title function_">parse</span>(req.<span class="property">url</span>.<span class="title function_">split</span>(<span class="string">&quot;?&quot;</span>)[<span class="number">1</span>]);</span><br><span class="line">  <span class="keyword">var</span> fn = params.<span class="property">callback</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(params);</span><br><span class="line"></span><br><span class="line">  res.<span class="title function_">writeHead</span>(<span class="number">200</span>, &#123; <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;text/javascript&quot;</span> &#125;);</span><br><span class="line">  <span class="keyword">var</span> response = &#123; <span class="attr">status</span>: <span class="literal">true</span>, <span class="attr">user</span>: <span class="string">&quot;admin&quot;</span> &#125;;</span><br><span class="line">  res.<span class="title function_">write</span>(<span class="string">`<span class="subst">$&#123;fn&#125;</span>(<span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(response)&#125;</span>)`</span>);</span><br><span class="line">  res.<span class="title function_">end</span>();</span><br><span class="line">&#125;);</span><br><span class="line">server.<span class="title function_">listen</span>(<span class="string">&quot;8080&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;server is running at port 8080....&quot;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="postMessage-跨域"><a href="#postMessage-跨域" class="headerlink" title="postMessage 跨域"></a>postMessage 跨域</h4><p><code>postMessage</code>是 window 属性之一，可安全实现跨域通信，能解决以下问题：</p>
+<ul>
+<li>页面和其打开的新窗口的数据传递</li>
+<li>多窗口之间的息传递</li>
+<li>页面与嵌套的<code>iframe</code>之间消息传递</li>
+</ul>
+<p>基本思路:一个窗口可以获得对另一个窗口的引用，然后在发送窗口上调用<code>otherWindow.postMessage()</code>方法分发一个<code>MessageEvent</code>消息,接收消息的窗口可监听该事件(<code>message</code>),并可自由处理此事件。</p>
+<ul>
+<li>分发消息<br><code>otherWindow.postMessage(message, targetOrigin)</code>方法，分发一个消息给<code>targetOrigin</code>窗口，是通过消息事件对象暴露给接收框口的。<ul>
+<li>targetWindow: 其他窗口的一个引用，例如，iframe 的<code>contentWindow</code>属性，<code>window.open()</code>返回的窗口对象，命名过或数值索引的<code>winsdow.frames</code></li>
+<li>message: 要发送给接收窗口的数据，它会被序列化，无需自己序列化</li>
+<li>targetOrigin: 指定那些窗口能接收到消息事件，其值可以是字符串<code>&quot;*&quot;</code>,或者一个 URL</li>
+</ul>
+</li>
+<li>接收消息<br><code>window.addEventListener(&quot;message&quot;,receiveMessage)</code>,通过监听事件来接收消息，事件对象相关属性有：<ul>
+<li>data： 从其他 window 中传递过来的消息内容</li>
+<li>origin: 调用<code>postMessage</code>时发送方窗口的 origin.</li>
+<li>source: 对发送消息的窗口对象的引用</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://aixuexi567.github.io/2020/04/09/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86-10-Ajax/" title="JS知识点梳理(10)-Ajax" target="_blank" rel="external">https://aixuexi567.github.io/2020/04/09/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86-10-Ajax/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aixuexi567" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aixuexi567" target="_blank"><span class="text-dark">爱学兮</span><small class="ml-1x">Front End &amp; Vue &amp; TypeScript</small></a></h3>
+        <div>前端狗，偶尔思考，间歇式码字</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/04/13/Axios%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/" title="Axios知识点梳理"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/04/09/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86-9-%E4%BA%8B%E4%BB%B6/" title="JS知识点梳理(9)-事件"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="wechat" data-mobile-sites=""></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '3c9348a5e84eb5050ec8',
+    clientSecret: 'b92d8dd66f66bbe04d870af0e612ff74a00546da',
+    repo: 'aixuexi567.github.io',
+    owner: 'aixuexi567',
+    admin: ['aixuexi567'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+  <!-- Google Adsense -->
+<script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7070857500305563"
+  crossorigin="anonymous"
+></script>
+
+</body>
+</html>
