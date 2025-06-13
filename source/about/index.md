@@ -13,7 +13,7 @@ sidebar: custom
   "gender": "male",
   "profession": "front end & vue",
   "address": "Shenzhen， China",
-  "github": "https://github.com/Better-Jiang",
+  "github": "https://github.com/aixuexi567",
   "email": "1433539514@qq.com",
 
   "skills": [

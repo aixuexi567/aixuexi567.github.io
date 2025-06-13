@@ -31,7 +31,7 @@ site:
     width: 40
     height: 40
     url:
-  title: better-jiang # 页面title
+  title: aixuexi567 # 页面title
   favicon: /favicon.ico
   board: <p>😊 欢迎交流与分享经验!</p>  <p>😊 上班摸鱼写散文!</p> # 站点公告
   copyright: false # 底部版权信息
@@ -102,7 +102,7 @@ share:
 
 # Github
 github:
-  username: Better-Jiang # github username
+  username: aixuexi567 # github username
 
 # Comment
 # Gitment
@@ -121,9 +121,9 @@ comment:
     ClientSecret:
     lazy: false
   gitalk: # gitalk. https://gitalk.github.io/
-    owner: Better-Jiang #必须. GitHub repository 所有者，可以是个人或者组织。
-    admin: Better-Jiang #必须. GitHub repository 的所有者和合作者 (对这个 repository 有写权限的用户)。
-    repo: Better-Jiang.github.io #必须. GitHub repository.
+    owner: aixuexi567 #必须. GitHub repository 所有者，可以是个人或者组织。
+    admin: aixuexi567 #必须. GitHub repository 的所有者和合作者 (对这个 repository 有写权限的用户)。
+    repo: aixuexi567.github.io #必须. GitHub repository.
     ClientID: 3c9348a5e84eb5050ec8 #必须. GitHub Application Client ID.
     ClientSecret: b92d8dd66f66bbe04d870af0e612ff74a00546da #必须. GitHub Application Client Secret.
   valine: # Valine. https://valine.js.org
@@ -149,7 +149,7 @@ comment:
 # https://api.douban.com/v2/movie/subject/:id 单个电影信息
 # https://api.douban.com/v2/movie/search?q={text} 电影搜索
 douban:
-  user: better-jiang # 豆瓣用户名(域名)
+  user: aixuexi567 # 豆瓣用户名(域名)
   start: 0 # 从哪一条记录开始
   count: 100 # 获取豆瓣书单数据条数
 
@@ -190,11 +190,11 @@ profile:
   author_title: Front End & Vue & TypeScript
   author_description: 前端狗，偶尔思考，间歇式码字
   location: Shenzhen, China
-  follow: https://github.com/Better-Jiang
+  follow: https://github.com/aixuexi567
   # Social Links
   social:
     links:
-      github: https://github.com/Better-Jiang
+      github: https://github.com/aixuexi567
       # weibo: http://weibo.com/cofess
       # twitter: https://twitter.com/iwebued
       # facebook: /
@@ -212,7 +212,7 @@ profile:
 
   # My Personal Links
   links:
-    Github: https://github.com/Better-Jiang
+    Github: https://github.com/aixuexi567
     # Blog: http://blog.cofess.com
     # 微博: http://weibo.com/cofess
     # 花瓣: http://huaban.com/cofess
