@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- google 广告 -->
+  <script data-ad-client="ca-pub-7070857500305563" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>小白笔记-grunt | aixuexi567</title>
+  <meta name="description" content="Grunt 侧重对整个过程的控制管理，是任务类型的的打包工具，代码检查、预编译、合并压缩；生成雪碧图、sourceMap、版本管理；运行单元测试、监控等。 Grunt 执行异步任务 执行异步任务的回调函数不能使用箭头函数 异步任务完成需要调用任务内置函数告知已经完成  Grunt 标记任务失败 同步任务通过 return false来标记任务失败 异步任务通过内置函数 done 传递 false">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小白笔记-grunt">
+<meta property="og:url" content="https://aixuexi567.github.io/2022/08/13/xiao-bai-bi-ji-grunt/index.html">
+<meta property="og:site_name" content="爱学兮">
+<meta property="og:description" content="Grunt 侧重对整个过程的控制管理，是任务类型的的打包工具，代码检查、预编译、合并压缩；生成雪碧图、sourceMap、版本管理；运行单元测试、监控等。 Grunt 执行异步任务 执行异步任务的回调函数不能使用箭头函数 异步任务完成需要调用任务内置函数告知已经完成  Grunt 标记任务失败 同步任务通过 return false来标记任务失败 异步任务通过内置函数 done 传递 false">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-13T01:56:40.000Z">
+<meta property="article:modified_time" content="2025-06-13T05:38:58.255Z">
+<meta property="article:author" content="刘振江">
+<meta property="article:tag" content="grunt">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://aixuexi567.github.io/2022/08/13/xiao-bai-bi-ji-grunt/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="爱学兮" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aixuexi567" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">爱学兮</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">AI &amp; Web Developer &amp; Data Analyst</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>😊 欢迎交流与分享经验!</p>  <p>😊 上班摸鱼写散文!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/">成长小记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a><span class="category-list-count">87</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%83%82%E7%AC%94%E5%A4%B4/">烂笔头</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8B%B1%E8%AF%AD%E6%8B%BE%E9%81%97/">英语拾遗</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94%E6%84%9F%E6%82%9F/">随笔感悟</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" rel="tag">CSS权威指南-第四版</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eslint/" rel="tag">eslint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grunt/" rel="tag">grunt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pnpm/" rel="tag">pnpm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vite/" rel="tag">vite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" rel="tag">一碗鸡汤</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" rel="tag">书籍读后感</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" rel="tag">前端性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" rel="tag">反思怪</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" rel="tag">团队协作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" rel="tag">成长小记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" rel="tag">技术总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" rel="tag">残酷物语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" rel="tag">烂笔头</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" rel="tag">编程认知</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A3%9E%E7%9B%98/" rel="tag">飞盘</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" style="font-size: 13.63px;">CSS权威指南-第四版</a> <a href="/tags/axios/" style="font-size: 13px;">axios</a> <a href="/tags/css/" style="font-size: 14px;">css</a> <a href="/tags/eslint/" style="font-size: 13.13px;">eslint</a> <a href="/tags/git/" style="font-size: 13.75px;">git</a> <a href="/tags/grunt/" style="font-size: 13px;">grunt</a> <a href="/tags/http/" style="font-size: 13.38px;">http</a> <a href="/tags/javascript/" style="font-size: 13.88px;">javascript</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/npm/" style="font-size: 13px;">npm</a> <a href="/tags/pnpm/" style="font-size: 13px;">pnpm</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/shell/" style="font-size: 13px;">shell</a> <a href="/tags/vite/" style="font-size: 13px;">vite</a> <a href="/tags/vscode/" style="font-size: 13px;">vscode</a> <a href="/tags/vue/" style="font-size: 13.75px;">vue</a> <a href="/tags/webpack/" style="font-size: 13px;">webpack</a> <a href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" style="font-size: 13px;">一碗鸡汤</a> <a href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" style="font-size: 13.25px;">书籍读后感</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" style="font-size: 13px;">前端性能</a> <a href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" style="font-size: 13.5px;">反思怪</a> <a href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" style="font-size: 13px;">团队协作</a> <a href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" style="font-size: 13px;">成长小记</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" style="font-size: 13px;">技术总结</a> <a href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" style="font-size: 13px;">残酷物语</a> <a href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" style="font-size: 13px;">烂笔头</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" style="font-size: 13.13px;">编程认知</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 13.13px;">网络</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 13.75px;">翻译</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 13.25px;">语法</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 13.63px;">面试</a> <a href="/tags/%E9%A3%9E%E7%9B%98/" style="font-size: 13.25px;">飞盘</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a>
+              </p>
+              <p class="item-title">
+                <a href="/2025/06/13/chi-zhi-de-yi-dian-dian-shou-huo-xue-chang-xue-jie-ju-hui-fen-xiang/" class="title">离职的一点点收获(学长学姐聚会分享)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2025-06-13T06:49:06.000Z" itemprop="datePublished">2025-06-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/13/mao-xuan-du-hou-gan/" class="title">&lt;毛选&gt;读后感</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-13T01:48:36.000Z" itemprop="datePublished">2023-09-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/29/v8-ru-he-zhi-xing-yi-duan-js-dai-ma/" class="title">V8如何执行一段js代码?</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-29T02:24:35.000Z" itemprop="datePublished">2023-08-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/28/js-v8-la-ji-hui-shou/" class="title">JS-V8垃圾回收</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-28T01:46:03.000Z" itemprop="datePublished">2023-08-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/31/kong-xiang-guai-de-ri-chang-fan-si/" class="title">空想怪的日常反思</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-31T02:31:08.000Z" itemprop="datePublished">2023-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-小白笔记-grunt" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      小白笔记-grunt
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/08/13/xiao-bai-bi-ji-grunt/" class="article-date">
+	  <time datetime="2022-08-13T01:56:40.000Z" itemprop="datePublished">2022-08-13</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E7%83%82%E7%AC%94%E5%A4%B4/">烂笔头</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/grunt/" rel="tag">grunt</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/08/13/xiao-bai-bi-ji-grunt/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.7k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 12(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>Grunt 侧重对整个过程的控制管理，是任务类型的的打包工具，代码检查、预编译、合并压缩；生成雪碧图、sourceMap、版本管理；运行单元测试、监控等。</p>
+<h4 id="Grunt-执行异步任务"><a href="#Grunt-执行异步任务" class="headerlink" title="Grunt 执行异步任务"></a>Grunt 执行异步任务</h4><ul>
+<li>执行异步任务的回调函数不能使用箭头函数</li>
+<li>异步任务完成需要调用任务内置函数告知已经完成</li>
+</ul>
+<h4 id="Grunt-标记任务失败"><a href="#Grunt-标记任务失败" class="headerlink" title="Grunt 标记任务失败"></a>Grunt 标记任务失败</h4><ul>
+<li>同步任务通过 <strong>return false</strong>来标记任务失败</li>
+<li>异步任务通过内置函数 done 传递 false 参数 ***done(false)**来标记任务失败</li>
+<li>如果多任务执行，只要标记任务失败，后续任务将不在执行。添加 <code>--force</code>选项，会强制执行后续任务</li>
+</ul>
+<h4 id="Grunt-设置配置"><a href="#Grunt-设置配置" class="headerlink" title="Grunt 设置配置"></a>Grunt 设置配置</h4><ul>
+<li>使用 <code>initConfig</code> 方法去配置参数</li>
+<li>使用 <code>grunt.config</code> 方法来获取参数</li>
+</ul>
+<h4 id="Grunt-插件使用"><a href="#Grunt-插件使用" class="headerlink" title="Grunt 插件使用"></a>Grunt 插件使用</h4><ul>
+<li>Grunt 插件命名规则 <code>grunt-contrib-任务名</code> 或 <code>grunt-任务名</code></li>
+<li>Grunt 常用插件 样式预编译、JS编译、文件监听</li>
+<li>使用插件前，需要使用**<code>loadNpmTasks</code>**方法加载插件，然后才可以使用。<code>load-grunt-tasks</code>插件可自动加载所有插件</li>
+</ul>
+<h4 id="npx"><a href="#npx" class="headerlink" title="npx"></a>npx</h4><p>npx是一个npm包执行器，有如下特点：</p>
+<ul>
+<li><p>临时安装可执行依赖包，不用全局安装，故不用担心长期的污染</p>
+</li>
+<li><p>可以执行依赖包中的命令，安装完成自动运行</p>
+</li>
+<li><p>自动加载 <code>node_modules</code>中依赖包，而无需指定<code>$PATH</code>,还可以指定node.js版本，命令的版本。</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 指定uglify-js 版本，npx 运行时，会到node_modules/.bin路径 和 环境变量$PATH里检查命令是否存。</span><br><span class="line">// 如果找不到，会临时安装，然后执行</span><br><span class="line">npx uglify-js@3.1.0 ./test/test_npx.js -o ./test/haha.js</span><br><span class="line"></span><br><span class="line">//  指定node版本的</span><br><span class="line">npx -p node@8 npm run build</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Gulp"><a href="#Gulp" class="headerlink" title="Gulp"></a>Gulp</h2><p>Gulp在4.0版本之后，无需引入gulp，然后在注册任务才可以调用，现在可直接通过exports导出任务。且<strong>取消了同步任务</strong>，约定每次任务执行完成后，都要调用回调函数的方法参数才可以。</p>
+<h3 id="Gulp-异步任务的多种形式"><a href="#Gulp-异步任务的多种形式" class="headerlink" title="Gulp 异步任务的多种形式"></a>Gulp 异步任务的多种形式</h3><ul>
+<li><ol>
+<li>回调函数，<br>标记任务失败，在方法done中传入错误对象。<strong>其后面的任务也不会在执行</strong></li>
+</ol>
+</li>
+<li><ol start="2">
+<li>promise<br>Promise.resolve() 任务成功； Promise.reject() 任务失败</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>async、await</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>使用gulp读取文件操作时，返回文件流，gulp会自动在流上注册一个end事件</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回文件流 </span></span><br><span class="line">    <span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line">    <span class="built_in">exports</span>.<span class="property">stream</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> readstream = fs.<span class="title function_">createReadStream</span>(<span class="string">&quot;package.json&quot;</span>);</span><br><span class="line">        <span class="keyword">const</span> writestream = fs.<span class="title function_">createWriteStream</span>(<span class="string">&quot;temp.txt&quot;</span>);</span><br><span class="line">        readstream.<span class="title function_">pipe</span>(writestream);</span><br><span class="line">        <span class="keyword">return</span> readstream;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">exports</span>.<span class="property">stream2</span> = <span class="function">(<span class="params">done</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> readstream = fs.<span class="title function_">createReadStream</span>(<span class="string">&quot;package.json&quot;</span>);</span><br><span class="line">        <span class="keyword">const</span> writestream = fs.<span class="title function_">createWriteStream</span>(<span class="string">&quot;temp2.txt&quot;</span>);</span><br><span class="line">        readstream.<span class="title function_">pipe</span>(writestream);</span><br><span class="line">        readstream.<span class="title function_">on</span>(<span class="string">&quot;end&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">done</span>()</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="gulp-文件操作"><a href="#gulp-文件操作" class="headerlink" title="gulp 文件操作"></a>gulp 文件操作</h3><p>Gulp使用 <code>src</code>方法匹配到源文件，然后通过node.js的<code>pipe</code>将文件流 输送到 gulp插件（编译，压缩），最后通过<code>dest</code>方法，将编译好的文件输出到指定编译目录中。</p>
+<p>webpack用于JavaScript应用程序的<strong>静态模块</strong>打包工具。他会在内部从一个或多个入口点构建一个依赖图（dependency graph）,然后将项目中所需要的每一个<strong>模块组合成一个或多个bundles</strong>,它们均为静态资源。<br>对webpack而言，一起文件都是一个个模块，根据个模块之间的依赖关系，对模块进行组合和打包，最终输出浏览器能使用的静态资源。</p>
+<h4 id="context-基础目录"><a href="#context-基础目录" class="headerlink" title="context 基础目录"></a>context 基础目录</h4><ul>
+<li>webpack的基础目录，必须是<strong>绝对路径</strong>，用于从配置中解析 入口点（entry）和 加载器（loader）,默认为<strong>当前目录</strong>。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;__dirname&#x27;</span>,__dirname);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&quot;development&quot;</span>,</span><br><span class="line">    <span class="comment">// 基础目录 &quot;/home/project/webpack-config/config/src&quot;</span></span><br><span class="line">    <span class="attr">context</span>: path.<span class="title function_">resolve</span>(__dirname,<span class="string">&quot;src&quot;</span>),</span><br><span class="line">    <span class="attr">entry</span>: <span class="string">&quot;./src/index.js&quot;</span>,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&quot;main.js&quot;</span>,</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname,<span class="string">&quot;../dist&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>基础目录 为 <code>/home/project/webpack-config/config/src</code>, 运行 <code>npx webpack --config ./config/webpack.config-1.js</code>,会报错，找不到<code>./src/index.js</code>.</p>
+<p><code>context</code>,<code>entry</code>做如下修改，在执行 npx webpack 命令，编译正常。由此可知，<strong>context 是作为 entry 和 loader 的 根目录</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;__dirname&#x27;</span>,__dirname);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;__filename&quot;</span>,__filename);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&quot;development&quot;</span>,</span><br><span class="line">    <span class="attr">context</span>: path.<span class="title function_">resolve</span>(__dirname,<span class="string">&quot;../src&quot;</span>),</span><br><span class="line">    <span class="attr">entry</span>: <span class="string">&quot;./index.js&quot;</span>,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&quot;main.js&quot;</span>,</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&quot;../dist&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="entry-入口文件"><a href="#entry-入口文件" class="headerlink" title="entry 入口文件"></a>entry 入口文件</h4><p>entry支持字符串、字符串数组、对象、函数类型</p>
+<ul>
+<li><p>string 类型</p>
+  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">entry<span class="punctuation">:</span> <span class="string">&quot;./src/index.js&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>字符串数组 类型<br>两个文件会合并打包为一个chunk文件</p>
+  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">entry<span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;./src/index.js&quot;</span><span class="punctuation">,</span> <span class="string">&quot;./src/calc/js&quot;</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure></li>
+<li><p>对象类型<br>entry 对象有2个入口，入口 a 和 b, 通过 <strong>dependOn</strong> 配置 b 依赖于 a, 构建是会等 a构建完成后再启动b的构建。<br>entry 配置有多个入口文件，所以输出<code>output</code>的配置也要满足，使用<code>[name]</code>占位符来确保每个文件具有唯一代名称。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&quot;development&quot;</span>,</span><br><span class="line">    <span class="attr">context</span>: path.<span class="title function_">resolve</span>(__dirname,<span class="string">&quot;..&quot;</span>),</span><br><span class="line">    <span class="attr">entry</span>: &#123;</span><br><span class="line">        <span class="attr">b</span>: &#123;</span><br><span class="line">            <span class="attr">dependOn</span>: <span class="string">&quot;a&quot;</span>,</span><br><span class="line">            <span class="attr">import</span>: <span class="string">&quot;./src/calc.js&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">a</span>: <span class="string">&quot;./src/index.js&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&quot;[name].js&quot;</span>,</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&quot;../dist&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="output-输出"><a href="#output-输出" class="headerlink" title="output 输出"></a>output 输出</h4><p>output属性最低要求，设置为一个对象，配置输出文件的文件名,默认输出目录<code>dist</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&quot;bundle.js&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果配置2个或多个入口文件，则应该使用 <strong>占位符</strong>来保证每个文件具有唯一的名称</p>
+<h5 id="生成-hash-文件名-例如-b-ec5d198e69-js"><a href="#生成-hash-文件名-例如-b-ec5d198e69-js" class="headerlink" title="生成 hash 文件名,  例如 b.ec5d198e69.js"></a>生成 hash 文件名,  例如 <code>b.ec5d198e69.js</code></h5>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&quot;development&quot;</span>,</span><br><span class="line">    <span class="attr">context</span>: path.<span class="title function_">resolve</span>(__dirname,<span class="string">&quot;..&quot;</span>),</span><br><span class="line">    <span class="attr">entry</span>: &#123;</span><br><span class="line">        <span class="attr">b</span>: &#123;</span><br><span class="line">            <span class="attr">dependOn</span>: <span class="string">&quot;a&quot;</span>,</span><br><span class="line">            <span class="attr">import</span>: <span class="string">&quot;./src/calc.js&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">a</span>: <span class="string">&quot;./src/index.js&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&quot;[name].[contenthash:10].js&quot;</span>,</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&quot;../dist&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>常用的hash 占位符有:</p>
+<ul>
+<li>hash, hash跟整个项目构建相关，每次构建生成的文件hash值都一样，只要项目中文件内容发生变化，hash值也会变化</li>
+<li>contenthash, 由文件内容产生的hash值，内容不同产生的值也不一样</li>
+<li>chunkhash, 每一次构建后生成的hash值都不一样，即使文件内容没有改变，<strong>不利于浏览器的缓存</strong></li>
+</ul>
+<h5 id="生成-umd-模式的文件"><a href="#生成-umd-模式的文件" class="headerlink" title="生成 umd 模式的文件"></a>生成 umd 模式的文件</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&quot;development&quot;</span>,</span><br><span class="line">    <span class="attr">context</span>: path.<span class="title function_">resolve</span>(__dirname,<span class="string">&quot;..&quot;</span>),</span><br><span class="line">    <span class="attr">entry</span>: <span class="string">&quot;./src/index.js&quot;</span>,</span><br><span class="line">    <span class="comment">// output: &#123;</span></span><br><span class="line">    <span class="comment">//     library: &quot;lgUtils&quot;,</span></span><br><span class="line">    <span class="comment">//     libraryTarget: &quot;umd&quot;,</span></span><br><span class="line">    <span class="comment">//     filename: &#x27;[name].[hash:6].js&#x27;,</span></span><br><span class="line">    <span class="comment">//     path: path.resolve(__dirname,&quot;../dist&quot;)</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">library</span>: &#123;</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;umd&#x27;</span>,</span><br><span class="line">            <span class="attr">name</span>: <span class="string">&#x27;lqUtils&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;[name].[hash:6].js&#x27;</span>,</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname,<span class="string">&quot;../dist&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行 <code>npx webpack --config ./config/webpack.config-6.js</code>, 生成 <code>main.7f77f8.js</code>js文件，新建index.html并引入打包后的js文件，控制台打印<code>lqUtils</code>,可看到输出结果。表面 打包的js文件是 <strong>umd</strong>格式，支持浏览器。 js文件如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * ATTENTION: The &quot;eval&quot; devtool has been used (maybe by default in mode: &quot;development&quot;).</span></span><br><span class="line"><span class="comment"> * This devtool is neither made for production nor for readable output files.</span></span><br><span class="line"><span class="comment"> * It uses &quot;eval()&quot; calls to create a separate source file in the browser devtools.</span></span><br><span class="line"><span class="comment"> * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)</span></span><br><span class="line"><span class="comment"> * or disable the default devtool with &quot;devtool: false&quot;.</span></span><br><span class="line"><span class="comment"> * If you are looking for production-ready output files, see mode: &quot;production&quot; (https://webpack.js.org/configuration/mode/).</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">(<span class="keyword">function</span> <span class="title function_">webpackUniversalModuleDefinition</span>(<span class="params">root, factory</span>) &#123;</span><br><span class="line"> <span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="built_in">exports</span> === <span class="string">&#x27;object&#x27;</span> &amp;&amp; <span class="keyword">typeof</span> <span class="variable language_">module</span> === <span class="string">&#x27;object&#x27;</span>)</span><br><span class="line">  <span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title function_">factory</span>();</span><br><span class="line"> <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">typeof</span> define === <span class="string">&#x27;function&#x27;</span> &amp;&amp; define.<span class="property">amd</span>)</span><br><span class="line">  <span class="title function_">define</span>([], factory);</span><br><span class="line"> <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="built_in">exports</span> === <span class="string">&#x27;object&#x27;</span>)</span><br><span class="line">  <span class="built_in">exports</span>[<span class="string">&quot;lqUtils&quot;</span>] = <span class="title function_">factory</span>();</span><br><span class="line"> <span class="keyword">else</span></span><br><span class="line">  root[<span class="string">&quot;lqUtils&quot;</span>] = <span class="title function_">factory</span>();</span><br><span class="line">&#125;)(self, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="comment">/******/</span> (<span class="function">() =&gt;</span> &#123; <span class="comment">// webpackBootstrap</span></span><br><span class="line"><span class="comment">/******/</span>  <span class="string">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="comment">/******/</span>  <span class="keyword">var</span> __webpack_modules__ = (&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">/***/</span> <span class="string">&quot;./src/index.js&quot;</span>:</span><br><span class="line"><span class="comment">/*!**********************!*\</span></span><br><span class="line"><span class="comment">  !*** ./src/index.js ***!</span></span><br><span class="line"><span class="comment">  \**********************/</span></span><br><span class="line"><span class="comment">/***/</span> (<span class="function">(<span class="params">__unused_webpack_module, __webpack_exports__, __webpack_require__</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&quot;__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, &#123;\n/* harmony export */   \&quot;a\&quot;: () =&gt; (/* binding */ a),\n/* harmony export */   \&quot;say\&quot;: () =&gt; (/* binding */ say)\n/* harmony export */ &#125;);\nconst say = (msg) =&gt; &#123;\n    return `hello $&#123;msg&#125;`;\n&#125;\nconst a = \&quot;jiang2\&quot;;\n\n\n//# sourceURL=webpack://lqUtils/./src/index.js?&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/***/</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/******/</span>  &#125;);</span><br><span class="line"><span class="comment">/************************************************************************/</span></span><br><span class="line"><span class="comment">/******/</span>  <span class="comment">// The require scope</span></span><br><span class="line"><span class="comment">/******/</span>  <span class="keyword">var</span> __webpack_require__ = &#123;&#125;;</span><br><span class="line"><span class="comment">/******/</span>  </span><br><span class="line"><span class="comment">/************************************************************************/</span></span><br><span class="line"><span class="comment">/******/</span>  <span class="comment">/* webpack/runtime/define property getters */</span></span><br><span class="line"><span class="comment">/******/</span>  (<span class="function">() =&gt;</span> &#123;</span><br><span class="line"><span class="comment">/******/</span>   <span class="comment">// define getter functions for harmony exports</span></span><br><span class="line"><span class="comment">/******/</span>   __webpack_require__.<span class="property">d</span> = <span class="function">(<span class="params"><span class="built_in">exports</span>, definition</span>) =&gt;</span> &#123;</span><br><span class="line"><span class="comment">/******/</span>    <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> definition) &#123;</span><br><span class="line"><span class="comment">/******/</span>     <span class="keyword">if</span>(__webpack_require__.<span class="title function_">o</span>(definition, key) &amp;&amp; !__webpack_require__.<span class="title function_">o</span>(<span class="built_in">exports</span>, key)) &#123;</span><br><span class="line"><span class="comment">/******/</span>      <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(<span class="built_in">exports</span>, key, &#123; <span class="attr">enumerable</span>: <span class="literal">true</span>, <span class="attr">get</span>: definition[key] &#125;);</span><br><span class="line"><span class="comment">/******/</span>     &#125;</span><br><span class="line"><span class="comment">/******/</span>    &#125;</span><br><span class="line"><span class="comment">/******/</span>   &#125;;</span><br><span class="line"><span class="comment">/******/</span>  &#125;)();</span><br><span class="line"><span class="comment">/******/</span>  </span><br><span class="line"><span class="comment">/******/</span>  <span class="comment">/* webpack/runtime/hasOwnProperty shorthand */</span></span><br><span class="line"><span class="comment">/******/</span>  (<span class="function">() =&gt;</span> &#123;</span><br><span class="line"><span class="comment">/******/</span>   __webpack_require__.<span class="property">o</span> = <span class="function">(<span class="params">obj, prop</span>) =&gt;</span> (<span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">hasOwnProperty</span>.<span class="title function_">call</span>(obj, prop))</span><br><span class="line"><span class="comment">/******/</span>  &#125;)();</span><br><span class="line"><span class="comment">/******/</span>  </span><br><span class="line"><span class="comment">/******/</span>  <span class="comment">/* webpack/runtime/make namespace object */</span></span><br><span class="line"><span class="comment">/******/</span>  (<span class="function">() =&gt;</span> &#123;</span><br><span class="line"><span class="comment">/******/</span>   <span class="comment">// define __esModule on exports</span></span><br><span class="line"><span class="comment">/******/</span>   __webpack_require__.<span class="property">r</span> = <span class="function">(<span class="params"><span class="built_in">exports</span></span>) =&gt;</span> &#123;</span><br><span class="line"><span class="comment">/******/</span>    <span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="title class_">Symbol</span> !== <span class="string">&#x27;undefined&#x27;</span> &amp;&amp; <span class="title class_">Symbol</span>.<span class="property">toStringTag</span>) &#123;</span><br><span class="line"><span class="comment">/******/</span>     <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(<span class="built_in">exports</span>, <span class="title class_">Symbol</span>.<span class="property">toStringTag</span>, &#123; <span class="attr">value</span>: <span class="string">&#x27;Module&#x27;</span> &#125;);</span><br><span class="line"><span class="comment">/******/</span>    &#125;</span><br><span class="line"><span class="comment">/******/</span>    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(<span class="built_in">exports</span>, <span class="string">&#x27;__esModule&#x27;</span>, &#123; <span class="attr">value</span>: <span class="literal">true</span> &#125;);</span><br><span class="line"><span class="comment">/******/</span>   &#125;;</span><br><span class="line"><span class="comment">/******/</span>  &#125;)();</span><br><span class="line"><span class="comment">/******/</span>  </span><br><span class="line"><span class="comment">/************************************************************************/</span></span><br><span class="line"><span class="comment">/******/</span>  </span><br><span class="line"><span class="comment">/******/</span>  <span class="comment">// startup</span></span><br><span class="line"><span class="comment">/******/</span>  <span class="comment">// Load entry module and return exports</span></span><br><span class="line"><span class="comment">/******/</span>  <span class="comment">// This entry module can&#x27;t be inlined because the eval devtool is used.</span></span><br><span class="line"><span class="comment">/******/</span>  <span class="keyword">var</span> __webpack_exports__ = &#123;&#125;;</span><br><span class="line"><span class="comment">/******/</span>  __webpack_modules__[<span class="string">&quot;./src/index.js&quot;</span>](<span class="number">0</span>, __webpack_exports__, __webpack_require__);</span><br><span class="line"><span class="comment">/******/</span>  </span><br><span class="line"><span class="comment">/******/</span>  <span class="keyword">return</span> __webpack_exports__;</span><br><span class="line"><span class="comment">/******/</span> &#125;)()</span><br><span class="line">;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h3><p><code>npm view webpack devDependencies</code>,<code>npm  view webpack dependencies</code> 查看webpack的依赖</p>
+<p>脚手架工具<br>inquirer, 询问交互<br>ejs， 模板解析<br>在 package.json中，bin字段指向可执行文件，其值是字符串，或者 对象。</p>
+<p>对象形式，myjs-cli 即为脚手架的名字<br>字符串，脚手架的名字 就是 name的值<br>执行脚手架，就会执行在package.json 中配置项 bin 指向的可执行文件<br>    “bin”: {<br>        “myjs-cli”: “bin/index.js”<br>    },<br>process.cwd()，node 运行时的路径</p>
+<p>webpack 原理<br>webpack 原理<br>自定义 loader， plugin<br>简易的 webpack<br>webpack 核心配置</p>
+<p>entry, 可执行模块 或者 库的入口<br>chunk, 多个文件组成的一个代码块。可以将可执行模块和它所依赖的模块组合成一个chunk<br>loader， 文件转换器。 es6 转换 为 es5, scass 转换为 css<br>plugin, 扩展webpack功能的插件。 在 webpack 构建的生命周期节点上加入扩展hook，添加功能<br>webpack 构建过程？<br>初始化参数， 解析webpack 配置参数，合并shell传入和webpack.config.js 文件配置的参数，形成最后的配置结果<br>开始编译<br>通过上一步得到 的参数 初始化 compiler 对象<br>注册所有配置的插件， 插件 监听webpack构建生命周期的事件节点，做出相应的处理<br>执行对象的run方法开始执行编译<br>确认入口， 从配置的 entry 入口，开始解析文件，构建AST语法树，找出依赖，递归下去<br>编译模块， 递归中 根据文件类型和loader配置，调用所有配置的loader对文件进行转换，在找出该模块依赖的模块，在递归本步骤，直到所有入口依赖的文件都经过处理<br>完成模块编译并输出，递归完成后，等到每个文件结果，包含每个模块以及它们之间的依赖关系，根据 entry 配置生成代码块 chunk<br>输出完成， 输出所有的chunk 到文件系统<br>自定义 plugins<br>plugins 的钩子函数分为 compiler钩子，和 compilation钩子，每个钩子还有很多各自的钩子周期函数，在不同钩子周期函数中，webpack 进行不同的操作。</p>
+<p>如何创建 webpack plugin？<br>构建函数<br>扩展 apply 方法<br>指定webpack 自身的事件钩子<br>处理 webpack 内部实例的特定数据<br>功能完成后，调用 webpack 提供的回调函数</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://aixuexi567.github.io/2022/08/13/xiao-bai-bi-ji-grunt/" title="小白笔记-grunt" target="_blank" rel="external">https://aixuexi567.github.io/2022/08/13/xiao-bai-bi-ji-grunt/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aixuexi567" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aixuexi567" target="_blank"><span class="text-dark">爱学兮</span><small class="ml-1x">AI &amp; Web Developer &amp; Data Analyst</small></a></h3>
+        <div>前端狗，偶尔思考，间歇码字</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/08/20/js-yi-nan-zhi-yu/" title="js疑难治愈"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/08/04/qu-liao-jie-eslint-ba/" title="去了解ESLint吧"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="wechat" data-mobile-sites=""></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '3c9348a5e84eb5050ec8',
+    clientSecret: 'b92d8dd66f66bbe04d870af0e612ff74a00546da',
+    repo: 'aixuexi567.github.io',
+    owner: 'aixuexi567',
+    admin: ['aixuexi567'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+  <!-- Google Adsense -->
+<script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7070857500305563"
+  crossorigin="anonymous"
+></script>
+
+</body>
+</html>

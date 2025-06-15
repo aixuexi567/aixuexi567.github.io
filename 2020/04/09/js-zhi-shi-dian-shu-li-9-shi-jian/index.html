@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- google 广告 -->
+  <script data-ad-client="ca-pub-7070857500305563" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>JS知识点梳理(9)-事件 | aixuexi567</title>
+  <meta name="description" content="JavaScript 与 HTML 之间的交互是通过事件实现的。事件就是文档或浏览器窗口中发生的一些特定的交互瞬间，并使用侦听器（或处理程序）来预定事件，以便在事件发生时执行相应的代码。 事件流事件流描述的是从页面中接受事件的顺序，有 3 中类型  事件冒泡：事件开始时由最具体的元素接受，然后沿着 DOM 树逐级向上传播，直到传播到 document 对象 事件捕获：不太具体的节点更早接受到事件，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS知识点梳理(9)-事件">
+<meta property="og:url" content="https://aixuexi567.github.io/2020/04/09/js-zhi-shi-dian-shu-li-9-shi-jian/index.html">
+<meta property="og:site_name" content="爱学兮">
+<meta property="og:description" content="JavaScript 与 HTML 之间的交互是通过事件实现的。事件就是文档或浏览器窗口中发生的一些特定的交互瞬间，并使用侦听器（或处理程序）来预定事件，以便在事件发生时执行相应的代码。 事件流事件流描述的是从页面中接受事件的顺序，有 3 中类型  事件冒泡：事件开始时由最具体的元素接受，然后沿着 DOM 树逐级向上传播，直到传播到 document 对象 事件捕获：不太具体的节点更早接受到事件，">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-08T23:14:24.000Z">
+<meta property="article:modified_time" content="2025-06-13T05:38:58.249Z">
+<meta property="article:author" content="刘振江">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://aixuexi567.github.io/2020/04/09/js-zhi-shi-dian-shu-li-9-shi-jian/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="爱学兮" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aixuexi567" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">爱学兮</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">AI &amp; Web Developer &amp; Data Analyst</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>😊 欢迎交流与分享经验!</p>  <p>😊 上班摸鱼写散文!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/">成长小记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a><span class="category-list-count">87</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%83%82%E7%AC%94%E5%A4%B4/">烂笔头</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8B%B1%E8%AF%AD%E6%8B%BE%E9%81%97/">英语拾遗</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94%E6%84%9F%E6%82%9F/">随笔感悟</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" rel="tag">CSS权威指南-第四版</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eslint/" rel="tag">eslint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grunt/" rel="tag">grunt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pnpm/" rel="tag">pnpm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vite/" rel="tag">vite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" rel="tag">一碗鸡汤</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" rel="tag">书籍读后感</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" rel="tag">前端性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" rel="tag">反思怪</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" rel="tag">团队协作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" rel="tag">成长小记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" rel="tag">技术总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" rel="tag">残酷物语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" rel="tag">烂笔头</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" rel="tag">编程认知</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A3%9E%E7%9B%98/" rel="tag">飞盘</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" style="font-size: 13.63px;">CSS权威指南-第四版</a> <a href="/tags/axios/" style="font-size: 13px;">axios</a> <a href="/tags/css/" style="font-size: 14px;">css</a> <a href="/tags/eslint/" style="font-size: 13.13px;">eslint</a> <a href="/tags/git/" style="font-size: 13.75px;">git</a> <a href="/tags/grunt/" style="font-size: 13px;">grunt</a> <a href="/tags/http/" style="font-size: 13.38px;">http</a> <a href="/tags/javascript/" style="font-size: 13.88px;">javascript</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/npm/" style="font-size: 13px;">npm</a> <a href="/tags/pnpm/" style="font-size: 13px;">pnpm</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/shell/" style="font-size: 13px;">shell</a> <a href="/tags/vite/" style="font-size: 13px;">vite</a> <a href="/tags/vscode/" style="font-size: 13px;">vscode</a> <a href="/tags/vue/" style="font-size: 13.75px;">vue</a> <a href="/tags/webpack/" style="font-size: 13px;">webpack</a> <a href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" style="font-size: 13px;">一碗鸡汤</a> <a href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" style="font-size: 13.25px;">书籍读后感</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" style="font-size: 13px;">前端性能</a> <a href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" style="font-size: 13.5px;">反思怪</a> <a href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" style="font-size: 13px;">团队协作</a> <a href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" style="font-size: 13px;">成长小记</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" style="font-size: 13px;">技术总结</a> <a href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" style="font-size: 13px;">残酷物语</a> <a href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" style="font-size: 13px;">烂笔头</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" style="font-size: 13.13px;">编程认知</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 13.13px;">网络</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 13.75px;">翻译</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 13.25px;">语法</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 13.63px;">面试</a> <a href="/tags/%E9%A3%9E%E7%9B%98/" style="font-size: 13.25px;">飞盘</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a>
+              </p>
+              <p class="item-title">
+                <a href="/2025/06/13/chi-zhi-de-yi-dian-dian-shou-huo-xue-chang-xue-jie-ju-hui-fen-xiang/" class="title">离职的一点点收获(学长学姐聚会分享)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2025-06-13T06:49:06.000Z" itemprop="datePublished">2025-06-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/13/mao-xuan-du-hou-gan/" class="title">&lt;毛选&gt;读后感</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-13T01:48:36.000Z" itemprop="datePublished">2023-09-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/29/v8-ru-he-zhi-xing-yi-duan-js-dai-ma/" class="title">V8如何执行一段js代码?</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-29T02:24:35.000Z" itemprop="datePublished">2023-08-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/28/js-v8-la-ji-hui-shou/" class="title">JS-V8垃圾回收</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-28T01:46:03.000Z" itemprop="datePublished">2023-08-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/31/kong-xiang-guai-de-ri-chang-fan-si/" class="title">空想怪的日常反思</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-31T02:31:08.000Z" itemprop="datePublished">2023-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-JS知识点梳理-9-事件" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS知识点梳理(9)-事件
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/09/js-zhi-shi-dian-shu-li-9-shi-jian/" class="article-date">
+	  <time datetime="2020-04-08T23:14:24.000Z" itemprop="datePublished">2020-04-09</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/javascript/" rel="tag">javascript</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/09/js-zhi-shi-dian-shu-li-9-shi-jian/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3.5k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 13(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>JavaScript 与 HTML 之间的交互是通过事件实现的。事件就是文档或浏览器窗口中发生的一些特定的交互瞬间，并使用侦听器（或处理程序）来预定事件，以便在事件发生时执行相应的代码。</p>
+<h2 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h2><p>事件流描述的是从页面中接受事件的顺序，有 3 中类型</p>
+<ul>
+<li>事件冒泡：事件开始时由最具体的元素接受，然后沿着 DOM 树逐级向上传播，直到传播到 document 对象</li>
+<li>事件捕获：不太具体的节点更早接受到事件，最具体的节点最后接受到事件，即在事件到达预定目标之前捕获它。</li>
+<li>DOM 事件流：分 3 个阶段依次为，事件捕获阶段，处于目标阶段，事件冒泡阶段。实际的目标在捕获阶段不会接受到事件。</li>
+</ul>
+<h2 id="事件处理程序"><a href="#事件处理程序" class="headerlink" title="事件处理程序"></a>事件处理程序</h2><p>事件时用户或浏览器自身执行的某种动作，而响应某个事件的函数叫做事件处理程序/事件侦听器。为事件指定处理程序的方法（3 种）</p>
+<h3 id="HTML-事件处理程序"><a href="#HTML-事件处理程序" class="headerlink" title="HTML 事件处理程序"></a>HTML 事件处理程序</h3><ul>
+<li><ol>
+<li>直接在 HTML 中定义事件处理程序及要执行的具体动作<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;111&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;alert(&#x27;111&#x27;)&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><ol start="2">
+<li>在 HTML 中定义事件处理程序，执行的动作则调用其他地方定义的脚本<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;222&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;showMsg(event)&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">function</span> <span class="title function_">showMsg</span>(<span class="params">event</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;event&quot;</span>, event);</span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">alert</span>(<span class="number">222</span>);</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>事件处理程序在执行时，有权访问全局作用域中任何代码。</li>
+<li>事件处理程序会接受一个参数 event，即事件对象。</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>HTML 与 JavaScript 代码紧密耦合，若要更换事件处理程序，二者则都需要改动。</li>
+<li>存在一个时差问题，比如，用户已经在 HTML 页面中触发事件，但当时事件处理程序包含在一个外部文件，可能尚未加载。</li>
+</ul>
+<h3 id="DOM0-级事件处理程序"><a href="#DOM0-级事件处理程序" class="headerlink" title="DOM0 级事件处理程序"></a>DOM0 级事件处理程序</h3><p>通过 Javascript 指定事件处理程序，就是将一个函数赋值给一个事件处理程序属性。每个元素都有自己的事件处理程序属性，这些属性通常全部小写，例如 onclick,将该属性的值设置为一个函数，就可指定事件处理程序</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;3333&quot;</span> <span class="attr">id</span>=<span class="string">&quot;btn3&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  btn3.<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">alert</span>(<span class="number">333</span>);</span></span><br><span class="line"><span class="language-javascript">  &#125;;</span></span><br><span class="line"><span class="language-javascript">  btn3.<span class="property">onmouseover</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;mouseover&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">  &#125;;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>指定事件处理程序在运行之前是无效的，因此如果这些代码在按钮之后，就有可能在一段时间内点击按钮没反应</li>
+<li>使用 DOM0 级方法指定的事件处理程序被认为是<strong>元素的方法</strong>，所有此时的事件处理程序是在元素的作用域中运行，级程序中的 this 执行当前元素</li>
+<li>重复指定事件处理程序，后者会覆盖前者。因此，仅触发一次执行动作</li>
+<li>删除 DOM0 级方法指定的事件处理程序，只需将事件处理程序属性设置为<code>null</code>即可。<code>btn3.onclick = null;</code></li>
+</ul>
+<h3 id="DOM2-级事件处理程序"><a href="#DOM2-级事件处理程序" class="headerlink" title="DOM2 级事件处理程序"></a>DOM2 级事件处理程序</h3><p>DOM2 级事件处理程序定义了 2 个方法：</p>
+<ul>
+<li><code>addEventListener(type,listener,useCapture)</code>,添加事件处理程序</li>
+<li><code>removeEventListener(type,listener,useCapture)</code>，删除事件处理程序</li>
+</ul>
+<p>这 2 个方法都可接受 3 个参数：</p>
+<ul>
+<li><ol>
+<li>要处理的事件名</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>作为事件处理程序的函数</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>表示事件流方式的布尔值。true 为捕获阶段处理程序，false 为冒泡阶段处理程序。默认为 false</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> btn4 = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;btn4&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> handler = <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(event, <span class="variable language_">this</span>);</span><br><span class="line">  <span class="title function_">alert</span>(<span class="number">4444</span>);</span><br><span class="line">&#125;;</span><br><span class="line">btn4.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, handler, <span class="literal">false</span>);</span><br><span class="line">btn4.<span class="title function_">addEventListener</span>(</span><br><span class="line">  <span class="string">&quot;click&quot;</span>,</span><br><span class="line">  <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">alert</span>(<span class="number">555</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="literal">false</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意-2"><a href="#注意-2" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>与 DOM0 级方法一样，这里添加的事件处理程序也是在其依附的元素的作用域中运行，即 this 执行当前元素</li>
+<li>可以添加多个事件处理程序，并按照添加顺序触发</li>
+<li>通过<code>addEventListener()</code>添加的事件处理程序只能使用<code>removeEventListener()</code>来移除，且移除是传入的参数与添加时使用的参数相同。<strong>这也就意味着，通过<code>addEventListener()</code>添加的匿名函数将无法移除</strong></li>
+</ul>
+<h2 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h2><p>在触发 DOM 上的事件时，都会产生一个事件对象<code>event</code>，无论指定事件处理程序使用什么方法，都会将 event 对象传入到事件处理程序中。event 对象包含与创建它的特定事件有关的属性和方法，以下成员是所有事件都具有的：</p>
+<table>
+<thead>
+<tr>
+<th align="center">属性/方法</th>
+<th align="center">类型</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">type</td>
+<td align="center">String</td>
+<td align="center">被触发事件的类型</td>
+</tr>
+<tr>
+<td align="center">bubbles</td>
+<td align="center">Boolean</td>
+<td align="center">是否冒泡</td>
+</tr>
+<tr>
+<td align="center">cancelable</td>
+<td align="center">Boolean</td>
+<td align="center">是否可取消事件的默认行为</td>
+</tr>
+<tr>
+<td align="center">currentTarget</td>
+<td align="center">Element</td>
+<td align="center">事件处理程序当前正在处理事件的那个元素</td>
+</tr>
+<tr>
+<td align="center">target</td>
+<td align="center">Element</td>
+<td align="center">事件的目标元素（真正触发事件的元素）</td>
+</tr>
+<tr>
+<td align="center">defaultPrevented</td>
+<td align="center">Boolean</td>
+<td align="center">是否已经调用 preventDefault()</td>
+</tr>
+<tr>
+<td align="center">preventDefault()</td>
+<td align="center">Function</td>
+<td align="center">取消事件的默认行为</td>
+</tr>
+<tr>
+<td align="center">stopPropagation()</td>
+<td align="center">Function</td>
+<td align="center">取消事件的传播，即取消事件的进一步捕获或冒泡</td>
+</tr>
+</tbody></table>
+<ul>
+<li>在事件处理程序内部，this 对象始终等于<code>currentTarget</code>的值,而<code>target</code>则只包含事件的实际目标。</li>
+<li>只有在事件处理程序执行期间，event 对象才存在，一旦事件处理程序执行完毕，event 对象会被销毁</li>
+</ul>
+<h2 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h2><ul>
+<li>UI 事件(UIEvent):当用户与页面上的元素交互时触发</li>
+<li>焦点事件(FocusEvent):当元素获得或失去焦点时触发</li>
+<li>鼠标事件(MouseEvent):用户通过鼠标在页面上执行操作时触发</li>
+<li>滚动事件(WheelEvent):使用鼠标滚动时触发</li>
+<li>文本事件(InputEvent):可编辑的内容被修改时触发</li>
+<li>键盘事件(KeyboardEvent):当用户通过键盘在页面上执行操作时触发</li>
+<li>HTML5 事件</li>
+</ul>
+<h3 id="UI-事件"><a href="#UI-事件" class="headerlink" title="UI 事件"></a>UI 事件</h3><ul>
+<li>load： 当页面完全加载后在 window 上触发；当所有框架都加载完毕时在框架集上触发；当图集加载完毕时在<code>&lt;img&gt;</code>元素上触发；当嵌入的内容加载完毕时在<code>&lt;object&gt;</code>元素上触发</li>
+<li>unload： 当页面完全卸载后在 window 上触发；当所有框架都卸载完成时在框架集上触发；当嵌入内容卸载完成时在<code>&lt;object&gt;</code>元素上触发</li>
+<li>abort： 在用户停止下载过程时，如果嵌入的内容没有加载完，则在<code>&lt;object&gt;</code>元素上触发</li>
+<li>error: 当发生 javascript 错误时在 window 上触发；当无法加载图片时在<code>&lt;img&gt;</code>元素上触发；当无法加载嵌入内容时在<code>&lt;object&gt;</code>元素上触发</li>
+<li>select： 当文本内容被选中时触发，一般在<code>&lt;input&gt;</code>，<code>&lt;textarea&gt;</code>元素</li>
+<li>resize: 当窗口大小变化时在 window 上触发</li>
+<li>scroll： 当用户滚动带滚动条的元素内容时，在该元素上触发</li>
+</ul>
+<h3 id="焦点事件"><a href="#焦点事件" class="headerlink" title="焦点事件"></a>焦点事件</h3><p>当焦点从一个元素移动到另一个元素，会依次触发以下事件：</p>
+<ul>
+<li><ol>
+<li>focusout，在失去焦点的元素（失去焦点之前）触发</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>focusint， 在获得焦点的元素（获得焦点之前）触发</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>blur， 在失去焦点的元素（失去焦点之后）触发</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>focus， 在获得焦点的元素（获得焦点之后）触发</li>
+</ol>
+</li>
+</ul>
+<h3 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h3><p>9 个鼠标事件，<strong>页面上所有元素都支持鼠标事件，除了<code>mouseenter</code>,<code>mouseleave</code>,所有鼠标事件都会冒泡，也可以被取消</strong></p>
+<ul>
+<li>click：单击鼠标（一般是左键），或者按下回车键时触发</li>
+<li>dblclick：双击鼠标触发</li>
+<li>mousedown：按下任意鼠标按钮触发，不能通过键盘触发</li>
+<li>mouseenter：光标从元素外部首次移动到元素范围之内触发。<strong>此事件不冒泡，而且在光标移动到后代元素也不会触发</strong></li>
+<li>mouseleave：光标从元素之上移动到元素之外时触发。<strong>此事件不冒泡，移动到后代元素不触发</strong></li>
+<li>mousemove： 光标在元素内部移动时触发</li>
+<li>mouseout： 光标从一个元素之上，移入到另一个元素时触发。</li>
+<li>mouseover： 光标从一个元素外部，移入另一个元素边界之内触发</li>
+<li>mouseup： 释放鼠标按钮时触发</li>
+</ul>
+<h4 id="事件触发顺序"><a href="#事件触发顺序" class="headerlink" title="事件触发顺序"></a>事件触发顺序</h4><ul>
+<li>只有在同一个元素相继触发 mousedown，mouseup 事件，才会触发 click。如果 mousedown,mosueup 中的任意一个被取消，就不会触发 click 事件</li>
+<li>只有触发两次 click，才会触发一次 dblclick 事件</li>
+</ul>
+<h5 id="双击鼠标-事件触发顺序"><a href="#双击鼠标-事件触发顺序" class="headerlink" title="双击鼠标 事件触发顺序"></a>双击鼠标 事件触发顺序</h5><ol>
+<li>mousedown</li>
+<li>mousemove</li>
+<li>mouseup</li>
+<li>click</li>
+<li>mousemove</li>
+<li>mousedown</li>
+<li>mousemove</li>
+<li>mouseup</li>
+<li>click</li>
+<li>dblclick</li>
+</ol>
+<h5 id="光标由元素-B-移入到元素-A，再移出"><a href="#光标由元素-B-移入到元素-A，再移出" class="headerlink" title="光标由元素 B 移入到元素 A，再移出"></a>光标由元素 B 移入到元素 A，再移出</h5><table>
+<thead>
+<tr>
+<th>事件类型</th>
+<th>所在元素</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1 mousemove</td>
+<td>B</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>光标移入 元素 A</td>
+</tr>
+<tr>
+<td>2 mouseover</td>
+<td>A</td>
+<td></td>
+</tr>
+<tr>
+<td>3 mouseenter</td>
+<td>A</td>
+<td></td>
+</tr>
+<tr>
+<td>4 mousemove</td>
+<td>A</td>
+<td>多次触发 mousemove 事件</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>光标移出 元素 A</td>
+</tr>
+<tr>
+<td>5 mouseout</td>
+<td>A</td>
+<td></td>
+</tr>
+<tr>
+<td>6 mouseleave</td>
+<td>A</td>
+<td></td>
+</tr>
+</tbody></table>
+<h5 id="光标移入元素-A，然后移动到一个嵌套的元素-B，再返回元素-A，再移出元素-A"><a href="#光标移入元素-A，然后移动到一个嵌套的元素-B，再返回元素-A，再移出元素-A" class="headerlink" title="光标移入元素 A，然后移动到一个嵌套的元素 B，再返回元素 A，再移出元素 A"></a>光标移入元素 A，然后移动到一个嵌套的元素 B，再返回元素 A，再移出元素 A</h5><p>| 事件类型      | 所在元素 | 说明                       |<br>| ————- | ——– | ————————– | — |<br>| 1 mousemove   |          |                            |<br>|               |          | 光标移入元素 A             |<br>| 2 mouseover   | A        |                            |<br>| 3 mouseenter  | A        |                            |<br>| 4 mousemove   | A        | 多次触发 mousemove 事件    |<br>|               |          | 光标移入到嵌套的元素 B     |<br>| 5 mouseout    | A        |                            |<br>| 6 mouseover   | B        |                            |<br>| 7 mouseenter  | B        |                            |<br>| 8 mousemove   | B        | 多次触发 mousemove 事件    |<br>|               |          | 光标 从元素 B 移入到元素 A |<br>| 9 mouseout    | B        |                            |<br>| 10 mouseleave | B        |                            |<br>| 11 mouseover  | A        |                            |<br>| 12 mousemove  | A        | 多次触发 mousemove 事件    |<br>|               |          | 光标从 A 元素移出          |<br>| 13 mouseout   | A        |                            |     |<br>| 14 mouseleave | A        |                            |</p>
+<ul>
+<li><ol>
+<li>mousemove</li>
+</ol>
+</li>
+</ul>
+<h4 id="光标坐标位置"><a href="#光标坐标位置" class="headerlink" title="光标坐标位置"></a>光标坐标位置</h4><ul>
+<li>视口坐标位置，<code>event.clientX</code>,<code>event.clientY</code></li>
+<li>页面坐标位置,<code>event.pageX</code>,<code>event.pageY</code></li>
+<li>屏幕坐标位置.<code>event.screenX</code>,<code>event.screenY</code></li>
+</ul>
+<h4 id="修改键"><a href="#修改键" class="headerlink" title="修改键"></a>修改键</h4><p>DOM 规定了 4 个属性，表示这些修改键的状态：<code>shiftKey</code>,<code>altKey</code>,<code>ctrlKey</code>,<code>metaKey</code>,相应的键被按下，其值为 true，否则为 false。当鼠标事件发生时，就可以检测这几个属性就可以确定用户是否同时按下了其中的几个键。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">btn4.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> keys = [];</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(event);</span><br><span class="line">  <span class="keyword">if</span> (event.<span class="property">shiftKey</span>) &#123;</span><br><span class="line">    keys.<span class="title function_">push</span>(<span class="string">&quot;shift&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (event.<span class="property">ctrlKey</span>) &#123;</span><br><span class="line">    keys.<span class="title function_">push</span>(<span class="string">&quot;ctrl&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (event.<span class="property">metaKey</span>) &#123;</span><br><span class="line">    keys.<span class="title function_">push</span>(<span class="string">&quot;meta&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (event.<span class="property">altKey</span>) &#123;</span><br><span class="line">    keys.<span class="title function_">push</span>(<span class="string">&quot;alt&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">alert</span>(<span class="string">`keys: <span class="subst">$&#123;keys.join(<span class="string">&quot;, &quot;</span>)&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="滚动事件"><a href="#滚动事件" class="headerlink" title="滚动事件"></a>滚动事件</h3><blockquote>
+<p>当用户通过鼠标滚动页面时，就会触发 mousewheel 事件，这个事件可以在任何元素上触发，但最终都会冒泡到 document 或 window 对象上。</p>
+</blockquote>
+<blockquote>
+<p>与 mousewheel 事件对象的 event 对象除了包含鼠标事件的所有标准信息外，还包含一个特性的<code>wheelDelta</code>属性，当向上滚动时，<code>wheelDelta</code>的属性的值是 120 倍数，向下滚动时，<code>wheelDelta</code>的属性的值是-120 倍数</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;height: 2500px;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;wheelDelta&quot;</span> <span class="attr">style</span>=<span class="string">&quot;position: fixed; top: 90px;&quot;</span>&gt;</span>0<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;mousewheel&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">console</span>.<span class="title function_">log</span>(event);</span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;wheelDelta&quot;</span>).<span class="property">innerHTML</span> = event.<span class="property">wheelDelta</span>;</span></span><br><span class="line"><span class="language-javascript">  &#125;);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="文本事件"><a href="#文本事件" class="headerlink" title="文本事件"></a>文本事件</h3><ul>
+<li>beforeinput,可编辑的内容被修改之前触发</li>
+<li>input，可编辑的内容被修改之后触发</li>
+</ul>
+<p>事件对象的<code>data</code>属性的值为输入文本的内容</p>
+<h3 id="键盘事件"><a href="#键盘事件" class="headerlink" title="键盘事件"></a>键盘事件</h3><ul>
+<li>keydown：按下键盘上的任意键触发，按住不放，会重复触发</li>
+<li>keyup：释放键盘上的按键时触发</li>
+<li>keypress,已废弃</li>
+</ul>
+<h4 id="键盘事件-触发顺序"><a href="#键盘事件-触发顺序" class="headerlink" title="键盘事件 触发顺序"></a>键盘事件 触发顺序</h4><ol>
+<li>keydown</li>
+<li>beforeinput</li>
+<li>input</li>
+<li>keyup</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">id</span>=<span class="string">&quot;input&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">   <span class="keyword">var</span> input = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;input&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">   input.<span class="title function_">addEventListener</span>(<span class="string">&quot;beforeinput&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;beforeinput&gt;&gt;&gt;&quot;</span>, event);</span></span><br><span class="line"><span class="language-javascript">   &#125;);</span></span><br><span class="line"><span class="language-javascript">   input.<span class="title function_">addEventListener</span>(<span class="string">&quot;input&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;input&gt;&gt;&gt;&quot;</span>, event);</span></span><br><span class="line"><span class="language-javascript">   &#125;);</span></span><br><span class="line"><span class="language-javascript">   input.<span class="title function_">addEventListener</span>(<span class="string">&quot;keydown&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;keydown&gt;&gt;&quot;</span>, event);</span></span><br><span class="line"><span class="language-javascript">   &#125;);</span></span><br><span class="line"><span class="language-javascript">   input.<span class="title function_">addEventListener</span>(<span class="string">&quot;keyup&quot;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;keyup&gt;&gt;&gt;&quot;</span>, event);</span></span><br><span class="line"><span class="language-javascript">   &#125;);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="HTML5-事件"><a href="#HTML5-事件" class="headerlink" title="HTML5 事件"></a>HTML5 事件</h3><ul>
+<li><p>contextmenu 事件（已过时，被删除）</p>
+<p>由于 contextmenu 事件是冒泡的，因此可以为 document 指定一个事件处理程序，用以处理页面中所有的此类事件。</p>
+</li>
+<li><p>DOMContentLoaded 事件<br>在形成完整的 DOM 树之后就会触发，不理会图像、js 文件、css 文件或其他资源是否已经下载完毕。</p>
+</li>
+</ul>
+<h2 id="事件相关的性能"><a href="#事件相关的性能" class="headerlink" title="事件相关的性能"></a>事件相关的性能</h2><h3 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h3><p><strong>事件委托</strong>利用了事件冒泡，只指定一个事件处理程序，就可以关联某一类的所有事件。例如，click 事件会一种冒泡到 document 层，所以只需为整个页面指定一个 onclick 事件处理程序，而不必给每个可单击的元素分别添加事件处理程序。与传统做法相比具有的优势：</p>
+<ul>
+<li>document 对象很快就可以访问，而且可以在页面生命周期的任何点上为它添加事件处理程序，无需等待 DOMContentLoaded 或 load 事件</li>
+<li>只添加一个事件处理程序所需的 DOM 引用更少，所花费是时间也更少，页面加载更快</li>
+<li>这个页面占用的内存空间更少</li>
+</ul>
+<h3 id="移除不需要的事件处理程序"><a href="#移除不需要的事件处理程序" class="headerlink" title="移除不需要的事件处理程序"></a>移除不需要的事件处理程序</h3><p>在不需要的时候要移除事件处理程序，因为内存中留有的那些过时不用的“空事件处理程序”也是造成 web 内存与性能问题的原因。<br>例如，通过<code>innerHTML</code>替换元素时，如果带有事件处理程序的元素被<code>innerHTML</code>替换，那么用来添加到元素的事件处理程序极有可能无法被当作垃圾回收。<br><strong>所以，在已经知道要移除 dom 时，最后手动移除对应的事件处理程序</strong></p>
+<h2 id="模拟事件"><a href="#模拟事件" class="headerlink" title="模拟事件"></a>模拟事件</h2><p>除了用户操作或通过浏览器功能触发事件，也可以使用 JavaScript 在任意时刻刻意触发特定的事件。在测试 web 应用程序中，模拟触发事件是极其有用的技术。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://aixuexi567.github.io/2020/04/09/js-zhi-shi-dian-shu-li-9-shi-jian/" title="JS知识点梳理(9)-事件" target="_blank" rel="external">https://aixuexi567.github.io/2020/04/09/js-zhi-shi-dian-shu-li-9-shi-jian/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aixuexi567" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aixuexi567" target="_blank"><span class="text-dark">爱学兮</span><small class="ml-1x">AI &amp; Web Developer &amp; Data Analyst</small></a></h3>
+        <div>前端狗，偶尔思考，间歇码字</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/04/09/js-zhi-shi-dian-shu-li-10-ajax/" title="JS知识点梳理(10)-Ajax"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/04/08/js-zhi-shi-dian-shu-li-8-dom2-ji-bian-li-he-fan-wei/" title="JS知识点梳理(8)-DOM2级遍历和范围"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="wechat" data-mobile-sites=""></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '3c9348a5e84eb5050ec8',
+    clientSecret: 'b92d8dd66f66bbe04d870af0e612ff74a00546da',
+    repo: 'aixuexi567.github.io',
+    owner: 'aixuexi567',
+    admin: ['aixuexi567'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+  <!-- Google Adsense -->
+<script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7070857500305563"
+  crossorigin="anonymous"
+></script>
+
+</body>
+</html>

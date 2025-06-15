@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- google 广告 -->
+  <script data-ad-client="ca-pub-7070857500305563" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>CSS知识点梳理(12)-弹性盒子布局 | aixuexi567</title>
+  <meta name="description" content="基础（Flexbox Fundamental） 弹性&#x2F;伸缩盒子布局是一种简单而强大的 布局页面组件的方法，它规定了空间是如何分配的，内容是如何对齐的，元素在视觉上是如何排序的。 在元素声明display: flex，此元素成为一个伸缩容器（flex container），在所提供的 空间内安排其子元素并控制它们的布局。伸缩容器的子元素变成伸缩项（flex items） 一旦设置一个元素成为伸缩容器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS知识点梳理(12)-弹性盒子布局">
+<meta property="og:url" content="https://aixuexi567.github.io/2019/12/30/css-zhi-shi-dian-shu-li-12-dan-xing-he-zi-bu-ju/index.html">
+<meta property="og:site_name" content="爱学兮">
+<meta property="og:description" content="基础（Flexbox Fundamental） 弹性&#x2F;伸缩盒子布局是一种简单而强大的 布局页面组件的方法，它规定了空间是如何分配的，内容是如何对齐的，元素在视觉上是如何排序的。 在元素声明display: flex，此元素成为一个伸缩容器（flex container），在所提供的 空间内安排其子元素并控制它们的布局。伸缩容器的子元素变成伸缩项（flex items） 一旦设置一个元素成为伸缩容器">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://aixuexi567.github.io/image/flexBox_axis.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/flex_line_stacking_of_row_oriented.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/flex_line_stacking_of_column_oriented.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/flex_wrap_in_column_oriented_Flex.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/six_value_of_justify_content.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/justify_content_flex_start.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/justify_content_flex_end.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/justify_content_center.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/justify_content_space_between.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/justify_content_space_around.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/justify_content_space_evenly.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/the_five_value_of_align_item.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/the_six_value_of_align-content.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/flex_grow_scenarios.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/flex_shorthand.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/flex_basis_auo_or_0.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/flex_initial.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/flex_auto.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/flex_none.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/flex_numeric_value.jpg">
+<meta property="og:image" content="https://aixuexi567.github.io/image/flex_order.jpg">
+<meta property="article:published_time" content="2019-12-30T02:24:28.000Z">
+<meta property="article:modified_time" content="2025-06-13T05:38:58.246Z">
+<meta property="article:author" content="刘振江">
+<meta property="article:tag" content="css">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://aixuexi567.github.io/image/flexBox_axis.jpg">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://aixuexi567.github.io/2019/12/30/css-zhi-shi-dian-shu-li-12-dan-xing-he-zi-bu-ju/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="爱学兮" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/aixuexi567" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">爱学兮</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">AI &amp; Web Developer &amp; Data Analyst</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>😊 欢迎交流与分享经验!</p>  <p>😊 上班摸鱼写散文!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/">成长小记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a><span class="category-list-count">87</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%83%82%E7%AC%94%E5%A4%B4/">烂笔头</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8B%B1%E8%AF%AD%E6%8B%BE%E9%81%97/">英语拾遗</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94%E6%84%9F%E6%82%9F/">随笔感悟</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" rel="tag">CSS权威指南-第四版</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eslint/" rel="tag">eslint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grunt/" rel="tag">grunt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pnpm/" rel="tag">pnpm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vite/" rel="tag">vite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" rel="tag">一碗鸡汤</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" rel="tag">书籍读后感</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" rel="tag">前端性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" rel="tag">反思怪</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" rel="tag">团队协作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" rel="tag">成长小记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" rel="tag">技术总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" rel="tag">残酷物语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" rel="tag">烂笔头</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" rel="tag">编程认知</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A3%9E%E7%9B%98/" rel="tag">飞盘</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CSS%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97-%E7%AC%AC%E5%9B%9B%E7%89%88/" style="font-size: 13.63px;">CSS权威指南-第四版</a> <a href="/tags/axios/" style="font-size: 13px;">axios</a> <a href="/tags/css/" style="font-size: 14px;">css</a> <a href="/tags/eslint/" style="font-size: 13.13px;">eslint</a> <a href="/tags/git/" style="font-size: 13.75px;">git</a> <a href="/tags/grunt/" style="font-size: 13px;">grunt</a> <a href="/tags/http/" style="font-size: 13.38px;">http</a> <a href="/tags/javascript/" style="font-size: 13.88px;">javascript</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/npm/" style="font-size: 13px;">npm</a> <a href="/tags/pnpm/" style="font-size: 13px;">pnpm</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/shell/" style="font-size: 13px;">shell</a> <a href="/tags/vite/" style="font-size: 13px;">vite</a> <a href="/tags/vscode/" style="font-size: 13px;">vscode</a> <a href="/tags/vue/" style="font-size: 13.75px;">vue</a> <a href="/tags/webpack/" style="font-size: 13px;">webpack</a> <a href="/tags/%E4%B8%80%E7%A2%97%E9%B8%A1%E6%B1%A4/" style="font-size: 13px;">一碗鸡汤</a> <a href="/tags/%E4%B9%A6%E7%B1%8D%E8%AF%BB%E5%90%8E%E6%84%9F/" style="font-size: 13.25px;">书籍读后感</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD/" style="font-size: 13px;">前端性能</a> <a href="/tags/%E5%8F%8D%E6%80%9D%E6%80%AA/" style="font-size: 13.5px;">反思怪</a> <a href="/tags/%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C/" style="font-size: 13px;">团队协作</a> <a href="/tags/%E6%88%90%E9%95%BF%E5%B0%8F%E8%AE%B0/" style="font-size: 13px;">成长小记</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" style="font-size: 13px;">技术总结</a> <a href="/tags/%E6%AE%8B%E9%85%B7%E7%89%A9%E8%AF%AD/" style="font-size: 13px;">残酷物语</a> <a href="/tags/%E7%83%82%E7%AC%94%E5%A4%B4/" style="font-size: 13px;">烂笔头</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AE%A4%E7%9F%A5/" style="font-size: 13.13px;">编程认知</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 13.13px;">网络</a> <a href="/tags/%E7%BF%BB%E8%AF%91/" style="font-size: 13.75px;">翻译</a> <a href="/tags/%E8%AF%AD%E6%B3%95/" style="font-size: 13.25px;">语法</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 13.63px;">面试</a> <a href="/tags/%E9%A3%9E%E7%9B%98/" style="font-size: 13.25px;">飞盘</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a>
+              </p>
+              <p class="item-title">
+                <a href="/2025/06/13/chi-zhi-de-yi-dian-dian-shou-huo-xue-chang-xue-jie-ju-hui-fen-xiang/" class="title">离职的一点点收获(学长学姐聚会分享)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2025-06-13T06:49:06.000Z" itemprop="datePublished">2025-06-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B0%B1%E8%A6%81%E8%A1%A8%E8%BE%BE/">就要表达</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/13/mao-xuan-du-hou-gan/" class="title">&lt;毛选&gt;读后感</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-13T01:48:36.000Z" itemprop="datePublished">2023-09-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/29/v8-ru-he-zhi-xing-yi-duan-js-dai-ma/" class="title">V8如何执行一段js代码?</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-29T02:24:35.000Z" itemprop="datePublished">2023-08-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/08/28/js-v8-la-ji-hui-shou/" class="title">JS-V8垃圾回收</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-08-28T01:46:03.000Z" itemprop="datePublished">2023-08-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%91%B8%E9%B1%BC%E6%95%A3%E6%96%87/">摸鱼散文</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/31/kong-xiang-guai-de-ri-chang-fan-si/" class="title">空想怪的日常反思</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-31T02:31:08.000Z" itemprop="datePublished">2023-07-31</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-CSS知识点梳理-12-弹性盒子布局" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSS知识点梳理(12)-弹性盒子布局
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/12/30/css-zhi-shi-dian-shu-li-12-dan-xing-he-zi-bu-ju/" class="article-date">
+	  <time datetime="2019-12-30T02:24:28.000Z" itemprop="datePublished">2019-12-30</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/css/" rel="tag">css</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/12/30/css-zhi-shi-dian-shu-li-12-dan-xing-he-zi-bu-ju/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 8(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="基础（Flexbox-Fundamental）"><a href="#基础（Flexbox-Fundamental）" class="headerlink" title="基础（Flexbox Fundamental）"></a>基础（Flexbox Fundamental）</h3><ul>
+<li>弹性/伸缩盒子布局是一种简单而强大的 布局页面组件的方法，它规定了空间是如何分配的，内容是如何对齐的，元素在视觉上是如何排序的。</li>
+<li>在元素声明<code>display: flex</code>，此元素成为一个<strong>伸缩容器（<code>flex container</code>）</strong>，在所提供的 空间内安排其子元素并控制它们的布局。伸缩容器的子元素变成<strong>伸缩项（flex items）</strong></li>
+<li><strong>一旦设置一个元素成为<code>伸缩容器</code>，那么它只会<code>flex</code>其直接子代，而不会<code>flex</code>其进一步的后代。</strong></li>
+<li>在<code>flex容器</code>中，<code>flex项</code>在主轴（<code>main axis</code>）上排成一行。</li>
+</ul>
+<h3 id="伸缩容器（Flex-Container）"><a href="#伸缩容器（Flex-Container）" class="headerlink" title="伸缩容器（Flex Container）"></a>伸缩容器（Flex Container）</h3><ul>
+<li><p><code>flex-direction</code>: 控制主轴，<code>flex项</code>沿着主轴放置的。即指定如何在<code>flex容器</code>中放置<code>flex 项</code>。<strong>默认 <code>row</code>,是主轴方向，也即是当前写入模式的方向（writing mode）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Value:                row|row-reverse|column|column-reverse</span><br><span class="line">Initial value:        row</span><br><span class="line">Applies to:           flex container</span><br><span class="line">Inherited:            No</span><br><span class="line">Animatable:           No</span><br></pre></td></tr></table></figure></li>
+<li><p>写入模式的方向（Writing Direction）,由 CSS 中的<code>writing-mode</code>，<code>direction</code>属性控制，或者由 HTML 中的<code>dir</code>属性控制。</p>
+</li>
+<li><p><code>flex-wrap</code>，控制<code>flex 容器</code>是否被限制为单行容器，或者在需要时允许成为多行容器。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Value:            nowrap|wrap|wrap-reverse</span><br><span class="line">Initial value；   nowrap</span><br><span class="line">Applies to:       Flex contaier</span><br><span class="line">Inherited:        No</span><br><span class="line">Animatable:       No</span><br></pre></td></tr></table></figure></li>
+<li><p><code>flex-flow</code>,<code>flex-direction</code>和<code>flex-wrap</code>的简写形式。 、</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Vlaue:            &lt;flex-direction&gt;||&lt;flex-wrap&gt;</span><br><span class="line">Initial value:    row nowrap</span><br><span class="line">Applies to:       Flex container</span><br><span class="line">Inherited:        No</span><br><span class="line">Animatable:       No</span><br></pre></td></tr></table></figure></li>
+<li><p>理解弹性盒子中的轴(axes)</p>
+<ul>
+<li><code>main axis</code>：主轴，沿着 内容流动的轴，是<code>flex 项</code>流动的方向</li>
+<li><code>main size</code>：内容腌主轴的总长度</li>
+<li><code>main start</code>: 主轴上内容开始流动的一端</li>
+<li><code>main end</code>: 内容流向的主轴的末端</li>
+<li><code>cross axis</code>：沿着块堆叠的轴，是<code>flex 项</code>需要换行，放置 <code>flex 项目 行</code>的方向</li>
+</ul>
+<p><img src="/image/flexBox_axis.jpg" alt="flex box axis"></p>
+</li>
+</ul>
+<hr>
+<p><img src="/image/flex_line_stacking_of_row_oriented.jpg" alt="Stacking of row-oriented flex lines"></p>
+<hr>
+<p><img src="/image/flex_line_stacking_of_column_oriented.jpg" alt="Stacking of column-oriented flex lines"></p>
+<hr>
+<p><img src="/image/flex_wrap_in_column_oriented_Flex.jpg" alt="the three values of flex-wrap in a columen-oriented flow"></p>
+<ul>
+<li>Flex direction in LTR writing modes</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">row</th>
+<th align="center">row-reverse</th>
+<th align="center">column</th>
+<th align="center">colum-reverse</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">main axis</td>
+<td align="center">left to right</td>
+<td align="center">right to left</td>
+<td align="center">top to bottom</td>
+<td align="center">bottom to top</td>
+</tr>
+<tr>
+<td align="center">main-start</td>
+<td align="center">left</td>
+<td align="center">right</td>
+<td align="center">top</td>
+<td align="center">bottom</td>
+</tr>
+<tr>
+<td align="center">main-end</td>
+<td align="center">right</td>
+<td align="center">left</td>
+<td align="center">bottom</td>
+<td align="center">top</td>
+</tr>
+<tr>
+<td align="center">main size</td>
+<td align="center">width</td>
+<td align="center">width</td>
+<td align="center">height</td>
+<td align="center">height</td>
+</tr>
+<tr>
+<td align="center">main dimension</td>
+<td align="center">horizontal</td>
+<td align="center">horizontal</td>
+<td align="center">vertical</td>
+<td align="center">vertical</td>
+</tr>
+<tr>
+<td align="center">cross axis</td>
+<td align="center">top to bottom</td>
+<td align="center">top to bottom</td>
+<td align="center">left to right</td>
+<td align="center">left to right</td>
+</tr>
+<tr>
+<td align="center">cross-start</td>
+<td align="center">top</td>
+<td align="center">top</td>
+<td align="center">left</td>
+<td align="center">left</td>
+</tr>
+<tr>
+<td align="center">cross-end</td>
+<td align="center">bottom</td>
+<td align="center">bottom</td>
+<td align="center">right</td>
+<td align="center">right</td>
+</tr>
+<tr>
+<td align="center">cross size</td>
+<td align="center">height</td>
+<td align="center">height</td>
+<td align="center">width</td>
+<td align="center">width</td>
+</tr>
+<tr>
+<td align="center">cross dimension</td>
+<td align="center">vertical</td>
+<td align="center">vertical</td>
+<td align="center">horizontal</td>
+<td align="center">horizontal</td>
+</tr>
+</tbody></table>
+<h3 id="排列-Flex-项（Arranging-Flex-Items）"><a href="#排列-Flex-项（Arranging-Flex-Items）" class="headerlink" title="排列 Flex 项（Arranging Flex Items）"></a>排列 Flex 项（Arranging Flex Items）</h3><h4 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h4><p><code>justify-content</code>属性定义了<code>flex项</code>在主轴<code>flex 行</code>上的如何对齐，一根轴线（flex line）上<code>flex 项</code>是如何分布的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Value:          flex-start|flex-end|center|space-between|space-around|space-evenly</span><br><span class="line">Initial value:  flex-start</span><br><span class="line">Applies to:     Flex containers</span><br><span class="line">Inherited:      No</span><br><span class="line">Animatable:     No</span><br></pre></td></tr></table></figure>
+
+<p><img src="/image/six_value_of_justify_content.jpg" alt="The six values  of the justify-content property"></p>
+<ul>
+<li><p>flex-start<br><img src="/image/justify_content_flex_start.jpg" alt="justify-content:flex-start"></p>
+</li>
+<li><p>flex-end<br><img src="/image/justify_content_flex_end.jpg" alt="justify-content:flex-end"></p>
+</li>
+<li><p>center<br><img src="/image/justify_content_center.jpg" alt="justify-content:center"></p>
+</li>
+<li><p>space-between<br><code>space-between</code>将<code>flex 行</code>中的第一个<code>flex 项</code>与<code>main-start</code>对齐，最后一个<code>flex 项</code>与<code>main-end</code>对齐，然后在每个<code>flex 项</code>周围放置相同的空间，直到<code>flex 行</code>被填满。</p>
+<p><img src="/image/justify_content_space_between.jpg" alt="justify-conent:space-between"></p>
+</li>
+<li><p>space-around<br><code>space-around</code>均匀的把额外空间分配在每一<code>flex 项</code>周围，就好像每个<code>flex 项</code>周围都有大小相同的非折叠边距。因此，首项和第二项，尾项和倒数第二项之间的空间是其他中间项之间的 2 倍(项之间的空间是项与边框之间的 2 倍)。</p>
+<p><img src="/image/justify_content_space_around.jpg" alt="justify-content:space-around"></p>
+</li>
+<li><p>space-evenly<br><code>space-evenly</code>，项与项之间，项与边框之间的空间相同。</p>
+<p><img src="/image/justify_content_space_evenly.jpg" alt="justify-content:space-evenly"></p>
+</li>
+</ul>
+<h4 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h4><p><code>align-items</code>属性定义每一个<code>flex 行</code>中<code>flex项</code>在交叉轴上如何对齐</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Value:          flex-start|flex-end|center|baseline|stretch</span><br><span class="line">Initial value:  stretch</span><br><span class="line">Applies to:     Flex containers</span><br></pre></td></tr></table></figure>
+
+<p><img src="/image/the_five_value_of_align_item.jpg" alt="the five values of the align-items property"></p>
+<h4 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h4><p><code>align-content</code>属性定义了多个<code>flex 行</code>的如何沿着交叉轴对齐。<br> <strong>该属性仅适用于多<code>flex 行</code>的<code>flex 容器</code></strong></p>
+<p><img src="/image/the_six_value_of_align-content.jpg" alt="the six   values of the align-content property"></p>
+<h3 id="flex-项-Flex-项"><a href="#flex-项-Flex-项" class="headerlink" title="flex 项(Flex 项)"></a>flex 项(Flex 项)</h3><ul>
+<li><code>flex 容器</code>的子元素被称为<code>flex 项</code>，包括子元素，子元素之间的非空文本节点，或者生成的内容。</li>
+<li>当<code>flex 容器</code>包含文本节点时，且文本节点不是空的，它被包装在一个**匿名的<code>flex 项</code>**中，就像其它的<code>flex 项</code>的兄弟一样，并继承了<code>flex 容器</code>设置的所以 flex 属性。</li>
+<li>空白的文本节点在<code>flex 容器</code>中会被忽略。</li>
+<li><code>flex 项</code>的边距（margin）不会折叠。</li>
+<li><code>float</code>,<code>clear</code>属性对<code>flex 项</code>没有影响，会被忽略。</li>
+<li><code>vertical-align</code>对<code>flex 项</code>没有影响，除非它影响到<code>flex 项</code>内容文本的对齐。</li>
+<li>决定定位 <code>flex 容器</code>内的子元素，与其他任何决定定位元素一样，从文档流中移除。但是它会受到<code>flex 容器</code>的<code>justify-content</code>和<code>align-self</code>值的影响。</li>
+</ul>
+<h3 id="flex属性"><a href="#flex属性" class="headerlink" title="flex属性"></a><code>flex</code>属性</h3><p><strong>虽然通过在<code>flex 容器</code>上设置属性，可以在一定程度上控制<code>flex 项</code>的对齐、顺序、伸缩性，但是也有几个属性（<code>flex-grow,flex-shrink,flex-basis</code>）可以应用到单个<code>flex 项</code>上，以实现更细粒度的控制</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Value:          [&lt;flex-grow&gt;&lt;flex-shrink&gt;?|| &lt;flex-basis&gt;]|none</span><br><span class="line">Initial value:  0 1 auto</span><br><span class="line">Allpies to:     Flex items(children of flex containers)</span><br></pre></td></tr></table></figure>
+
+<p><code>flex-basis</code>是指每个<code>flex 项</code>的初始大小，可以通过指定<code>grow</code>和<code>shrink</code>因子为 0 来限定为特定的大小。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.flexItem</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">flex</span> <span class="number">0</span> <span class="number">0</span> <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上 CSS,<code>flex 项</code>在主轴尺寸正好是 200px,其尺寸既不能增长也不能收缩。<strong>假若主轴是水平的，那么宽度值（50%）将被忽略。并且这种覆盖发生在 CSS 层叠之外，甚至不能通过添加<code>！important</code>来再覆盖掉</strong></p>
+<h4 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a><code>flex-grow</code></h4><ul>
+<li><code>flex-grow</code>不能是负值，可使用小数。它决定了当<code>flex 容器</code>有额外空间被分配时，**<code>flex 项</code>相对于其它<code>felx 项</code>**的增长幅度。</li>
+<li>额外空间根据增长因子的不同值按比例分配给具有非零正增长因子的子元素。<br><img src="/image/flex_grow_scenarios.jpg" alt="flex-grow"></li>
+<li>如果<code>flex 项</code>没有设置<code>width</code>或<code>flex-basis</code>，则<code>flex-basis</code>默认为<code>auto</code>,这意味着每个<code>flex-basis</code>是其<strong>非换行内容</strong>的宽度。即如果<code>flex 项</code>没有设置宽度，此时<code>flex-basis</code>将成为该宽度。</li>
+<li>如果<code>flex-basis</code>被设置为<code>0%</code>或者默认值<code>auto</code>,且增长因子为 0 时，非增长的<code>flex 项</code>的主轴长度将收缩到内容允许的最小长度（<strong>即 最宽字母序列的宽度</strong>），或更小。</li>
+<li>如果所有的<code>flex 项</code>都允许增长，并且每个<code>flex 项</code>的<code>flex-basis</code>都时<code>0%</code>,那么所有的空间，而不仅仅时额外空间，将根据增长因子按比例分配。<br><img src="/image/flex_shorthand.jpg" alt="flex shorthand"></li>
+</ul>
+<h4 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a><code>flex-shrink</code></h4><ul>
+<li><p>如果<code>flex 项</code>中包含一个固定像素（300px）图像，则该<code>flex 项</code>不会收缩。</p>
+</li>
+<li><p><strong><code>flex 项</code>是与收缩因子和其宽度成比例的收缩的。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ShrinkPercent(收缩百分比) = NegativeSpace(缺少空间) / ((Width1 * ShrinkF1) + ...  + (WidthN * ShrinkFN))</span><br><span class="line"></span><br><span class="line">// 例如 缺少空间：250px，  flex项宽度： 250px  500px  250px; flex-shrink： 1 1 3</span><br><span class="line">收缩百分比 = 250px  / ((250px * 1) + (500px *1 ) + (250px * 3))</span><br><span class="line">           = 250px  / 1500px</span><br><span class="line">           = 0.1666666667 (16.67%)</span><br><span class="line"></span><br><span class="line">item1 = 250px - (250px * 16.67% * 1) = 208.33px</span><br><span class="line">item2 = 500px - (500px * 16.67% * 1) = 416.67px</span><br><span class="line">item3 = 250px - (250px * 17.67% * 3) = 125px</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a><code>flex-basis</code></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Value:              content|[&lt;length&gt; | &lt;percentage&gt;]</span><br><span class="line">Initial value:      auto</span><br><span class="line">Applies to:         Flex item</span><br><span class="line">Percentage：        Relative to flex container&#x27;s inner main-axis size</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当没有其他属性（如：<code>width</code>,<code>min-width</code>）设置主轴上<code>flex 项</code>，<code>flex-basis:auto</code>或<code>flex: 0 1 auto</code>，则<code>flex 项</code>的宽度会尽可能的去适应其内容</li>
+<li><code>flex 项</code>上既设置了<code>width</code>，又设置了<code>flex-basis</code>，则<code>flex-basis</code>胜出。</li>
+<li><code>flex 项</code>上既设置了<code>min-width</code>，又设置了<code>flex-basis</code>，则<code>min-width</code>胜出。</li>
+<li><code>flex-basis</code>百分比数，是根据<code>fkex 容器</code>的主轴尺寸大小计算的。</li>
+<li><code>flex-basis:auto</code>，“可用”空间是基于 <code>flex 项</code>的 内容大小；<code>flex-basis:0</code>，那么”可用”空间就是整个<code>flex 容器</code>主轴的大小。<br><img src="/image/flex_basis_auo_or_0.jpg" alt="Flex growth in auto and zero flex bases"></li>
+</ul>
+<h3 id="flex-简写（Flex-Shorthand）"><a href="#flex-简写（Flex-Shorthand）" class="headerlink" title="flex 简写（Flex Shorthand）"></a>flex 简写（Flex Shorthand）</h3><p><strong>切记，总是要使用<code>flex</code>简写</strong>，它接受 3 个全局属性值，<code>initial</code>,<code>auto</code>,<code>none</code>，和一个数值。</p>
+<ul>
+<li><code>flex:initial</code> 等同于<code>flex: 0 1 auto</code>;<br><img src="/image/flex_initial.jpg" alt="flex:initial"></li>
+<li><code>flex:auto</code>等同于<code>flex: 1 1 auto</code>;<br><img src="/image/flex_auto.jpg" alt="flex:auto"></li>
+<li><code>flex:none</code> 等同于<code>flex: 0 0 auto</code>;<br><img src="/image/flex_none.jpg" alt="flex:none"></li>
+<li><code>flex:&lt;number&gt;</code>,<code>flex:3</code> 等同于<code>flex:3 0 0</code>;<br><img src="/image/flex_numeric_value.jpg" alt="Flexing using a single numeric value"></li>
+</ul>
+<h3 id="flex-项-顺序"><a href="#flex-项-顺序" class="headerlink" title="flex 项 顺序"></a>flex 项 顺序</h3><ul>
+<li><p>默认，所有的<code>flex 项</code>的顺序都是 0.</p>
+</li>
+<li><p><code>order</code>属性指定<code>flex 项</code>所属的<strong>序号组</strong>，负值的<code>flex 项</code>出现在默认值为 0 的项之前，正值的<code>flex 项</code>出现在之后。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ul</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-flex;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">li</span><span class="selector-pseudo">:nth-of-type</span>(<span class="number">3</span>n-<span class="number">1</span>) &#123;</span><br><span class="line">    <span class="attribute">order</span>: <span class="number">3</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">li</span><span class="selector-pseudo">:nth-of-type</span>(<span class="number">3</span>n+<span class="number">1</span>) &#123;</span><br><span class="line">    <span class="attribute">order</span>: -<span class="number">1</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.4</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>item 2,5,8,11 的顺序组是 3</li>
+<li>item 1，4，7，10 的顺序组是-1</li>
+<li>item 3，6，9，12 的 顺序组是 0<br><img src="/image/flex_order.jpg" alt="flex items appear in order of ordinal groups "></li>
+</ul>
+</li>
+<li><p>按<code>tab 键</code>是按照源代码的顺序，而不是按布局的顺序。<code>order</code>属性仅改变布局的顺序，源代码顺序不变。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://aixuexi567.github.io/2019/12/30/css-zhi-shi-dian-shu-li-12-dan-xing-he-zi-bu-ju/" title="CSS知识点梳理(12)-弹性盒子布局" target="_blank" rel="external">https://aixuexi567.github.io/2019/12/30/css-zhi-shi-dian-shu-li-12-dan-xing-he-zi-bu-ju/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/aixuexi567" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/aixuexi567" target="_blank"><span class="text-dark">爱学兮</span><small class="ml-1x">AI &amp; Web Developer &amp; Data Analyst</small></a></h3>
+        <div>前端狗，偶尔思考，间歇码字</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/12/31/2019-nian-hui-gu-yu-2020-nian-zhan-wang/" title="2019年回顾与2020年展望"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/12/30/css-zhi-shi-dian-shu-li-11-ding-wei/" title="CSS知识点梳理(11)-定位"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="wechat" data-mobile-sites=""></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/aixuexi567" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '3c9348a5e84eb5050ec8',
+    clientSecret: 'b92d8dd66f66bbe04d870af0e612ff74a00546da',
+    repo: 'aixuexi567.github.io',
+    owner: 'aixuexi567',
+    admin: ['aixuexi567'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+  <!-- Google Adsense -->
+<script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7070857500305563"
+  crossorigin="anonymous"
+></script>
+
+</body>
+</html>
